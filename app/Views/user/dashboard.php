@@ -80,194 +80,38 @@
         </div>
     
     </div> -->
-    
-  
+
+
     <div class="col-xl-12 col-xxl-12">
         <div class="card card-bordered card-full">
             <div class="card-inner border-bottom">
                 <div class="card-title-group">
                     <div class="card-title">
-                        <h6 class="title">Laporan Terakhir Anda</h6>
+                        <h6 class="title">Laporan Anda</h6>
                     </div>
                     <div class="card-tools">
-                        <a href="#" class="link">Lihat Semua</a>
+                        <!-- <a href="#" class="link">Lihat Semua</a> -->
                     </div>
                 </div>
             </div>
-            <div class="nk-tb-list">
-                <div class="nk-tb-item nk-tb-head">
-                    <div class="nk-tb-col"><span>Plan</span></div>
-                    <div class="nk-tb-col tb-col-sm"><span>Who</span></div>
-                    <div class="nk-tb-col tb-col-lg"><span>Date</span></div>
-                    <div class="nk-tb-col"><span>Amount</span></div>
-                    <div class="nk-tb-col tb-col-sm"><span>&nbsp;</span></div>
-                    <div class="nk-tb-col"><span>&nbsp;</span></div>
-                </div>
-                <div class="nk-tb-item">
-                    <div class="nk-tb-col">
-                        <div class="align-center">
-                            <div class="user-avatar user-avatar-sm bg-light">
-                                <span>P2</span>
-                            </div>
-                            <span class="tb-sub ms-2">Dimond <span class="d-none d-md-inline">- Daily 8.52% for 14 Days</span></span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <div class="user-card">
-                            <div class="user-avatar user-avatar-xs bg-azure-dim">
-                                <span>VA</span>
-                            </div>
-                            <div class="user-name">
-                                <span class="tb-lead">Victoria Aguilar</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-lg">
-                        <span class="tb-sub">18/10/2019</span>
-                    </div>
-                    <div class="nk-tb-col">
-                        <span class="tb-sub tb-amount">1.094780 <span>BTC</span></span>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <span class="tb-sub text-success">Completed</span>
-                    </div>
-                    <div class="nk-tb-col nk-tb-col-action">
-                        <div class="dropdown">
-                            <a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                <ul class="link-list-plain">
-                                    <li><a href="#">View</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">Print</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="nk-tb-item">
-                    <div class="nk-tb-col">
-                        <div class="align-center">
-                            <div class="user-avatar user-avatar-sm bg-light">
-                                <span>P3</span>
-                            </div>
-                            <span class="tb-sub ms-2">Platinam <span class="d-none d-md-inline">- Daily 14.82% for 7 Days</span></span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <div class="user-card">
-                            <div class="user-avatar user-avatar-xs bg-purple-dim">
-                                <span>EH</span>
-                            </div>
-                            <div class="user-name">
-                                <span class="tb-lead">Emma Henry</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-lg">
-                        <span class="tb-sub">18/10/2019</span>
-                    </div>
-                    <div class="nk-tb-col">
-                        <span class="tb-sub tb-amount">1.094780 <span>BTC</span></span>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <span class="tb-sub text-success">Completed</span>
-                    </div>
-                    <div class="nk-tb-col nk-tb-col-action">
-                        <div class="dropdown">
-                            <a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                <ul class="link-list-plain">
-                                    <li><a href="#">View</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">Print</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="nk-tb-item">
-                    <div class="nk-tb-col">
-                        <div class="align-center">
-                            <div class="user-avatar user-avatar-sm bg-light">
-                                <span>P1</span>
-                            </div>
-                            <span class="tb-sub ms-2">Silver <span class="d-none d-md-inline">- Daily 4.76% for 21 Days</span></span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <div class="user-card">
-                            <div class="user-avatar user-avatar-xs bg-teal-dim">
-                                <span>AF</span>
-                            </div>
-                            <div class="user-name">
-                                <span class="tb-lead">Alice Ford</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-lg">
-                        <span class="tb-sub">18/10/2019</span>
-                    </div>
-                    <div class="nk-tb-col">
-                        <span class="tb-sub tb-amount">1.094780 <span>BTC</span></span>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <span class="tb-sub text-success">Completed</span>
-                    </div>
-                    <div class="nk-tb-col nk-tb-col-action">
-                        <div class="dropdown">
-                            <a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                <ul class="link-list-plain">
-                                    <li><a href="#">View</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">Print</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="nk-tb-item">
-                    <div class="nk-tb-col">
-                        <div class="align-center">
-                            <div class="user-avatar user-avatar-sm bg-light">
-                                <span>P3</span>
-                            </div>
-                            <span class="tb-sub ms-2">Platinam <span class="d-none d-md-inline">- Daily 14.82% for 7 Days</span></span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <div class="user-card">
-                            <div class="user-avatar user-avatar-xs bg-orange-dim">
-                                <span>HW</span>
-                            </div>
-                            <div class="user-name">
-                                <span class="tb-lead">Harold Walker</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nk-tb-col tb-col-lg">
-                        <span class="tb-sub">18/10/2019</span>
-                    </div>
-                    <div class="nk-tb-col">
-                        <span class="tb-sub tb-amount">1.094780 <span>BTC</span></span>
-                    </div>
-                    <div class="nk-tb-col tb-col-sm">
-                        <span class="tb-sub text-success">Completed</span>
-                    </div>
-                    <div class="nk-tb-col nk-tb-col-action">
-                        <div class="dropdown">
-                            <a class="text-soft dropdown-toggle btn btn-sm btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-chevron-right"></em></a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
-                                <ul class="link-list-plain">
-                                    <li><a href="#">View</a></li>
-                                    <li><a href="#">Invoice</a></li>
-                                    <li><a href="#">Print</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="reportTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Nama Terlapor</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">Lampiran</th>
+                            <th scope="col">Dibuat</th>
+                            <th scope="col">Status</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
+
         </div><!-- .card -->
     </div><!-- .col -->
 </div>
@@ -338,7 +182,7 @@
                         <small class="">Ukuran Maksimal 1 Mb, Format JPG/PNG/PDF</small>
                     </div>
                     <div class="form-group">
-                        <button type="button" data-bs-dismiss="modal"  class="btn btn-lg btn-danger ">Batal</button>
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-danger ">Batal</button>
                         <button type="submit" class="btn btn-lg btn-primary ">Kirim</button>
                     </div>
                 </form>
