@@ -10,7 +10,7 @@
     color: $white;
     background: $accent-500;
     font-size: 14px;
-    font-weight: $fw-bold;
+    font-weight: $fw-medium;
     letter-spacing: 0.06em;
     flex-shrink: 0;
     position: relative;
@@ -215,7 +215,7 @@ $avatar-adj-colors: (
     }
     &-name{
         color: $base-text;
-        font-size: $fx-sz-13;
+        font-size: 12px;
         line-height: 16px;
         font-weight: $fw-bold;
         @if($dark_option==true) {

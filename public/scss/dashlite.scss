@@ -12,7 +12,7 @@
  * It will helps you to easy update of the template.
  **/
 
-/* 
+/*
 ----------------------
 ## Table Contents ##
 * 01. FONTS
@@ -31,7 +31,8 @@
 
 // Included Fonts
 /** 01. FONTS */
-@import "core/fonts/dmsans";
+@import "core/fonts/roboto";
+@import "core/fonts/nunito";
 
 // Included Bootstarp
 @import "extend/bootstrap/variables";
@@ -49,6 +50,9 @@
 ////// GLOBAL INCLUDED
 @import "global/style";
 
+//////  INDIVIDUL CONCEPTS 
+@import "invest/style";
+
 //////  APPLICATONS - Common Uses
 @import "apps/asterisk"; 
 @import "apps/reply-comment"; 
@@ -56,7 +60,7 @@
 
 //////  Apps
 @import "apps/messages";  		// - Support Messages
-@import "apps/inbox";  			//- Inbox/ Mail App
+@import "apps/inbox";  			// - Inbox/ Mail App
 @import "apps/file-manager";  	// - File Manager
 @import "apps/chats";  			// - Chats
 

@@ -18,7 +18,6 @@
     &-sm{
         padding: $badge-padding-y-sm $badge-padding-x-sm;
         font-size:$badge-font-size-sm;
-
         &.rounded-pill{
             padding: $badge-padding-y-sm $badge-pill-padding-x-sm;
         }
@@ -119,27 +118,12 @@ $dim-badge: map-merge(
         border-radius:50%;
         background: currentColor;
     }
-    &.has-bg{
-        border-radius: 20px;
-        padding:3px ($badge-dot-width + $badge-dot-gap) 3px ($badge-dot-width + $badge-dot-gap)*2;
-        &:before{
-            left: ($badge-dot-width + $badge-dot-gap);
-            margin-top: 0;
-        }
-    }
     &.badge-sm, &.badge-md {
         padding-left: $badge-dot-width-sm + $badge-dot-gap-sm;
         &:before{
             height: $badge-dot-width-sm;
             width: $badge-dot-width-sm;
             margin-top: 0;
-        }
-        &.has-bg{
-            border-radius: 20px;
-            padding:5px ($badge-dot-width-sm + $badge-dot-gap-sm)*.75 5px ($badge-dot-width-sm + $badge-dot-gap-sm)*1.75;
-            &:before{
-                left: ($badge-dot-width-sm + $badge-dot-gap-sm)*.75;
-            }
         }
     }
     &.badge-lg, &.badge-xl{
@@ -160,13 +144,8 @@ $dot-badge: map-merge(
     )
 );
 @each $name, $color in $dot-badge {
-    .badge-dot{
-        &.bg-#{$name} {
-            color: $color;
-            &.has-bg{
-                background-color: rgba($color,.15) !important;
-            }
-        }
+    .badge-dot.bg-#{$name} {
+        color: $color;
     }
 }
 

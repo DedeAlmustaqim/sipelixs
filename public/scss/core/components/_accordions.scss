@@ -37,7 +37,8 @@ $accordion-s3-icon-collapsed: $ni-plus !default;
 
 .accordion {
     border-radius: $border-radius;
-    background: $accordion-bg;
+    border: 1px solid $border-color;
+    background: $accordion-bg;; 
     &-heading {
         padding-bottom: 1.5rem;
     }

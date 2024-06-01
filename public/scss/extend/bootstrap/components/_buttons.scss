@@ -21,7 +21,7 @@
     > span{
         display: inline-block;
         white-space: nowrap;
-        &:only-child{
+        &:only-child(){
             width: 100%;
         }
     }
@@ -85,14 +85,14 @@
             }
         }
         .dot{
-            top: .35rem;
             position: absolute;
+            top: .35rem;
             right: .35rem;
             transform: translate(50%, -50%);
         }
         .badge{
-            top: .25rem;
             position: absolute;
+            top: .25rem;
             right: .25rem;
             transform: translate(50%, -50%);
             &-circle{

@@ -10,8 +10,11 @@ $dark-border-light: $light-800;
 body.dark-mode {
     background: $dark-body-bg !important;
     color: $base-300;
-    &.ui-shady,&.ui-clean,&.bg-lighter, &.bg-light {
+    &.bg-lighter, &.bg-light {
         background: $dark-body-bg-light !important;
+    }
+    &.nk-body.ui-softy, &.nk-body.ui-shady{
+        background: $dark-body-bg !important;
     }
 }
 .dark-mode {
@@ -158,7 +161,7 @@ body.dark-mode {
         }
     }
 
-        .bg-outline-secondary, .badge-dot.bg-dark, .badge-dot.bg-secondary {
+    .bg-outline-secondary, .badge-dot.bg-dark, .badge-dot.bg-secondary {
         color: $light-400;
     }
 
@@ -166,7 +169,7 @@ body.dark-mode {
         color: $light;
         border-color: $light;
     }
-    .badge-outline-light {
+    .bg-outline-light {
         color: $light-400;
         border-color: $light-700;
     }
@@ -319,7 +322,7 @@ body.dark-mode {
     .border,.border-bottom, .border-top, .border-left, .border-right,
     .dropdown-inner + .dropdown-inner,.dropdown-head,.dropdown-foot,
     .preview-hr,.select2-container--default .select2-selection--single,
-    .ql-picker-options,
+    .ql-picker-options,.dropzone,
     .select2-container--default .select2-selection--multiple,.select2-dropdown,
     .select2-container--default .select2-search--dropdown .select2-search__field,
     .ui-timepicker-standard,.ql-toolbar,.ql-container,.note-editor,.note-toolbar,
@@ -335,7 +338,7 @@ body.dark-mode {
     .nk-tb-item:not(:last-child) .nk-tb-col, .nk-activity-item:not(:last-child), 
     .nk-support-item:not(:last-child), .card-inner-group .card-inner:not(:last-child),
     .card-aside,.nav-tabs,.divider,.data-item:not(:last-child),.nk-footer,
-    .nav-switch-s2 .nav-link,.accordion-item:last-child .accordion-inner, .user-avatar-multiple .user-avatar {
+    .nav-switch-s2 .nav-link, .user-avatar-multiple .user-avatar {
         border-color: $dark-border-color !important;
     }
     .select2-search--dropdown .select2-search__field{
@@ -354,7 +357,7 @@ body.dark-mode {
 
     .table-active, .table-active > th, .table-active > td, .table-hover tbody tr:hover, 
     .code-block .prettyprint, .prettyprint, .list-group-item,.example-spacing-pd > div > span,
-    .form-file-label::after,.ql-picker-options,.data-more:before,
+    .form-file-label::after,.ql-picker-options,.data-more:before,.dropzone,
     .ui-state-hover,.note-editor.note-frame .note-statusbar, 
     .note-editor.note-airframe .note-statusbar,.swal2-popup, 
     .select2-container--default .select2-results__option--highlighted[aria-selected],
@@ -364,9 +367,6 @@ body.dark-mode {
     .example-width > div, .example-height > div, .example-border > div, .example-spacing > div{
         background: $dark-body-bg;
     }
-    .list-group-item{
-        color: $base-300;
-    }
     .tox .tox-tbtn:hover,
     .tox .tox-collection--list .tox-collection__item--active,
     .tox .tox-mbtn--active,.tox .tox-mbtn:focus:not(:disabled),
@@ -374,10 +374,13 @@ body.dark-mode {
     .tox .tox-collection--list .tox-collection__item--enabled {
         background: darken($dark-body-bg, 4%);
     }
+    .list-group-item{
+        color: $base-300;
+    }
     .icon-overlap li {
         border-color: $dark-card-bg;
     }
-    .card,.kanban-add-task,.kanban-board-header,.kanban-item,.table > :not(caption) > * > *{
+    .card,.kanban-add-task,.kanban-board-header,.kanban-item,.table > :not(caption) > * > * {
         background: $dark-card-bg;
     }
     .accordion,.form-clip, .form-text-hint,.card-aside,
@@ -398,6 +401,7 @@ body.dark-mode {
     }
     .accordion-item{
         background: $dark-card-bg !important;
+        border-color:  $dark-border-color !important;
     }
     .clipboard-success-message {
         background: rgba($dark-card-bg, .9);
@@ -470,13 +474,13 @@ body.dark-mode {
     .nk-tb-list .tb-lead-sub, .nk-tb-list .tb-amount-sub {
         color: $base-400 !important;
     }
-    .tox .tox-collection__item-accessory {
+    .tox .tox-collection__item-accessory{
         color: $base-500;
     }
     .nk-menu-link, .link-dark, .nk-menu-main .nk-menu-sub .nk-menu-link, .link-list a{
-        color: $base-400;
+        color: $base-400 !important;
         &:hover{
-            color: $accent-color;
+            color: $accent-color !important;
         }
     }
     .nk-menu-badge {
@@ -499,10 +503,20 @@ body.dark-mode {
     .is-theme .nk-menu-item.current-menu > .nk-menu-link .nk-menu-icon,
     .is-theme .nk-menu-sub .nk-menu-link:hover,
     .is-theme .nk-menu-sub .active > .nk-menu-link,.page-link:hover{
-        color: $accent-color!important;
+        color: $accent-color;
     }
-    .nk-menu-hr,.nk-menu-main .nk-menu-sub,.nk-sidebar .nk-menu > li .nk-menu-sub .nk-menu-sub,
+    .nk-header-mobile,
+    .nk-menu-hr,.nk-menu .nk-menu-sub,.nk-sidebar .nk-menu > li .nk-menu-sub .nk-menu-sub,
     .user-avatar-group .user-avatar{
+        border-color: $dark-border-color;
+    }
+    .nk-header-menu,.nk-menu .nk-menu-sub{
+        background: lighten($sidebar-bg-dark-color,3%);
+    }
+    .nk-menu .nk-menu-sub .nk-menu-item:hover > a{
+        background-color: $sidebar-bg-dark-color;
+    }
+    .nk-sidebar .nk-menu > li .nk-menu-sub .nk-menu-sub{
         border-color: $dark-border-color;
     }
     .table .table-light th,.page-item.disabled .page-link,.page-link:hover,.tb-odr-head,.tb-tnx-head,
@@ -510,7 +524,7 @@ body.dark-mode {
         background-color: lighten($dark-card-bg, 11%) !important;
     }
     .progress,.data-head,.custom-control-label::before,.input-group-text,
-    .nk-msg-profile-toggle {
+    .nk-msg-profile-toggle{
         background-color: lighten($dark-card-bg, 7%) !important;
     }
     .nk-msg-profile-toggle,
@@ -535,7 +549,8 @@ body.dark-mode {
         border-color: $accent-color !important;
     }
 
-    .btn-trigger:before,.btn-trigger.active:hover:before,.nk-quick-nav-icon:before{
+    .btn-trigger:before,.btn-trigger.active:hover:before,.nk-quick-nav-icon:before,
+    .nk-header-mobile .nk-nav-toggle.nk-quick-nav-icon:before{
         background-color: $dark-body-bg-dark;
     }
 
@@ -554,7 +569,7 @@ body.dark-mode {
             background: lighten($dark-card-bg, 12%);
         }
     }
-    
+
     .border-transparent{
         border-color: transparent !important;
     }
@@ -569,6 +584,12 @@ body.dark-mode {
     .ql-stroke {
         stroke: $base-400
     }
+    .swal2-validation-message{
+        background: $dark-border-color;
+    }
+    .tb-tnx-item{
+        border-color: $dark-border-color !important;;
+    }
     .team-info li span:first-child,.team-statistics li span:last-child,.project-progress-task,
     .table, .nk-tb-list, .nk-tb-list .tb-amount span, .nk-tb-list .tb-amount .currency,
     .tb-tnx-item .tb-tnx-total, .tb-odr-item .tb-odr-total,.user-balance-sub span,
@@ -578,14 +599,8 @@ body.dark-mode {
     .tagify__tag > div, .popover-body,.input-mail::placeholder, .list-apps-title {
         color: $base-300;
     }
-    .tb-tnx-item{
-        border-color: $dark-border-color !important;;
-    }
     .nk-notification-text span, .is-unread .chat-context .text {
         color: $base-200;
-    }
-    .swal2-validation-message{
-        background: $dark-border-color;
     }
     .nav-tabs .nav-link {
         color: $base-300;
@@ -613,7 +628,7 @@ body.dark-mode {
         background: darken($dark-card-bg, 2%);
     }
 
-    .nk-apps-sidebar .dropdown-menu .lead-text, .list-step li.list-step-current,
+    .nk-apps-sidebar .dropdown-menu .lead-text, .list-step li.list-step-current, 
     .nk-tb-list .tb-lead, .nk-tb-list .tb-amount, .nk-support-content .title, .nk-sale-data .amount {
         color: $white;
     }
@@ -655,12 +670,14 @@ body.dark-mode {
         background: $sidebar-bg-dark-color;
     }
 
-
     // Apps
     .nk-chat-aside-user .title,.nk-file-name,.nk-file-name-text a.title,
     .is-unread .nk-ibx-context-text .heading, .chat-profile-settings .custom-control-sm .custom-control-label,
     .attach-info,.profile-stats .amount,.is-unread .chat-from .name{
         color: $white;
+    }
+    .chat-upload-option{
+        background-color: $dark-card-bg;
     }
     .nk-fmg-menu-item .icon, .nk-ibx-menu-item .icon {
         color: $base-400;
@@ -674,9 +691,7 @@ body.dark-mode {
     .nk-file-name-text a.title:hover,.active > .nk-fmg-menu-item .icon, .active .nk-ibx-menu-text, .active .nk-ibx-menu-item .icon{
         color: $accent-color;
     }
-    .chat-upload-option{
-        background-color: $dark-card-bg;
-    }
+
     .nk-chat,.nk-chat-aside,.nk-chat-profile,.nk-chat-head,.chat-profile-group,
     .nk-fmg,.nk-fmg-aside,.nk-fmg-body-head,.nk-fmg-switch,
     .nk-files-view-grid .nk-file, .nk-files-view-group .nk-file,
@@ -713,7 +728,12 @@ body.dark-mode {
     .nk-msg,.nk-msg-head,.nk-msg-profile, .nk-fmg-switch{
         background: $dark-card-bg;
     }
-
+    .nk-files-view-list .nk-file.selected > div{
+        background: transparent;
+    }
+    .nk-files-view-list .nk-file.selected{
+        background: $dark-border-color;
+    }
     .nk-ibx-status .progress {
         background: $dark-card-bg !important;
     }
@@ -730,14 +750,8 @@ body.dark-mode {
     .nk-ibx-label > li:hover, .nk-ibx-contact > li:hover,
     .nk-ibx-menu li.active,.nk-ibx-menu li:hover,.dot-label:after,.attach-foot,
     .nk-reply-from,.nk-reply-entry.note,.nk-msg-aside,.nk-msg-nav,
-    .nk-files-view-grid .nk-file,.nk-files-view-group .nk-file,.nk-files-view-list .nk-file > div{
+    .nk-files-view-list .nk-file > div{
         background: $dark-body-bg;
-    }
-    .nk-files-view-list .nk-file.selected > div{
-        background: transparent;
-    }
-    .nk-files-view-list .nk-file.selected{
-        background: $dark-border-color;
     }
     .is-unread .nk-ibx-context-text,
     .nk-upload-info {
@@ -872,7 +886,6 @@ body.dark-mode {
     .accordion:not(.accordion-s2):not(.accordion-s3) {
         border-color: $dark-border-color !important;
     }
-
     .card.bg-light .card-header, .card.bg-lighter .card-header {
         background: rgba($black, .2);
     }
@@ -909,7 +922,6 @@ body.dark-mode {
         .card,
         .code-block,
         .accordion:not(.accordion-s2):not(.accordion-s3),
-        .accordion-item:last-child .accordion-inner,
         .card .card-inner + .table .tb-tnx-head, 
         .card-bordered,
         .nk-download {
@@ -925,11 +937,8 @@ body.dark-mode {
                 border-right-color: $dark-border-color;
             }
         }
-        .nk-files-view-grid .nk-file, .nk-files-view-group .nk-file {
-            border: none !important;
-        }
     }
-    
+
     .nk-order-ovwg-data {
         &.buy {
             border-color: mix($success, $dark-card-bg, 60%)
@@ -952,41 +961,69 @@ body.dark-mode {
         background: rgba($black, .9);
     }
 
-    // eCommerce
-    .is-light .nk-menu-link:hover, .is-light .active > .nk-menu-link,
-    .nk-menu-link:hover, .active > .nk-menu-link,
-    .is-theme .nk-menu-link:hover, .is-theme .active > .nk-menu-link {
-        background: lighten($sidebar-bg-dark-color,5%);
+    // Invest
+    .nk-iv-wg1,.nk-iv-scheme-item,.plan-item-card,
+    .invest-cc-choosen,.invest-cc-chosen,.invest-amount-label{
+        background: $dark-card-bg;
     }
-    
-    .nk-menu-sub .nk-menu-link:hover, .active > .nk-menu-sub .nk-menu-link,
-    .nk-header-search .form-control{
-        background-color: transparent !important;
+    .nk-iv-scheme-more:hover{
+        background: $dark-body-bg-dark;
+    }
+    .nk-iv-scheme-icon,.plan-label{
+        background: darken($dark-body-bg, 3%);
     }
 
+    .invest-cc-choosen,.invest-cc-chosen,.invest-cc-item:not(:last-child),.invest-cc-dropdown .dropdown-menu,
+    .nk-kycfm-count,.invest-amount-label,.nk-kycfm-label{
+        border-color: lighten($dark-card-bg, 20%);
+    }
+
+    .nk-iv-wg1,.nk-iv-wg2-list .total,.nk-refwg .nk-refwg-invite,.nk-iv-scheme-item,
+    .nk-iv-wg3-list li,.nk-iv-wg4-sub:not(:last-child),.plan-item-card,.plan-item-head,.plan-label,
+    .card-custom-s1 .card-inner-group,.nk-kyc-app-icon .icon,.nk-kycfm-head:not(:last-child), 
+    .nk-kycfm-content:not(:last-child), .nk-kycfm-footer:not(:last-child){
+        border-color: $dark-border-color;
+    }
+    .nk-iv-scheme-icon.is-done {
+        color: $base-400;
+    }
+    .slick-next, .slick-prev {
+        background: lighten($dark-card-bg, 20%);
+        border-color: lighten($dark-card-bg, 30%);
+        color: $base-200;
+        &:hover {
+            background: lighten($dark-card-bg, 28%);
+        }
+    }
+    .slick-disabled .slick-next, .slick-disabled .slick-prev{
+        color: $base-400;
+        &:hover {
+            background: lighten($dark-card-bg, 20%);
+            border-color: lighten($dark-card-bg, 30%);
+        }
+    }
+    .nk-kycfm-count {
+        border-color: darken($base-400, 5%);
+        color: $base-400;
+    }
+
+    .nk-iv-wg2-list .item-value,.nk-iv-wg3-amount .number,.nk-iv-wg3-amount .number-sm,
+    .nk-iv-scheme-name,.nk-iv-scheme-item .amount,.nk-iv-wg5-ck-result .text-lead,.coin-name,
+    .nk-kyc-app-icon .icon{
+        color: $white;
+    }
+
+    //Saparated Table / 
     .ui-bordered .nk-tb-list.is-separate .nk-tb-item > .nk-tb-col:first-child,
     .ui-bordered .nk-tb-list.is-separate .nk-tb-item > .nk-tb-col{
         border-color: $dark-border-color !important;
     }
-    .is-compact:not(:hover) .nk-menu-heading:not(:first-child):before{
-        background-color: $dark-border-color;
-    }
-    .nk-add-product {
-        background: lighten($dark-card-bg, 4%);
-        box-shadow: -10px 15px 30px 5px rgba($black, .4);
-    }
-
     .nk-tb-list.is-separate .nk-tb-item > .nk-tb-col,
-    .nk-tb-list.is-separate .nk-tb-item:hover .nk-tb-action-hidden,
-    .nk-download{
+    .nk-tb-list.is-separate .nk-tb-item:hover .nk-tb-action-hidden{
         background-color: $dark-card-bg;
     }
-    .nk-ecwg .amount, .nk-store-statistics .count, .nk-top-products .title, .nk-top-products .amount,
     .nk-tb-list .tb-product .title {
         color: $white;
-    }
-    .nk-ecwg8-legends .title, .nk-ecwg7-legends .title{
-        color: $base-100;
     }
 
     //List Box
@@ -1139,20 +1176,19 @@ body.dark-mode {
     .noUi-active {
         box-shadow: inset 0 0 1px $black, inset 0 1px 7px $black, 0 3px 6px -3px $black;
     }
-    
-    //   autocomplete indicator
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus,
-    textarea:-webkit-autofill,
-    textarea:-webkit-autofill:hover,
-    textarea:-webkit-autofill:focus,
-    select:-webkit-autofill,
-    select:-webkit-autofill:hover,
-    select:-webkit-autofill:focus {
-        -webkit-text-fill-color: $white;
-        transition: background-color 5000s ease-in-out 0s;
-    }
+     //   autocomplete indicator
+     input:-webkit-autofill,
+     input:-webkit-autofill:hover, 
+     input:-webkit-autofill:focus,
+     textarea:-webkit-autofill,
+     textarea:-webkit-autofill:hover,
+     textarea:-webkit-autofill:focus,
+     select:-webkit-autofill,
+     select:-webkit-autofill:hover,
+     select:-webkit-autofill:focus {
+         -webkit-text-fill-color: $white;
+         transition: background-color 5000s ease-in-out 0s;
+     }
 }
 
 @media (max-width: 576px) {

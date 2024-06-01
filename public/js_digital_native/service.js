@@ -1,5 +1,20 @@
 
 $(document).ready(function () {
+
+    $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
+        return {
+            "iStart": oSettings._iDisplayStart,
+            "iEnd": oSettings.fnDisplayEnd(),
+            "iLength": oSettings._iDisplayLength,
+            "iTotal": oSettings.fnRecordsTotal(),
+            "iFilteredTotal": oSettings.fnRecordsDisplay(),
+            "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+            "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+        };
+    };
+
+    showReport()
+
     $.ajax({
         url: BASE_URL + 'service/get_kecamatan',
         dataType: 'json',
@@ -10,6 +25,8 @@ $(document).ready(function () {
         }
     });
 });
+
+
 
 $('#id_kec').change(function () {
     var id = $(this).val();
@@ -62,14 +79,14 @@ $('#formRegister').on('submit', function (e) {
                 }
                 if (data.password) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.password + '</p>', 'error');
-                }if (data.confirm_password) {
+                } if (data.confirm_password) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.confirm_password + '</p>', 'error');
                 }
             } else if (data.success == true) {
 
                 Swal.fire('Pendaftaran Berhasil', '', 'success');
-                
-               window.location.href=BASE_URL+'/register/verifikasi/'+ data.email
+
+                window.location.href = BASE_URL + '/register/verifikasi/' + data.email
             }
 
         },
@@ -110,14 +127,15 @@ $('#reportForm').on('submit', function (e) {
                 }
                 if (data.deskripsi) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.deskripsi + '</p>', 'error');
-                }if (data.lampiran) {
+                } if (data.lampiran) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.lampiran + '</p>', 'error');
                 }
             } else if (data.success == true) {
 
                 Swal.fire('Laporan Anda telah dibuat', '', 'success');
-                $('#modalTambahPeg').modal('hide');
-              
+                $('#reportTable').DataTable().ajax.reload(null, false);
+                $('#modalReport').modal('hide');
+
             }
 
         },
@@ -125,3 +143,226 @@ $('#reportForm').on('submit', function (e) {
     })
     return false;
 });
+
+$('#filter_status').change(function () {
+
+    // Menghapus opsi yang ada dalam dropdown 'desa'
+    showReport();
+
+});
+
+
+function showReport() {
+    var status = $('#filter_status').val()
+
+
+    $('#reportTable').DataTable({
+        processing: true,
+        serverSide: true,
+
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bInfo": false,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "service/report/user/" + status,
+        },
+        "columns": [
+
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-left">' + data[2] + '</div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-left">' + data[6] + '</div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><a href="' + data[7] + '" target="_blank" class="btn btn-dim btn-primary">Lihat</a></div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center">' + konversiFormatTanggal(data[8]) + '</div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><span class="tb-sub ' + data[11] + ' ">' + data[10] + '</span></div>'
+
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    if (data[12] == 0) {
+                        return '<div class="text-center"><span class="tb-sub text-danger">Belum Ada </span></div>'
+                    } else if (data[12] == 1) {
+                        return '<div class="text-center"><a onClick="viewReply(this)" data-id="' + data[0] + '" target="_blank" class="btn btn-dim btn-primary">Lihat</a></div>'
+
+                    }
+
+
+                }
+            },
+
+
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+
+
+    });
+
+
+}
+
+function viewReply(elem) {
+    var id = $(elem).data("id");
+    $('#modalViewReply').modal('show');
+    showReplyTable(id)
+}
+
+
+function showReplyTable(id) {
+
+    $.ajax({
+        "url": BASE_URL + "service/get_reply/" + id,
+        dataType: 'json',
+        success: function (data) {
+             $('#showReply').html('');
+            $.each(data, function (index, item) {
+                if (item.lampiran_petugas) {
+                    var lampiran = `<a target="_blank" href="`+BASE_URL+`public/lampiran_petugas/`+item.lampiran_petugas+`"><span class="badge bg-secondary">Lihat Lampiran</span></a>`
+                }else{
+                    var lampiran = `<span class="badge bg-danger">Tidak ada Lampiran</span>`
+                }
+                $('#showReply').append(`<li class="nk-support-item">
+                
+                <div class="nk-support-content">
+                    <div class="title">
+                        <span>`+ konversiFormatTanggal(item.created_at) + `<br>`+lampiran+`</span>
+                        <span class="badge badge-dot badge-dot-xs bg-warning ms-1 `+ item.class + `">` + item.ket + `</span>
+                    </div>
+                    `+ item.catatan_petugas + `
+                   
+                </div>
+            </li>`);
+            });
+        }
+    });
+
+
+    // $('#replyTable').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     destroy: true,
+    //     "bPaginate": false,
+    //     "bLengthChange": false,
+    //     "bFilter": false,
+    //     "bInfo": false,
+    //     "bAutoWidth": false,
+    //     "columnDefs": [{
+    //         "visible": false,
+    //     }],
+
+    //     "language": {
+    //         "lengthMenu": "Tampilkan _MENU_ item per halaman",
+    //         "zeroRecords": "Tidak ada data yang ditampilkan",
+    //         "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+    //         "infoEmpty": "Tidak ada data yang ditampilkan",
+    //         "infoFiltered": "(filtered from _MAX_ total records)",
+    //         "search": "Cari",
+    //         "paginate": {
+    //             "first": "Awal",
+    //             "last": "Akhir",
+    //             "next": ">",
+    //             "previous": "<"
+    //         },
+    //     },
+    //     "displayLength": 25,
+    //     "ajax": {
+    //         "url": BASE_URL + "service/get_reply/" + id,
+    //     },
+    //     "columns": [
+    //         {
+    //             "orderable": false,
+    //             "data": function (data) {
+    //                 return '<div class="text-left">' + data[0] + '</div>'
+    //             }
+    //         },
+    //         {
+    //             "orderable": false,
+    //             "data": function (data) {
+    //                 return data[2]
+    //             }
+    //         },
+    //         {
+    //             "orderable": false,
+    //             "data": function (data) {
+    //                 return '<div class="text-left">' + data[3] + '</div>'
+    //             }
+    //         },
+
+
+
+    //     ],
+    //     rowCallback: function (row, data, iDisplayIndex) {
+    //         var info = this.fnPagingInfo();
+    //         var page = info.iPage;
+    //         var length = info.iLength;
+    //         var index = page * length + (iDisplayIndex + 1);
+    //         $('td:eq(0)', row).html(index);
+    //     },
+    // });
+}

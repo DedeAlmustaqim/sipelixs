@@ -50,7 +50,6 @@
         background: $header-bg-color;
         border-bottom: 1px solid $header-border-bottom;
         padding: 0 $header-main-gap-x;
-        box-shadow: 0px 1px 3px 0px rgba($base-color, 0.05);
         z-index: 1010;
         @if($dark_option==true) {
             &.is-dark:not([class*=bg-]){
@@ -110,25 +109,6 @@
             }
             .sub-text,.overline-title,.overline-title-alt{
                 color: $base-light;
-            }
-        }
-        &-search{
-            display: none;
-            .form-control{
-                background-color: transparent;
-                border: none;
-            }
-            .icon{
-                @if($dark_option==true) {
-                    .is-dark &{
-                        color: $white;
-                    }
-                }
-                @if($dark_theme_option==true) {
-                    .is-theme &{
-                        color: $white;
-                    }
-                }
             }
         }
     }
@@ -228,11 +208,6 @@
     .nk{
         &-header{
             padding: 0 $header-main-gap-x-sm;
-            &-search{
-                display: flex;
-                align-items: center;
-                flex-grow: 1;
-            }
         }
         &-quick{
             &-nav{
@@ -264,13 +239,19 @@
         }
     }
 }
-
+@keyframes overlay-fade-in{
+    0%{
+        opacity: 0;
+    }100%{
+        opacity: 1;
+    }
+}
 .nk-header{
     &-menu{
         position: fixed;
+        top: 0;
         left: 0;
         transform: translateX(-100%);
-        top: 0;
         width: 280px;
         height: 100vh;
         max-height: 100vh;
@@ -283,11 +264,12 @@
         }
         &.mobile-menu{
             padding-top: 65px;
+            padding-bottom: 2.5rem;
             padding-left: 0;
             padding-right: 0;
             transition: transform .4s ease;
         }
-        &.nk-sidebar-active{
+        &.nk-header-active{
             transform: translateX(0);
         }
     }
@@ -314,6 +296,16 @@
             }
         }
     }
+    &-overlay{
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: $sidebar-overlay;
+        z-index: 900;
+        animation: overlay-fade-in .4s ease 1;
+    }
 }
 @include media-breakpoint-up(lg){
     .nk-header{
@@ -322,7 +314,7 @@
                 display: none;
             }
             position: static;
-            background: transparent;
+            background: transparent !important;
             height: auto;
             max-height: auto;
             border-right: none;
@@ -331,125 +323,8 @@
             overflow: visible;
             transform: translateX(0) !important;
         }
-    }
-}
-
-// Header App Switcher
-.nk-header{
-    &-app{
-        &-name{
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-        &-logo{
-            flex-shrink: 0;
-            width: 32px;
-            height: 32px;
-            margin-right: 0.75rem;
-            .icon{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                font-size: 20px;
-                color: $accent-color;
-                background: rgba($accent-color, .3);
-            }
-        }
-        &-info{
-            line-height: 1.3;
-            .sub-text{
-                font-size: $fx-sz-11;
-                margin-bottom: 0.125rem;
-            }
-            .lead-text{
-                font-size: $fx-sz-14;
-            }
-        }
-        &-switch{
-            position: relative;
-            .nk-header-app-name{
-                padding: 1.5rem $sidebar-gap-x;
-            }
-            > a{
-                display: block;
-                width: 100%;
-                &:after{
-                    position: absolute;
-                    right: 24px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    font-size: 1rem;
-                    content: $ni-chevron-down;
-                    font-family: $nk-dashlite-font;
-                }
-            }
-            .mobile-menu &{
-                width: 100%;
-                border-bottom: 1px solid $border-light;
-            }
-            .toggle-content{
-                width: 100%;
-                top: 0;
-                transform: translateY(0);
-                height: calc(100vh - 65px);
-                overflow: auto;
-                box-shadow: none;
-                border-radius: 0;
-                background: $white;
-            }
-        }
-        &-head{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: .75rem $sidebar-gap-x;
-            .title  {
-                font-size: 16px;
-                font-weight: $fw-medium;
-            }
-            .toggle{
-                position: relative;
-                height: 24px;
-                width: 24px;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-        &-list{
-            li{
-                border-bottom: 1px solid $border-light;
-            }
-            .nk-header-app-name{
-                padding: 1rem $sidebar-gap-x;
-            }
-        }
-    }
-}
-@media (max-height:615px){
-    .nk-header{
-        &-app{
-            &-switch{
-                .dropdown-menu{
-                    max-height: 416px;
-                    overflow: auto;
-                }
-            }
-        }
-    }
-}
-
-@include media-breakpoint-up(md){
-    .nk-header{
-        &-onlymobile{
+        &-overlay{
             display: none;
-            + .nk-content{
-                margin-top: 0;
-            }
         }
     }
 }

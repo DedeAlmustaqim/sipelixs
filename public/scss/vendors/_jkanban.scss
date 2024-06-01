@@ -8,9 +8,12 @@
     box-sizing: border-box;
     width: auto;
     display: flex;
-    margin-left: math.div(-$grid-gutter-width,2);
-    margin-right: math.div(-$grid-gutter-width,2);
+    margin-left: math.div(-$grid-gutter-width , 2);
+    margin-right: math.div(-$grid-gutter-width , 2);
     overflow: auto;
+    > *{
+      touch-action: pan-y;
+    }
   }
   
   .kanban-container * {
@@ -19,7 +22,7 @@
 
 
   .kanban-board {
-    padding: math.div($grid-gutter-width,2);
+    padding: math.div($grid-gutter-width , 2);
     position: relative;
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     flex-shrink: 0;
@@ -39,8 +42,7 @@
   
   .kanban-board-header {
     background: $white;
-    border:0px solid $border-light;
-    box-shadow: 0px 1px 3px 0px rgba($base-color, 0.05);
+    border:1px solid $border-light;
     border-top: 3px solid $gray-300;
     border-radius: $border-radius;
     padding: .5rem 1.25rem;
@@ -98,8 +100,7 @@
   
   .kanban-item {
     border-radius: $border-radius;
-    border:0 solid $border-light;
-    box-shadow: 0px 1px 3px 0px rgba($base-color, 0.05);
+    border:1px solid $border-light;
     padding: 1rem 1.25rem;
     margin-bottom: 0.75rem;
     background: $white;

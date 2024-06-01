@@ -78,7 +78,7 @@
         display: table-row;
         &:not(.nk-tb-head):hover, &:not(.nk-tb-head).seleted {
             background: lighten($lighter, 1%);
-            box-shadow: 0 2px 15px -4px rgba($accent-color, 0.4);
+            box-shadow: 0 0 10px -4px rgba($base-color, 0.2);
         }
     }
     &-col{
@@ -102,14 +102,14 @@
             }
         }
         .nk-tb-item:not(:last-child) &{
-            border-bottom: 1px solid rgba($border-color, .9);
+            border-bottom: 1px solid $border-color;
         }
         .nk-tb-head &{
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
             color: $base-light;
             font-size: .9em;
-            border-bottom: 1px solid rgba($border-color, .9);
+            border-bottom: 1px solid $border-color;
         }
         &-action {
             text-align: right;
@@ -145,7 +145,7 @@
             }
         }
     }
-    &-list{
+    &-list{ 
         .nk-tb-head {
             .btn-trigger .icon{
                 font-size: 1.5em;

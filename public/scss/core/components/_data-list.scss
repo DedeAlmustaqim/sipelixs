@@ -24,7 +24,6 @@
             cursor: pointer;
         }
         &:hover{
-            // background-color: $lighter;
             .data-label{
                 color: $base-text;
             }
@@ -97,9 +96,6 @@
                 height: 40px;
                 width: 40px;
             }
-        }
-        .icon{
-            height: auto;
         }
         &.disable{
             &:before{

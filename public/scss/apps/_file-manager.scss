@@ -1,5 +1,5 @@
 $fmg-aside-width :          260px;
-$fmg-aside-width-small :    220px;
+$fmg-aside-width-small :    300px;
 $fmg-file-icon-width-xs :    24px;
 $fmg-file-icon-width-sm :    32px;
 $fmg-file-icon-width-lg :    72px;
@@ -683,6 +683,7 @@ $file-desc-sap:           $ni-dot !default;
             margin: 8px;
             background: $white;
             border-radius: $border-radius;
+            border: 1px solid $border-color;
             .nk-file-members{
                 display: none;
             }

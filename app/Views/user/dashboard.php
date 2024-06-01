@@ -85,35 +85,58 @@
     <div class="col-xl-12 col-xxl-12">
         <div class="card card-bordered card-full">
             <div class="card-inner border-bottom">
-                <div class="card-title-group">
-                    <div class="card-title">
+                <div class="row">
+                    <div class="col-6">
                         <h6 class="title">Laporan Anda</h6>
                     </div>
-                    <div class="card-tools">
-                        <!-- <a href="#" class="link">Lihat Semua</a> -->
+                    <div class="col-6">
+                        <div class="row g-5 align-center">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="form-label" for="site-name">Status</label>
+                                    <span class="form-note">Filter menurut Status Laporan</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control-wrap">
+                                        <select class="form-control" id="filter_status">
+                                            <option value="0" selected>Semua</option>
+                                            <option value="1">Belum ditanggapi</option>
+                                            <option value="2">Dalam proses</option>
+                                            <option value="3">Selesai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="table-responsive wrap mt-2">
+                    <table class="table table-borderedless" id="reportTable">
+                        <thead class="table-light text-center">
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Nama Terlapor</th>
+                                <th scope="col" width="25%">Deskripsi</th>
+                                <th scope="col">Lampiran</th>
+                                <th scope="col">Dibuat</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Catatan dan Lampiran Petugas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered" id="reportTable">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">Nama Terlapor</th>
-                            <th scope="col">Deskripsi</th>
-                            <th scope="col">Lampiran</th>
-                            <th scope="col">Dibuat</th>
-                            <th scope="col">Status</th>
-    
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
 
         </div><!-- .card -->
+
     </div><!-- .col -->
+
 </div>
 <!-- Modal Form -->
 <div class="modal fade" id="modalReport">
@@ -126,7 +149,7 @@
                 </a>
             </div>
             <div class="modal-body">
-                <form id="reportForm" method="POST" class="form-validate is-alter">
+                <form id="reportForm" method="POST" class="form-validate is-alter gy-3">
                     <input type="text" hidden value="<?= $userData['id'] ?>" name="user_id" id="user_id">
                     <div class="form-group">
                         <label class="form-label" for="nm_terlapor">Nama Terlapor</label>
@@ -193,5 +216,23 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalViewReply">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h5 class="modal-title">Catatan dan Lampiran Petugas</h5>
+                <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <em class="icon ni ni-cross"></em>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div id="showReply"></div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
 
 <?= $this->endSection() ?>

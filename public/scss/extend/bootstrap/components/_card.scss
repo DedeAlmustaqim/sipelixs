@@ -1,13 +1,9 @@
 .card{
-    box-shadow: 0px 1px 3px 0px rgba($base-color, 0.05);
-    .card{
-        box-shadow: 0px 1px 6px 1px rgba($base-color, 0.10);
-    }
     + .card:not(.card .card + .card){
-        margin-top: $gutter-width;
+        margin-top: $gutter-width; 
     }
     + .nk-block-head{
-        padding-top: 2.5rem; 
+        padding-top: 2.5rem;
     }
     &-full {
         height: 100%;
@@ -85,12 +81,6 @@
             font-weight: $fw-medium;
             color: $base-light;
         }
-        .is-dark &{
-            color: $white;
-            .title{
-                color: inherit;
-            }
-        }
     }
     &-subtitle {
         color: $base-light;
@@ -145,22 +135,6 @@
     &-hint{
         font-size: 1rem;
         color: $border-color;
-    }
-    &-tools{
-        display: flex;
-    }
-    &-note{
-        font-size: 12px;
-        line-height: 1.125rem;
-        color:$base-light;
-        display: flex;
-        
-        .icon{
-            font-size: 1.2em;
-            line-height: 1.125rem;
-            margin-right: 0.5rem;
-            display: inline-block;
-        }
     }
 }
 @include media-breakpoint-down(sm){

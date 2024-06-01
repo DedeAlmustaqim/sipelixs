@@ -5,24 +5,6 @@
  * Author: Softnio
  * Author URI: http://themeforest.net/user/softnio
 **/
-.nk-sidebar.is-dark {
-  background: #0f192a;
-  border-right-color: #1c2f50;
-}
-.nk-sidebar.is-theme {
-  background: #5f2525;
-  border-right-color: #833333;
-}
-.is-dark .nk-sidebar-head {
-  border-color: #1c2f50;
-}
-.is-theme .nk-sidebar-head {
-  border-color: #833333;
-}
-.nk-sidebar.is-dark .user-balance-alt, .nk-sidebar.is-theme .user-balance-alt {
-  color: rgba(255, 255, 255, 0.8);
-}
-
 .nk-header {
   background: #f5f6fa;
   border-bottom-color: #e5e9f2;
@@ -37,12 +19,6 @@
 .is-dark .nk-menu-link {
   color: #8699b2;
 }
-.is-dark .nk-menu-link:hover {
-  background: #172641;
-}
-.is-dark .active > .nk-menu-link {
-  background: #172641;
-}
 .is-dark .nk-menu-icon {
   color: #9faec2;
 }
@@ -55,7 +31,16 @@
 .is-dark .nk-menu-link:hover .nk-menu-icon, .is-dark .nk-menu-item.active > .nk-menu-link .nk-menu-icon, .is-dark .nk-menu-item.current-menu > .nk-menu-link .nk-menu-icon {
   color: #e8757d;
 }
-.is-dark .user-name {
+.is-dark .nk-news-icon .icon {
+  color: #e14954;
+}
+.is-dark .nk-news-text .icon {
+  color: #8094ae;
+}
+.is-dark .nk-news-text p span {
+  color: rgba(128, 148, 174, 0.9);
+}
+.is-dark .user-name, .is-dark .nk-news-text p {
   color: #90a1b8;
 }
 .is-dark .nk-quick-nav-icon {
@@ -65,12 +50,6 @@
 .is-theme .nk-menu-link {
   color: #f4b6bb;
 }
-.is-theme .nk-menu-link:hover {
-  background: #752e2e;
-}
-.is-theme .active > .nk-menu-link {
-  background: #752e2e;
-}
 .is-theme .nk-menu-icon {
   color: #f9d9dc;
 }
@@ -78,13 +57,16 @@
   color: #f7cccf;
   background: #833333;
 }
-.is-theme .nk-quick-nav-icon, .is-theme .overline-title {
+.is-theme .nk-news-icon .icon {
+  color: #ec8b92;
+}
+.is-theme .nk-news-text .icon, .is-theme .nk-quick-nav-icon, .is-theme .overline-title {
   color: #f5bfc3;
 }
-.is-theme .nk-menu-heading .overline-title {
+.is-theme .nk-news-text p span, .is-theme .nk-menu-heading .overline-title {
   color: rgba(245, 191, 195, 0.8);
 }
-.is-theme .user-name {
+.is-theme .user-name, .is-theme .nk-news-text p {
   color: #f8d5d8;
 }
 
@@ -92,9 +74,11 @@
 .nav-tabs .nav-link:after,
 .progress-bar, .dot-primary,
 .alert-fill.alert-primary,
-.bg-primary,
+.badge-primary,
 .icon-circle,
 .noUi-connect,
+.nk-kycfm-label::after,
+.plan-item-card:after,
 .nk-msg-menu-item a:after,
 .ui-shady .nk-msg-item.active:after, .ui-shady .nk-msg-item.current:after,
 .ui-softy .nk-msg-item.active:after, .ui-softy .nk-msg-item.current:after {
@@ -109,12 +93,12 @@
   background: #662828;
 }
 
-.is-dark .nk-wg7-title, .is-dark .nk-wg7-note {
-  color: #f5bfc3;
-}
-
 .user-avatar, [class^=user-avatar]:not([class*=-group]) {
   background: #e8757d;
+}
+
+.nk-news-item:hover .nk-news-text .icon {
+  color: #e8757d;
 }
 
 .nk-menu-link:hover,
@@ -124,7 +108,6 @@
 .nk-menu-link:hover .count,
 .nk-menu-sub .nk-menu-link:hover,
 .nk-menu-sub .active > .nk-menu-link,
-.nk-menu-sm .nk-menu-link:hover,
 .nk-menu-main .nk-menu-link:hover,
 .nk-menu-main .nk-menu-link:focus,
 .nk-menu-main .nk-menu-item.active > .nk-menu-link,
@@ -158,14 +141,19 @@
 .list-step li.list-step-current:before,
 .accordion-s2 .accordion-head .title,
 .accordion-s3 .accordion-head .title,
-.bg-outline-primary,
-.badge-dim.bg-primary,
+.badge-outline-primary,
+.badge-dim.badge-primary,
 .badge-dot.bg-primary,
-.badge-dim.bg-outline-primary,
+.badge-dim.badge-outline-primary,
 .alert-primary,
 .form-clip,
 .form-text-hint,
 .search-submit:hover,
+.nk-news-icon .icon,
+.nk-refwg-name .title,
+.nk-iv-wg1-info, .nk-wg4-note span,
+.nk-iv-scheme-item .amount-ex,
+.nk-kycfm-control:checked ~ .nk-kycfm-label .label-icon,
 .attach-item .icon,
 .attach-download:hover span,
 .nk-reply-meta-info .whom,
@@ -173,15 +161,17 @@
 .nk-msg-menu-item a:hover,
 .nk-msg-menu-item.active a,
 .user-balance,
-.user-avatar[class*=-primary-dim], a,
+.user-avatar[class*=-primary-dim],
+.nk-order-ovwg-data.sell .amount,
+.nk-order-ovwg-data.sell .title .icon,
+.nk-wg-action-content p strong, a,
 .dropzone .dz-message-text span,
 .nk-switch-icon.active,
 .link-list-plain a .icon,
 .chat-upload-option a,
 .is-unread .chat-context .status,
 .add-opt:hover .sub-text, .add-opt:hover .icon,
-.icon[class*=bg-primary-dim],
-.nk-tb-list .tb-asterisk a {
+.icon[class*=bg-primary-dim] {
   color: #e14954;
 }
 
@@ -221,24 +211,23 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #fcedee !important;
 }
 
-.alert-primary, .badge-dim.bg-outline-primary {
+.alert-primary, .badge-dim.badge-outline-primary {
   background-color: #fcedee;
   border-color: #f3b6bb;
 }
 
-.alert-pro.alert-primary, .bg-primary,
-.sp-package-choose:checked ~ label,
+.alert-pro.alert-primary, .badge-primary,
 .plan-control:checked + .plan-item-card,
 .form-control:focus,
 .form-control.focus,
-.custom-file-input:focus ~ .custom-file-label,
+.form-file-input:focus ~ .form-file-label,
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before,
 .select2-container--default .select2-selection--single:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   border-color: #e14954;
 }
 
-.nk-order-ovwg-data.sell, .bg-outline-primary {
+.nk-order-ovwg-data.sell, .badge-outline-primary {
   border-color: #f3b6bb;
 }
 
@@ -251,6 +240,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 }
 
 .page-item.active .page-link,
+.plan-control:checked + .plan-item-card .plan-label,
 .custom-control-input:checked ~ .custom-control-label::before,
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
   background-color: #e14954;
@@ -263,13 +253,13 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   background-color: #ed9298;
 }
 
-.badge-dim.bg-primary {
+.badge-dim.badge-primary {
   background-color: #fcedee;
   border-color: #fcedee;
 }
 
 .bg-primary.badge-dot {
-  background: transparent !important;
+  background: transparent;
 }
 
 .nk-error-head {
@@ -283,9 +273,17 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #ffffff;
 }
 
-.icon-avatar {
+.icon-avatar, .nk-iv-scheme-icon.is-running {
   color: #e14954;
   background-color: #fbe4e5;
+}
+
+.is-dark .nk-wgw-icon {
+  background: #e76d76;
+}
+
+.is-dark .nk-iv-wg2-title .title {
+  color: #f5bfc3;
 }
 
 .is-theme .nk-quick-nav-icon:before {
@@ -368,7 +366,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 
 .form-control:focus, .form-control.focus,
 .custom-control-input:focus ~ .custom-control-label::before,
-.custom-file-input:focus ~ .custom-file-label,
+.form-file-input:focus ~ .form-file-label,
 .select2-container--default .select2-selection--single:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   box-shadow: 0 0 0 3px rgba(225, 73, 84, 0.1);
@@ -383,7 +381,8 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle,
-.btn-primary.disabled, .btn-primary:disabled {
+.btn-primary.disabled, .btn-primary:disabled,
+.invest-amount-control:checked ~ .invest-amount-label {
   background-color: #e14954;
   border-color: #e14954;
 }
@@ -439,7 +438,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #526484;
 }
 
-.nk-menu-badge {
+.nk-menu-badge, .nk-menu-main .nk-menu-sub .nk-menu-badge {
   color: #ea8087;
   background-color: #fcedee;
 }

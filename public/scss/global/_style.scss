@@ -9,15 +9,18 @@
 @import "comps/tb-compact";
 
 @import "tables/base";
+@import "tables/tranx";
 
+@import "wgs/kyc-form";
+@import "wgs/referral";
 @import "wgs/timeline";
+@import "wgs/coins";
 @import "wgs/invoice";
 @import "wgs/pricing";
 @import "wgs/products";
 @import "wgs/gallery";
 @import "wgs/misc";
 
-@import "wgs/analytic";
-@import "wgs/ecommerce";
 // Load with condition
+@import "wgs/db-analytic";
 @import "wgs/db-invest";

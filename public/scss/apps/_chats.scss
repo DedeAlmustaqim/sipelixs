@@ -839,7 +839,7 @@ $chat-meta-sap: $ni-dot !default;
 }
 
 
-@include media-breakpoint-down(sm){
+@include media-breakpoint-down(md){
     .nk-chat{
         border: none;
         border-radius: $border-radius;

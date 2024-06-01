@@ -149,34 +149,6 @@
 	}
 }
 
-// Sales data widgets
-.nk-sale-data{
-	flex-shrink: 0;
-	&-group{
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.amount{
-		display: block;
-		font-size: 1.75rem;
-		color: $base-color;
-		.change{
-			font-size: .875rem;
-		}
-		&.sm{
-			font-size: 1.125rem;
-			color: $base-light;
-		}
-	}
-	.sub-title{
-		color: $base-light;
-		font-size: $fx-sz-12;
-		.change{
-			margin-right: 0.5rem;
-		}
-	}
-}
-
 .nk-sales-ck{
 	height: 80px;
 	flex-grow: 1;

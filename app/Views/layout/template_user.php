@@ -14,6 +14,8 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="<?php echo base_url() ?>public/user_temp/src/assets/css/dashlite.css?ver=3.2.3">
     <link id="skin-default" rel="stylesheet" href="<?php echo base_url() ?>public/user_temp/src/assets/css/theme.css?ver=3.2.3">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/public/assets/datatables.net-bs4/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>/public/assets/datatables.net-bs4/css/responsive.dataTables.min.css">
 </head>
 
 <body class="nk-body bg-lighter ">
@@ -273,7 +275,11 @@
     </script>
     <script src="<?php echo base_url() ?>public/user_temp/src/assets/js/bundle.js?ver=3.2.3"></script>
     <script src="<?php echo base_url() ?>public/user_temp/src/assets/js/scripts.js?ver=3.2.3"></script>
-    <script src="<?php echo base_url() ?>public/user_temp/src/assets/js/charts/gd-invest.js?ver=3.2.3"></script>
+    <!-- <script src="<?php echo base_url() ?>/public/assets/js/libs/datatable-btns.js?ver=3.1.3"></script> -->
+
+    <script src="<?php echo base_url() ?>/public/assets/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>/public/assets/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url() ?>/public//js_digital_native/app.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
     <script src="<?php echo base_url() ?>/public//js_digital_native/service.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
 </body>
 

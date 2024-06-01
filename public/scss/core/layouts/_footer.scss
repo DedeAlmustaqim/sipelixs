@@ -4,7 +4,6 @@
         background: $footer-bg-color;
         border-top: 1px solid $footer-border-bottom;
         padding: $footer-main-gap-y $footer-main-gap-x;
-        box-shadow: 0px 1px 3px 0px rgba($base-color, 0.05);
         &.is-dark:not([class*=bg-]){
             background: $footer-bg-dark-color;
         }

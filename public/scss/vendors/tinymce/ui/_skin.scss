@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) Tiny Technologies, Inc. All rights reserved.
  * Licensed under the LGPL or a commercial license.
  * For LGPL see License.txt in the project root for license information.
@@ -1357,6 +1357,9 @@ body.tox-dialog__disable-scroll {
   height: 100%;
   position: absolute;
   width: 100%;
+}
+.mce-content-body {
+  font-family: arial;
 }
 .tox.tox-inline-edit-area {
   border: 1px dotted $border-light;

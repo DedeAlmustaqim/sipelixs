@@ -1,4 +1,3 @@
-$alert-dismissible-close-icon: $ni-cross;
 .alert{
     &:last-child{
         margin-bottom: 0;
@@ -43,7 +42,7 @@ $alert-dismissible-close-icon: $ni-cross;
             }
             &:after{
                 font-family: $nk-dashlite-font;
-                content: $alert-dismissible-close-icon;
+                content: $ni-cross;
                 font-size: 1.1rem;
             }
         }
@@ -144,4 +143,3 @@ $alert-pro: map-merge(
         }
     }
 }
-

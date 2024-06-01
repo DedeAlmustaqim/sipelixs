@@ -5,12 +5,41 @@ namespace App\Controllers\Service;
 use App\Controllers\BaseController;
 use App\Models\ReportModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use \Hermawan\DataTables\DataTable;
 
 class ReportController extends BaseController
 {
     public function index()
     {
         //
+    }
+    public function jsonReport($status)
+    {
+        $db = \Config\Database::connect();  // Menghubungkan ke database menggunakan konfigurasi default
+        $builder = $db->table('laporan_konflik')
+            ->select('laporan_konflik.id, 
+                  laporan_konflik.user_id, 
+                  laporan_konflik.nm_terlapor, 
+                  laporan_konflik.id_kec, 
+                  laporan_konflik.id_desa, 
+                  laporan_konflik.alamat, 
+                  laporan_konflik.deskripsi, 
+                  laporan_konflik.lampiran, 
+                  laporan_konflik.created_at, 
+                  laporan_konflik.updated_at, 
+                  status.ket,
+                  status.class,
+                  IF(EXISTS (SELECT 1 FROM reply_konflik WHERE reply_konflik.id_konflik = laporan_konflik.id), "1", "0") AS reply_status')
+            ->join('status', 'laporan_konflik.status = status.id', 'inner')
+            ->where('laporan_konflik.user_id', session('id'))
+            ->orderBy('laporan_konflik.created_at', 'DESC');
+
+        // Menambahkan kondisi filter status jika status tidak null
+        if ($status != 0) {
+            $builder->where('laporan_konflik.status', $status);
+        }
+
+        return DataTable::of($builder)->toJson();
     }
 
     public function store()
@@ -101,7 +130,7 @@ class ReportController extends BaseController
                 'alamat' => \Config\Services::validation()->getError('alamat'),
                 'deskripsi' => \Config\Services::validation()->getError('deskripsi'),
                 'lampiran' => \Config\Services::validation()->getError('lampiran'),
-               
+
             ];
             return $this->response->setJSON($respond);
         }
@@ -156,5 +185,68 @@ class ReportController extends BaseController
             ];
         }
         return $this->response->setJSON($respond);
+    }
+
+    public function jsonReply($id)
+    {
+        $db = db_connect();
+        $data = $db->table('reply_konflik')
+            ->join('status', 'reply_konflik.status_reply = status.id', 'left')
+            ->where('id_konflik', $id)->get()->getResult();
+        if ($data) {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
+                ->setJSON($data);
+        } else {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
+                ->setJSON(['message' => 'Not found']);
+        }
+    }
+
+    public function jsonDetailReport($id)
+    {
+        $db = db_connect();
+        $data = $db->table('laporan_konflik')
+            ->select('laporan_konflik.id, 
+        laporan_konflik.user_id, 
+        laporan_konflik.nm_terlapor, 
+        laporan_konflik.id_kec, 
+        laporan_konflik.id_desa, 
+        laporan_konflik.alamat, 
+        laporan_konflik.deskripsi, 
+        laporan_konflik.lampiran, 
+        laporan_konflik.created_at as laporan_dibuat, 
+        laporan_konflik.updated_at as laporan_diupdate, 
+        laporan_konflik.`status`, 
+        laporan_konflik.id_petugas, 
+        laporan_konflik.updated_by, 
+        users.id as user_id, 
+        users.`name`, 
+        users.nik, 
+        users.no_hp, 
+        users.alamat as alamat_user, 
+        `status`.id, 
+        `status`.ket, 
+        `status`.class, 
+        kecamatan.id as id_kec, 
+        kecamatan.nm_kec, 
+        desa.id as id_desa, 
+        desa.nm_desa, 
+        tbl_admin.nama as petugas, 
+        tbl_unit.nm_unit,
+	    tbl_admin.nip')
+            ->join('users', 'laporan_konflik.user_id = users.id', 'left')
+            ->join('tbl_admin', 'laporan_konflik.id_petugas = tbl_admin.id', 'left')
+            ->join('status', 'laporan_konflik.`status` = `status`.id', 'left')
+            ->join('kecamatan', 'laporan_konflik.id_kec = kecamatan.id', 'left')
+            ->join('desa', 'kecamatan.id = desa.id_kec AND laporan_konflik.id_desa = desa.id', 'left')
+            ->join('tbl_unit', 'laporan_konflik.id_petugas = tbl_unit.id', 'left')
+            ->where('laporan_konflik.id', $id)->get()->getRow();
+        if ($data) {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
+                ->setJSON($data);
+        } else {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
+                ->setJSON(['message' => 'Not found']);
+        }
     }
 }

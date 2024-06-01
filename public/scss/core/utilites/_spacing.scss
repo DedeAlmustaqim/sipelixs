@@ -1,5 +1,4 @@
 @use "sass:math";
-
 @each $size, $length in $spacers {
     .g-#{$size}:not(.row) {
         margin: math.div(-$length, 2);
