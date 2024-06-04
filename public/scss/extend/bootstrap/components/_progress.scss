@@ -18,7 +18,6 @@
             @extend .progress-pill;
         }
     }
-    
     &-text{
         display: flex;
         align-items: center;
@@ -33,7 +32,6 @@
         font-size: $fx-sz-12;
         padding-left: .5rem;
     }
-
     &-alt{
         display: flex;
         align-items: center;
@@ -42,7 +40,6 @@
             border-radius: $progress-border-radius;
         }
     }
-
     &-reverse{
         flex-direction: row-reverse;
     }
@@ -64,8 +61,8 @@
             }
         }
     }
-     //@e-290
-     &-rating{
+    //@e-290
+    &-rating{
         display: flex;
         align-items: center;
         &-title{

@@ -1,6 +1,5 @@
 // @conditiona -s-
 @if($gd_investment==true) {
-
 .card{
     &-title{
         .subtitle{
@@ -212,5 +211,4 @@
         height: 70px;
     }
 }
-
 } // @condition -e-

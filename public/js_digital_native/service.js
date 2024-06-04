@@ -85,8 +85,8 @@ $('#formRegister').on('submit', function (e) {
             } else if (data.success == true) {
 
                 Swal.fire('Pendaftaran Berhasil', '', 'success');
-
-                window.location.href = BASE_URL + '/register/verifikasi/' + data.email
+                var decodedEmail = atob(encodedEmail);
+                window.location.href = BASE_URL + '/register/verifikasi/' + decodedEmail
             }
 
         },
@@ -280,20 +280,20 @@ function showReplyTable(id) {
         "url": BASE_URL + "service/get_reply/" + id,
         dataType: 'json',
         success: function (data) {
-             $('#showReply').html('');
+            $('#showReply').html('');
             $.each(data, function (index, item) {
                 if (item.lampiran_petugas) {
-                    var lampiran = `<a target="_blank" href="`+BASE_URL+`public/lampiran_petugas/`+item.lampiran_petugas+`"><span class="badge bg-secondary">Lihat Lampiran</span></a>`
-                }else{
+                    var lampiran = `<a target="_blank" href="`  + item.lampiran_petugas + `"><span class="badge bg-secondary">Lihat Lampiran</span></a>`
+                } else {
                     var lampiran = `<span class="badge bg-danger">Tidak ada Lampiran</span>`
                 }
                 $('#showReply').append(`<li class="nk-support-item">
                 
-                <div class="nk-support-content">
-                    <div class="title">
-                        <span>`+ konversiFormatTanggal(item.created_at) + `<br>`+lampiran+`</span>
-                        <span class="badge badge-dot badge-dot-xs bg-warning ms-1 `+ item.class + `">` + item.ket + `</span>
-                    </div>
+               <div class="nk-support-content">
+               <div class="title">
+               <span>`+ konversiFormatTanggal(item.created_at) +  `&nbsp;&nbsp;` + lampiran + `<br> Oleh ` + item.nama +`</span>
+                   <span class="badge badge-dot badge-dot-xs bg-warning ms-1 `+ item.class + `">` + item.ket + `</span>
+               </div>
                     `+ item.catatan_petugas + `
                    
                 </div>
@@ -303,66 +303,5 @@ function showReplyTable(id) {
     });
 
 
-    // $('#replyTable').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     destroy: true,
-    //     "bPaginate": false,
-    //     "bLengthChange": false,
-    //     "bFilter": false,
-    //     "bInfo": false,
-    //     "bAutoWidth": false,
-    //     "columnDefs": [{
-    //         "visible": false,
-    //     }],
-
-    //     "language": {
-    //         "lengthMenu": "Tampilkan _MENU_ item per halaman",
-    //         "zeroRecords": "Tidak ada data yang ditampilkan",
-    //         "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
-    //         "infoEmpty": "Tidak ada data yang ditampilkan",
-    //         "infoFiltered": "(filtered from _MAX_ total records)",
-    //         "search": "Cari",
-    //         "paginate": {
-    //             "first": "Awal",
-    //             "last": "Akhir",
-    //             "next": ">",
-    //             "previous": "<"
-    //         },
-    //     },
-    //     "displayLength": 25,
-    //     "ajax": {
-    //         "url": BASE_URL + "service/get_reply/" + id,
-    //     },
-    //     "columns": [
-    //         {
-    //             "orderable": false,
-    //             "data": function (data) {
-    //                 return '<div class="text-left">' + data[0] + '</div>'
-    //             }
-    //         },
-    //         {
-    //             "orderable": false,
-    //             "data": function (data) {
-    //                 return data[2]
-    //             }
-    //         },
-    //         {
-    //             "orderable": false,
-    //             "data": function (data) {
-    //                 return '<div class="text-left">' + data[3] + '</div>'
-    //             }
-    //         },
-
-
-
-    //     ],
-    //     rowCallback: function (row, data, iDisplayIndex) {
-    //         var info = this.fnPagingInfo();
-    //         var page = info.iPage;
-    //         var length = info.iLength;
-    //         var index = page * length + (iDisplayIndex + 1);
-    //         $('td:eq(0)', row).html(index);
-    //     },
-    // });
+    
 }

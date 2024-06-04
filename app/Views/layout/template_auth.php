@@ -56,7 +56,9 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="nk-block-content text-center text-lg-left">
-                                        <p class="text-soft">&copy; 2024 Digital Native</p>
+                        
+                                        <p class="text-soft"> &copy; 2024 Digital Native by <a href="https://wa.me/085248457510?text= " target="_blank">Dede Almustaqim</a></p>
+
                                     </div>
                                 </div>
                             </div>
@@ -74,6 +76,7 @@
     <!-- JavaScript -->
     <script src="<?php echo base_url() ?>public/assets/js/bundle.js?ver=3.2.3"></script>
     <script src="<?php echo base_url() ?>public/assets/js/scripts.js?ver=3.2.3"></script>
+    <script src="<?php echo base_url() ?>public//js_digital_native/app.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
     <script src="<?php echo base_url() ?>/public//js_digital_native/service.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
 
    

@@ -68,7 +68,6 @@
     }
 }
 
-//Dark mode switch
 .dark-switch{
     position: relative;
     &:before,&:after{
@@ -151,8 +150,6 @@
         }
     }
 }
-
-
 //
 .switch-text{
     &-normal{
@@ -167,8 +164,7 @@
         }
     }
 }
-
-// 
+//
 .close {
     float: right;
     font-size: $close-font-size;
@@ -187,6 +183,8 @@
         }
     }
   }
+
+//alert close
 button.close {
     padding: 0;
     background-color: transparent;

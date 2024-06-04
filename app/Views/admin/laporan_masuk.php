@@ -47,7 +47,7 @@
 <div class="modal fade" tabindex="-1" id="modalForwardReport">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            
+
             <div class="modal-header">
                 <h5 class="modal-title">Teruskan Laporan Konflik</h5>
             </div>
@@ -124,14 +124,17 @@
 <div class="modal fade" tabindex="-1" id="modalDetailReport">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            
+
             <div class="modal-header">
                 <h5 class="modal-title">Detail Laporan Konflik</h5>
             </div>
             <div class="modal-body">
-               <div id="showDetailReport"></div>
+                <div id="showDetailReport"></div>
+                <div class="form-group float-end">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Tutup</button>
             </div>
-
+            </div>
+            
         </div>
     </div>
 </div>

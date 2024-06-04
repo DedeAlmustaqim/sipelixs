@@ -298,7 +298,7 @@
                 elm.remove();
             })
         }
-        
+
         function to12 (time) {
             time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
@@ -319,6 +319,13 @@
             var $cat = $('<span class="fc-' + cat.element.value + '"> <span class="dot"></span>' + cat.text + '</span>');
             return $cat;
         };
+
+        function removePopover() {
+            let fcPopover = document.querySelectorAll('.event-popover');
+            fcPopover.forEach(elm => {
+                elm.remove();
+            })
+        }
 
         NioApp.Select2('.select-calendar-theme', {
             templateResult: customCalSelect

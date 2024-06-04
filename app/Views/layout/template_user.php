@@ -54,12 +54,12 @@
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link">
+                                    <a  href="javascript:void(0);" onclick="onProgress(this)" class="nk-menu-link">
                                         <span class="nk-menu-text">Laporan Konflik</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
                                 <li class="nk-menu-item has-sub">
-                                    <a href="#" class="nk-menu-link">
+                                    <a  href="javascript:void(0);" onclick="onProgress(this)" class="nk-menu-link">
                                         <span class="nk-menu-text">Profil</span>
                                     </a>
                                 </li><!-- .nk-menu-item -->
@@ -256,7 +256,7 @@
             <div class="nk-footer bg-white">
                 <div class="container-fluid">
                     <div class="nk-footer-wrap">
-                        <div class="nk-footer-copyright"> &copy; 2024 Digital Native</a>
+                        <div class="nk-footer-copyright"> &copy; 2024 Digital Native<a href="https://wa.me/085248457510?text= " target="_blank">Dede Almustaqim</a>
                         </div>
 
                     </div>

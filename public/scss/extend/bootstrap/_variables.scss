@@ -326,7 +326,7 @@ $body-text-align:           null !default;
 
 // Come v6, we'll de-dupe these variables. Until then, for backward compatibility, we keep them to reassign.
 // scss-docs-start utilities-colors
-$utilities-colors: $theme-colors-rgb;
+$utilities-colors: $theme-colors-rgb !default;
 // scss-docs-end utilities-colors
 
 // scss-docs-start utilities-text-colors
@@ -337,8 +337,8 @@ $utilities-text: map-merge(
     "white": to-rgb($white),
     "body": to-rgb($body-color)
   )
-);
-$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text");
+) !default;
+$utilities-text-colors: map-loop($utilities-text, rgba-css-var, "$key", "text") !default;
 // scss-docs-end utilities-text-colors
 
 // scss-docs-start utilities-bg-colors
@@ -746,9 +746,9 @@ $btn-border-radius-lg:        $border-radius-lg !default;
 
 $btn-transition:              color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out !default;
 
-$btn-hover-bg-shade-amount:       15% !default;
-$btn-hover-bg-tint-amount:        15% !default;
-$btn-hover-border-shade-amount:   20% !default;
+$btn-hover-bg-shade-amount:       10% !default;
+$btn-hover-bg-tint-amount:        10% !default;
+$btn-hover-border-shade-amount:   25% !default;
 $btn-hover-border-tint-amount:    10% !default;
 $btn-active-bg-shade-amount:      20% !default;
 $btn-active-bg-tint-amount:       20% !default;

@@ -1,199 +1,232 @@
 <?= $this->extend('layout/template_admin') ?>
 <?= $this->section('content') ?>
 <div class="nk-block-head nk-block-head-sm">
-    
+
 </div><!-- .nk-block-head -->
 <div class="nk-block">
     <div class="row g-gs">
-        
-        <div class="col-xxl-12">
-            <div class="card card-full">
-                <div class="nk-ecwg nk-ecwg8 h-100">
-                    <div class="card-inner">
-                        <div class="card-title-group mb-3">
-                            <div class="card-title">
-                                <h6 class="title">Sales Statistics</h6>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card h-100 bg-primary">
+                <div class="nk-cmwg nk-cmwg1">
+                    <div class="card-inner pt-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="flex-item">
+                                <div class="text-white d-flex flex-wrap">
+                                    <span class="fs-2 me-1"><?= $selesai ?> Laporan</span>
+                                </div>
+                                <h6 class="text-white">Selesai</h6>
                             </div>
-                            <div class="card-tools">
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle link link-light link-sm dropdown-indicator" data-bs-toggle="dropdown">Weekly</a>
-                                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
-                                        <ul class="link-list-opt no-bdr">
-                                            <li><a href="#"><span>Daily</span></a></li>
-                                            <li><a href="#" class="active"><span>Weekly</span></a></li>
-                                            <li><a href="#"><span>Monthly</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="nk-ecwg8-legends">
-                            <li>
-                                <div class="title">
-                                    <span class="dot dot-lg sq" data-bg="#6576ff"></span>
-                                    <span>Total Order</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="title">
-                                    <span class="dot dot-lg sq" data-bg="#eb6459"></span>
-                                    <span>Cancelled Order</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="nk-ecwg8-ck">
-                            <canvas class="ecommerce-line-chart-s4" id="salesStatistics"></canvas>
-                        </div>
-                        <div class="chart-label-group ps-5">
-                            <div class="chart-label">01 Jul, 2020</div>
-                            <div class="chart-label">30 Jul, 2020</div>
+
                         </div>
                     </div><!-- .card-inner -->
-                </div>
+                    <div class="nk-ck-wrap mt-auto overflow-hidden rounded-bottom">
+                        <div class="nk-cmwg1-ck">
+                            <canvas class="campaign-line-chart-s1 rounded-bottom" id="runningCampaign" style="display: block; box-sizing: border-box; height: 70px; width: 294px;" width="294" height="70"></canvas>
+                        </div>
+                    </div>
+                </div><!-- .nk-cmwg -->
             </div><!-- .card -->
         </div><!-- .col -->
-       
-        <div class="col-xxl-12">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card h-100 bg-info">
+                <div class="nk-cmwg nk-cmwg1">
+                    <div class="card-inner pt-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="flex-item">
+                                <div class="text-white d-flex flex-wrap">
+                                    <span class="fs-2 me-1"><?= $proses ?> Laporan</span>
+                                </div>
+                                <h6 class="text-white">Dalam Proses</h6>
+                            </div>
+
+                        </div>
+                    </div><!-- .card-inner -->
+                    <div class="nk-cmwg1-ck mt-auto">
+                        <canvas class="campaign-line-chart-s1 rounded-bottom" id="totalAudience" style="display: block; box-sizing: border-box; height: 70px; width: 294px;" width="294" height="70"></canvas>
+                    </div>
+                </div><!-- .nk-cmwg -->
+            </div><!-- .card -->
+        </div><!-- .col -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="card h-100 bg-warning">
+                <div class="nk-cmwg nk-cmwg1">
+                    <div class="card-inner pt-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="flex-item">
+                                <div class="text-white d-flex flex-wrap">
+                                    <span class="fs-2 me-1"><?= $proses ?> Laporan</span>
+                                </div>
+                                <h6 class="text-white">Belum ditanggapi</h6>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner -->
+                    <div class="nk-ck-wrap mt-auto overflow-hidden rounded-bottom">
+                        <div class="nk-cmwg1-ck">
+                            <canvas class="campaign-bar-chart-s1 rounded-bottom" id="avgRating" style="display: block; box-sizing: border-box; height: 70px; width: 294px;" width="294" height="70"></canvas>
+                        </div>
+                    </div>
+                </div><!-- .nk-cmwg -->
+            </div><!-- .card -->
+        </div><!-- .col -->
+        <div class="col-lg-3 col-sm-6">
+            <div class="card h-100 bg-danger">
+                <div class="nk-cmwg nk-cmwg1">
+                    <div class="card-inner pt-3">
+                    <div class="d-flex justify-content-between">
+                            <div class="flex-item">
+                                <div class="text-white d-flex flex-wrap">
+                                    <span class="fs-2 me-1"><?= $ditolak ?> Laporan</span>
+                                </div>
+                                <h6 class="text-white">Ditolak</h6>
+                            </div>
+                        </div>
+                    </div><!-- .card-inner -->
+                    <div class="nk-ck-wrap mt-auto overflow-hidden rounded-bottom">
+                        <div class="nk-cmwg1-ck">
+                            <canvas class="campaign-line-chart-s1 rounded-bottom" id="newSubscriber" style="display: block; box-sizing: border-box; height: 70px; width: 294px;" width="294" height="70"></canvas>
+                        </div>
+                    </div>
+                </div><!-- .nk-cmwg -->
+            </div><!-- .card -->
+        </div><!-- .col -->
+        <!-- <div class="col-xxl-8 col-lg-7">
             <div class="card card-full">
                 <div class="card-inner">
                     <div class="card-title-group">
                         <div class="card-title">
-                            <h6 class="title"> Laporan Terakhir</h6>
+                            <h6 class="title">Performance Overview</h6>
+                        </div>
+                        <div class="card-tools">
+                            <ul class="card-tools-nav">
+                                <li><a href="#"><span>Week</span></a></li>
+                                <li class="active"><a href="#"><span>Month</span></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div class="nk-tb-list mt-n2">
-                    <div class="nk-tb-item nk-tb-head">
-                        <div class="nk-tb-col"><span>Order No.</span></div>
-                        <div class="nk-tb-col tb-col-sm"><span>Customer</span></div>
-                        <div class="nk-tb-col tb-col-md"><span>Date</span></div>
-                        <div class="nk-tb-col"><span>Amount</span></div>
-                        <div class="nk-tb-col"><span class="d-none d-sm-inline">Status</span></div>
+                <div class="card-inner pt-0">
+                    <ul class="d-flex justify-content-center flex-wrap gx-3 mb-2">
+                        <li class="align-center"><span class="dot" data-bg="#733AEA" style="background: rgb(115, 58, 234);"></span><span class="ms-1">Social</span></li>
+                        <li class="align-center"><span class="dot" data-bg="#0FCA7A" style="background: rgb(15, 202, 122);"></span><span class="ms-1">Email</span></li>
+                        <li class="align-center"><span class="dot" data-bg="#F2426E" style="background: rgb(242, 66, 110);"></span><span class="ms-1">Courses</span></li>
+                        <li class="align-center"><span class="dot" data-bg="#FD9722" style="background: rgb(253, 151, 34);"></span><span class="ms-1">Google Ads</span></li>
+                    </ul>
+                    <div class="nk-cmwg2-ck">
+                        <canvas class="campaign-line-chart-s2" id="performanceOverview" style="display: block; box-sizing: border-box; height: 270px; width: 750px;" width="750" height="270"></canvas>
                     </div>
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col">
-                            <span class="tb-lead"><a href="#">#95954</a></span>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <div class="user-card">
-                                <div class="user-avatar sm bg-purple-dim">
-                                    <span>AB</span>
-                                </div>
-                                <div class="user-name">
-                                    <span class="tb-lead">Abu Bin Ishtiyak</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">02/11/2020</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub tb-amount">4,596.75 <span>USD</span></span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col">
-                            <span class="tb-lead"><a href="#">#95850</a></span>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <div class="user-card">
-                                <div class="user-avatar sm bg-azure-dim">
-                                    <span>DE</span>
-                                </div>
-                                <div class="user-name">
-                                    <span class="tb-lead">Desiree Edwards</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">02/02/2020</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub tb-amount">596.75 <span>USD</span></span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="badge badge-dot badge-dot-xs bg-danger">Cancelled</span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col">
-                            <span class="tb-lead"><a href="#">#95812</a></span>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <div class="user-card">
-                                <div class="user-avatar sm bg-warning-dim">
-                                    <img src="./images/avatar/b-sm.jpg" alt="">
-                                </div>
-                                <div class="user-name">
-                                    <span class="tb-lead">Blanca Schultz</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">02/01/2020</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub tb-amount">199.99 <span>USD</span></span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col">
-                            <span class="tb-lead"><a href="#">#95256</a></span>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <div class="user-card">
-                                <div class="user-avatar sm bg-purple-dim">
-                                    <span>NL</span>
-                                </div>
-                                <div class="user-name">
-                                    <span class="tb-lead">Naomi Lawrence</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">01/29/2020</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub tb-amount">1099.99 <span>USD</span></span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="badge badge-dot badge-dot-xs bg-success">Paid</span>
-                        </div>
-                    </div>
-                    <div class="nk-tb-item">
-                        <div class="nk-tb-col">
-                            <span class="tb-lead"><a href="#">#95135</a></span>
-                        </div>
-                        <div class="nk-tb-col tb-col-sm">
-                            <div class="user-card">
-                                <div class="user-avatar sm bg-success-dim">
-                                    <span>CH</span>
-                                </div>
-                                <div class="user-name">
-                                    <span class="tb-lead">Cassandra Hogan</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="nk-tb-col tb-col-md">
-                            <span class="tb-sub">01/29/2020</span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="tb-sub tb-amount">1099.99 <span>USD</span></span>
-                        </div>
-                        <div class="nk-tb-col">
-                            <span class="badge badge-dot badge-dot-xs bg-warning">Due</span>
-                        </div>
+                    <div class="chart-label-group ms-5">
+                        <div class="chart-label">03 Jan</div>
+                        <div class="chart-label d-none d-sm-block">10 Jan</div>
+                        <div class="chart-label d-none d-sm-block">17 Jan</div>
+                        <div class="chart-label d-none d-sm-block">24 Jan</div>
+                        <div class="chart-label">31 Jan</div>
                     </div>
                 </div>
-            </div><!-- .card -->
+            </div>
+           
         </div>
-        
-    </div><!-- .row -->
+       
+        <div class="col-xxl-4 col-lg-5">
+            <div class="card card-full">
+                <div class="card-inner">
+                    <div class="card-title-group">
+                        <div class="card-title">
+                            <h6 class="title">Top Channels</h6>
+                        </div>
+                        <div class="card-tools">
+                            <a href="#" class="link">View All</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-inner pt-0">
+                    <ul class="gy-4">
+                        <li class="justify-between align-center border-bottom border-0 border-dashed">
+                            <div class="align-center">
+                                <div class="user-avatar sq bg-transparent"><img src="./images/icons/campaign/brand/google.png" alt=""></div>
+                                <div class="ms-2">
+                                    <div class="lead-text">Google </div>
+                                    <div class="sub-text">SEO &amp; PPC</div>
+                                </div>
+                            </div>
+                            <div class="align-center">
+                                <div class="sub-text me-2">70%</div>
+                                <div class="progress rounded-pill w-80px">
+                                    <div class="progress-bar bg-success rounded-pill" data-progress="70" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                      
+                        <li class="justify-between align-center border-bottom border-0 border-dashed">
+                            <div class="align-center">
+                                <div class="user-avatar sq bg-transparent"><img src="./images/icons/campaign/brand/instagram.png" alt=""></div>
+                                <div class="ms-2">
+                                    <div class="lead-text">Instagram </div>
+                                    <div class="sub-text">Social Media</div>
+                                </div>
+                            </div>
+                            <div class="align-center">
+                                <div class="sub-text me-2">86%</div>
+                                <div class="progress rounded-pill w-80px">
+                                    <div class="progress-bar bg-primary rounded-pill" data-progress="86" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                     
+                        <li class="justify-between align-center border-bottom border-0 border-dashed">
+                            <div class="align-center">
+                                <div class="user-avatar sq bg-transparent"><img src="./images/icons/campaign/brand/linkedin.png" alt=""></div>
+                                <div class="ms-2">
+                                    <div class="lead-text">Linked In </div>
+                                    <div class="sub-text">Social Media</div>
+                                </div>
+                            </div>
+                            <div class="align-center">
+                                <div class="sub-text me-2">75%</div>
+                                <div class="progress rounded-pill w-80px">
+                                    <div class="progress-bar bg-danger rounded-pill" data-progress="75" style="width: 75%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="justify-between align-center border-bottom border-0 border-dashed">
+                            <div class="align-center">
+                                <div class="user-avatar sq bg-transparent"><img src="./images/icons/campaign/brand/slack.png" alt=""></div>
+                                <div class="ms-2">
+                                    <div class="lead-text">Slack </div>
+                                    <div class="sub-text">Messanger</div>
+                                </div>
+                            </div>
+                            <div class="align-center">
+                                <div class="sub-text me-2">64%</div>
+                                <div class="progress rounded-pill w-80px">
+                                    <div class="progress-bar bg-info rounded-pill" data-progress="64" style="width: 64%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                     
+                        <li class="justify-between align-center">
+                            <div class="align-center">
+                                <div class="user-avatar sq bg-transparent"><img src="./images/icons/campaign/brand/twitter.png" alt=""></div>
+                                <div class="ms-2">
+                                    <div class="lead-text">Twitter </div>
+                                    <div class="sub-text">Social Media</div>
+                                </div>
+                            </div>
+                            <div class="align-center">
+                                <div class="sub-text me-2">54%</div>
+                                <div class="progress rounded-pill w-80px">
+                                    <div class="progress-bar bg-warning rounded-pill" data-progress="54" style="width: 54%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                    
+                    </ul>
+                </div>
+            </div>
+      
+        </div> -->
+ 
+
+    </div>
 </div><!-- .nk-block -->
 <?= $this->endSection() ?>

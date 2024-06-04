@@ -1,6 +1,6 @@
 !(function (NioApp, $) {
     "use strict";
-
+    
     // SummerNote Init @v1.0
     NioApp.SummerNote = function () {
         var _basic = '.summernote-basic';
@@ -160,5 +160,5 @@
     };
 
     NioApp.coms.docReady.push(NioApp.EditorInit);
-
+    
 })(NioApp, jQuery);

@@ -1,3 +1,5 @@
+$alert-dismissible-close-icon: $ni-cross;
+
 .alert{
     &:last-child{
         margin-bottom: 0;
@@ -42,7 +44,7 @@
             }
             &:after{
                 font-family: $nk-dashlite-font;
-                content: $ni-cross;
+                content: $alert-dismissible-close-icon;
                 font-size: 1.1rem;
             }
         }
@@ -73,6 +75,7 @@
             }
         }
     }
+    //@i-v140-e-
 }
 a.alert:hover{
     color: currentColor;

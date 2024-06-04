@@ -9,19 +9,6 @@
     }
 }
 
-.rating{
-    display: flex;
-    align-items: center;
-    margin: 0 -.125rem;
-    color: $warning;
-    > * {
-        padding: 0 .125rem;
-    }
-    .icon{
-        font-size: 1rem;
-    }
-}
-
 .product{
     &-card{
         overflow: hidden;
@@ -51,7 +38,7 @@
         a{
             color: $base-light;
             &:hover{
-                color: $primary;
+                color: $accent-color;
             }
         }
         + .product-title{
@@ -91,7 +78,7 @@
                 width: $btn-line-height + $btn-padding-y*2;
                 transition: .3s ease;
                 &:hover{
-                    color:$primary;
+                    color:$accent-color;
                 }
             }
         }

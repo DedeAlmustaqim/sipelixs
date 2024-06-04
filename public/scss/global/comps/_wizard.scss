@@ -29,7 +29,7 @@
                 border-color: $accent-color;
                 background: $accent-color;
                 @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
-                line-height: $btn-line-height;
+                line-height:  $btn-line-height;
             }
             &.disabled{
                 display: none;

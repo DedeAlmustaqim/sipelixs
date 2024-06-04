@@ -489,9 +489,6 @@
                             enabled: true,
                             rtl: NioApp.State.isRTL,
                             callbacks: {
-                                title: function() {
-                                    return false;
-                                },
                                 label: function (context) {
                                     return `${context.parsed.y} ${_get_data.dataUnit}`;
                                 },

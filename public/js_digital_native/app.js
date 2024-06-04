@@ -66,3 +66,6 @@ $("#modalForwardReport").on('hide.bs.modal', function (e) {
     $(this).find('form')[0].reset();
 });
 
+function onProgress(){
+    Swal.fire('Belum Selesai<br>Masih dipikirkan Sepenuh Jiwa Raga', '', 'success');
+}

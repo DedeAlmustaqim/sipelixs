@@ -321,11 +321,11 @@
     </div><!-- .modal -->
     <!-- JavaScript -->
     <script>var BASE_URL="<?= base_url() ?>"</script>
-    <script src="<?php echo base_url() ?>/public/assets/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url() ?>/public/assets/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
     <script src="<?php echo base_url() ?>public/assets/js/bundle.js?ver=3.2.3"></script>
     <script src="<?php echo base_url() ?>public/assets/js/scripts.js?ver=3.2.3"></script>
     <script src="<?php echo base_url() ?>public/assets/js/charts/chart-ecommerce.js?ver=3.2.3"></script>
+    <script src="<?php echo base_url() ?>/public/assets/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url() ?>/public/assets/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
     <script src="<?php echo base_url() ?>/public//js_digital_native/app.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
     <script src="<?php echo base_url() ?>/public//js_digital_native/admin.js?=<?php echo date('Y-m-d H:i:s') ?>"></script>
 </body>

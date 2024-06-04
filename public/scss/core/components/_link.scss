@@ -22,7 +22,6 @@ $link-list-menu-icon-rtl: $ni-chevron-left !default;
     }
 }
 
-
 /// Link Check
 /////////////////////////////////////
 .link-check{
@@ -210,8 +209,8 @@ $link-list-menu-icon-rtl: $ni-chevron-left !default;
             position: absolute;
             font-size: 1rem;
             font-family: $nk-dashlite-font;
-            content: $link-list-menu-icon-ltr;
             right: 1.25rem;
+            content: $link-list-menu-icon-ltr;
             color: $base-light;
             transition: .3s ease;
         }

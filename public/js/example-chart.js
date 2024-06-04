@@ -14,16 +14,16 @@
         dataUnit : 'People',
         datasets : [{
             label : "join",
-            color : "#b695ff",
+            color : "#9cabff",
             data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95, 75, 90, 75, 90]
-        },]
+        }]
     };
     var barChartMultiple = {
         labels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         dataUnit : 'USD',
         datasets : [{
             label : "Income",
-            color : "#b695ff",
+            color : "#9cabff",
             data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
         },{
             label : "Expense",
@@ -37,7 +37,7 @@
         dataUnit : 'USD',
         datasets : [{
             label : "Income",
-            color : "#b695ff",
+            color : "#9cabff",
             data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
         },{
             label : "Expense",
@@ -45,6 +45,8 @@
             data: [75, 90, 110, 80, 125, 55, 95, 75, 90, 110, 80, 125]
         }]
     };
+
+    console.log(NioApp.State.asMobile)
 
     function barChart(selector, set_data){
         var $selector = (selector) ? $(selector) : $('.bar-chart');
@@ -117,10 +119,11 @@
                             position : NioApp.State.isRTL ? "right" : "left",
                             ticks: {
                                 beginAtZero:true,
+                                color:"#9eaecf", 
                                 font: {
                                     size: 12,
                                 },
-                                color:'#9eaecf',
+                                padding:10,
                             },
                             grid: { 
                                 color: NioApp.hexRGB("#526484",.2),
@@ -134,11 +137,12 @@
                             display: true,
                             stacked: (_get_data.stacked) ? _get_data.stacked : false,
                             ticks: {
+                                color:"#9eaecf", 
                                 font: {
                                     size: 12,
                                 },
-                                color:'#9eaecf',
                                 source: 'auto',
+                                padding: 10,
                                 reverse: NioApp.State.isRTL
                             },
                             grid: {
@@ -175,7 +179,7 @@
             data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
         },{
             label : "Total Send",
-            color : "#9d72ff",
+            color : "#798bff",
             background : 'transparent',
             data: [80, 54, 105, 120, 82, 85, 60, 80, 54, 105, 120, 82]
         }]
@@ -186,8 +190,9 @@
         lineTension : .4,
         datasets : [{
             label : "Total Received",
-            color : "#9d72ff",
-            background : NioApp.hexRGB('#9d72ff',.4),
+            color : "#798bff",
+            fill: true,
+            background : NioApp.hexRGB('#798bff',.4),
             data: [110, 80, 125, 65, 95, 75, 90, 110, 80, 125, 70, 95]
         }]
     };
@@ -197,8 +202,9 @@
         lineTension : 0,
         datasets : [{
             label : "Total Received",
-            color : "#9d72ff",
-            background : NioApp.hexRGB('#9d72ff',.3),
+            color : "#798bff",
+            fill: true,
+            background : NioApp.hexRGB('#798bff',.3),
             data: [110, 80, 125, 55, 95, 75, 90, 110, 80, 125, 55, 95]
         }]
     };
@@ -278,11 +284,11 @@
                             position : NioApp.State.isRTL ? "right" : "left",
                             ticks: {
                                 beginAtZero: false,
+                                color:"#9eaecf", 
                                 font: {
                                     size: 12,
                                 },
-                                color:'#9eaecf',
-                                padding: 10
+                                padding: 15,
                             },
                             grid: { 
                                 color: NioApp.hexRGB("#526484",.2),
@@ -294,19 +300,19 @@
                         x: {
                             display: true,
                             ticks: {
+                                color:"#9eaecf", 
                                 font: {
                                     size: 12,
                                 },
-                                color:'#9eaecf',
                                 source: 'auto',
-                                padding: 5,
+                                padding: 10,
                                 reverse: NioApp.State.isRTL
                             },
                             grid: {
                                 color: "transparent",
                                 tickLength:10,
                                 zeroLineColor: NioApp.hexRGB("#526484",.2),
-                                offset: true,
+                                offset: false,
                                 drawTicks:false,
                             }
                         }
@@ -331,7 +337,7 @@
         legend: false,
         datasets : [{
             borderColor : "#fff",
-            background : ["#b695ff","#f4aaa4","#8feac5"],
+            background : ["#9cabff","#f4aaa4","#8feac5"],
             data: [110, 80, 125]
         }]
     };
@@ -385,7 +391,7 @@
                             titleMarginBottom: 6,
                             bodyColor: '#9eaecf',
                             bodyFont:{
-                                size: 12
+                                size: 12,
                             },
                             bodySpacing:4,
                             padding: 10,
@@ -410,7 +416,7 @@
         legend: false,
         datasets : [{
             borderColor : "#fff",
-            background : ["#b695ff","#f4aaa4","#8feac5"],
+            background : ["#9cabff","#f4aaa4","#8feac5"],
             data: [110, 80, 125]
         }]
     };
@@ -464,7 +470,7 @@
                             titleMarginBottom: 6,
                             bodyColor: '#9eaecf',
                             bodyFont:{
-                                size: 12
+                                size: 12,
                             },
                             bodySpacing:4,
                             padding: 10,
@@ -490,7 +496,7 @@
         legend: false,
         datasets : [{
             borderColor : "#fff",
-            background : [NioApp.hexRGB("#b695ff",.8),NioApp.hexRGB("#f4aaa4",.8),NioApp.hexRGB("#8feac5",.8)],
+            background : [NioApp.hexRGB("#9cabff",.8),NioApp.hexRGB("#f4aaa4",.8),NioApp.hexRGB("#8feac5",.8)],
             data: [110, 80, 125]
         }]
     };
@@ -544,7 +550,7 @@
                             titleMarginBottom: 6,
                             bodyColor: '#9eaecf',
                             bodyFont:{
-                                size: 12
+                                size: 12,
                             },
                             bodySpacing:4,
                             padding: 10,

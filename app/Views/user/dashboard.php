@@ -14,8 +14,8 @@
                 <div class="toggle-expand-content" data-content="pageMenu">
                     <ul class="nk-block-tools g-3">
                         <li><button data-bs-toggle="modal" data-bs-target="#modalReport" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-reports"></em><span>Buat Laporan</span></button></li>
-                        <li><a href="#" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-list"></em><span>Status Laporan</span></a></li>
-                        <li><a href="#" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-question"></em></em><span>Layanan</span></a></li>
+                        <li><a  href="javascript:void(0);" onclick="onProgress(this)" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-list"></em><span>Status Laporan</span></a></li>
+                        <li><a  href="javascript:void(0);" onclick="onProgress(this)" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-question"></em></em><span>Layanan</span></a></li>
 
                     </ul>
                 </div><!-- .toggle-expand-content -->

@@ -148,8 +148,11 @@
             </div>
             <div class="modal-body">
                <div id="showDetailReport"></div>
+               <div class="form-group float-end">
+                <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Tutup</button>
             </div>
-
+            </div>
+            
         </div>
     </div>
 </div>

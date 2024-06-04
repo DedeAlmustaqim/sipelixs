@@ -72,11 +72,13 @@
                 vertical-align: middle;
             }
         }
+        //@i-v120
         &-sm{
             .title{
                 font-size: $fx-sz-14;
             }
         }
+        //@i-v40
         small{
             font-weight: $fw-medium;
             color: $base-light;

@@ -1,4 +1,4 @@
-(function(NioApp, $){
+(function (NioApp, $) {
     'use strict';
 
     let dualListbox = new DualListbox('#basic-listbox');

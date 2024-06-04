@@ -11,9 +11,8 @@
         padding-left: 4px;
     }
     &.rounded-pill{
-        border-radius: $badge-pill-border-radius;
-        padding-right: .5rem;
-        padding-left: .5rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
     }
     &-sm{
         padding: $badge-padding-y-sm $badge-padding-x-sm;
@@ -54,10 +53,11 @@
         font-size: 1rem;
     }
 }
+
+
 @each $name, $value in $theme-colors {
     .bg-#{$name} {
         border-color: $value;
-        background: $value;
     }
 }
 

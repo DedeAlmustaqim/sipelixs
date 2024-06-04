@@ -4,9 +4,9 @@
     // Variable
     var $win = $(window), $body = $('body'), breaks = NioApp.Break;
 
-    NioApp.Kanban = function(){
+    NioApp.Kanban = function () {
 
-        function titletemplate(title,count,optionicon="more-h"){
+        function titletemplate(title, count, optionicon = "more-h") {
             return (`
                 <div class="kanban-title-content">
                     <h6 class="title">${title}</h6>
@@ -27,18 +27,18 @@
             `)
         }
 
-    	var kanban = new jKanban({
+        var kanban = new jKanban({
             element: '#kanban',
-            gutter:'0',
-            widthBoard:'320px',
-            responsivePercentage: false, 
+            gutter: '0',
+            widthBoard: '320px',
+            responsivePercentage: false,
             boards: [
                 {
                     'id': '_open',
-                    'title': titletemplate("Open","3"),
+                    'title': titletemplate("Open", "3"),
                     'class': 'kanban-light',
                     'item': [{
-                        'title':`
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Dashlite Design Kit Update</h6>
                                 <div class="drodown">
@@ -81,8 +81,8 @@
                                 </ul>
                             </div>
                         `,
-                    },{
-                        'title':`
+                    }, {
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Implement Design into Template</h6>
                                 <div class="drodown">
@@ -124,8 +124,8 @@
                                 </ul>
                             </div>
                         `,
-                    },{
-                        'title':`
+                    }, {
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Dashlite React Version</h6>
                                 <div class="drodown">
@@ -172,10 +172,10 @@
                 },
                 {
                     'id': '_in_progress',
-                    'title': titletemplate("In Progress","4"),
+                    'title': titletemplate("In Progress", "4"),
                     'class': 'kanban-primary',
                     'item': [{
-                        'title':`
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Techyspec Keyword Research</h6>
                                 <div class="drodown">
@@ -220,7 +220,7 @@
                         `,
                     },
                     {
-                        'title':`
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Fitness Next Website Design</h6>
                                 <div class="drodown">
@@ -263,8 +263,8 @@
                                 </ul>
                             </div>
                         `,
-                    },{
-                        'title':`
+                    }, {
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Runnergy Website Redesign</h6>
                                 <div class="drodown">
@@ -322,8 +322,8 @@
                                 </ul>
                             </div>
                         `,
-                    },{
-                        'title':`
+                    }, {
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Wordlab Android App</h6>
                                 <div class="drodown">
@@ -370,10 +370,10 @@
                 },
                 {
                     'id': '_to_review',
-                    'title': titletemplate("To Review","2"),
+                    'title': titletemplate("To Review", "2"),
                     'class': 'kanban-warning',
                     'item': [{
-                        'title':`
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">Oberlo Development</h6>
                                 <div class="drodown">
@@ -431,8 +431,8 @@
                                 </ul>
                             </div>
                         `,
-                    },{
-                        'title':`
+                    }, {
+                        'title': `
                             <div class="kanban-item-title">
                                 <h6 class="title">IOS app for Getsocio</h6>
                                 <div class="drodown">
@@ -479,7 +479,7 @@
                 },
                 {
                     'id': '_completed',
-                    'title': titletemplate("Completed","0"),
+                    'title': titletemplate("Completed", "0"),
                     'class': 'kanban-success',
                     'item': []
                 }

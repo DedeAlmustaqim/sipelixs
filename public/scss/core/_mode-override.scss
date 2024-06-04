@@ -1,6 +1,6 @@
 ///// Shadow Variable //////////
 $softy_shadow: 0 1px 4px rgba($dark, 0.15);
-$shady_shadow: 0 4px 20px -5px rgba($dark, .1);
+$shady_shadow: 0 0 25px -12px rgba($dark, .15);
 
 //// BODY STYLE OVERRIDE 
 ////////////////////////////////
@@ -18,15 +18,18 @@ $shady_shadow: 0 4px 20px -5px rgba($dark, .1);
     .card,
     .code-block,
     .nk-iv-scheme-item,
+    .sp-pdl-item,
+    .invoice-wrap,
+    .nk-msg-boxed,
     .nk-iv-wg1,
     .accordion:not(.accordion-s2):not(.accordion-s3){
         border: none;
     }
-    .table .table-light th {
+    .table .thead-light th {
         background: rgba($lighter, .5);
         box-shadow: 0 -1px 5px -5px rgba($dark, 0.7);
     }
-    .tb-tnx-head,.nk-refwg-stats {
+    .tb-tnx-head, .sp-plan-action, .tb-ticket-item.is-unread, .support-topic-block:link:hover, .nk-refwg-stats {
         background: rgba($lighter, .5);
     }
     .nk-refwg-stats {
@@ -49,6 +52,8 @@ $shady_shadow: 0 4px 20px -5px rgba($dark, .1);
     .card,
     .code-block,
     .nk-iv-scheme-item,
+    .sp-pdl-item,
+    .invoice-wrap,
     .nk-iv-wg1,
     .accordion:not(.accordion-s2):not(.accordion-s3),
     &.npc-apps-messages .nk-reply-form,
@@ -68,6 +73,8 @@ $shady_shadow: 0 4px 20px -5px rgba($dark, .1);
     .card,
     .code-block,
     .nk-iv-scheme-item,
+    .sp-pdl-item,
+    .invoice-wrap,
     .nk-iv-wg1,
     .accordion:not(.accordion-s2):not(.accordion-s3),
     &.npc-apps-messages .nk-reply-form,
@@ -85,12 +92,12 @@ $shady_shadow: 0 4px 20px -5px rgba($dark, .1);
 
 // Apps
 .ui-softy {
-    .nk-msg, .nk-ibx, .nk-fmg, .nk-chat{
+    .nk-msg-boxed, .nk-ibx-boxed, .nk-fmg-boxed, .nk-chat-boxed{
         box-shadow: $softy_shadow;
     }
 }
 .ui-shady {
-    .nk-msg, .nk-ibx, .nk-fmg, .nk-chat{
+    .nk-msg-boxed, .nk-ibx-boxed, .nk-fmg-boxed, .nk-chat-boxed{
         box-shadow: $shady_shadow;
     }
 }
@@ -166,4 +173,11 @@ $shady_shadow: 0 4px 20px -5px rgba($dark, .1);
     .card,.ratio{
         border-radius: $border-radius-xxl;
     }
+}
+
+// 
+.table .table-light th {
+    color: $base-color !important;
+    background-color: $lighter;
+    border: $light-300;
 }

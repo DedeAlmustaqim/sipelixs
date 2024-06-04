@@ -1,5 +1,5 @@
 $fmg-aside-width :          260px;
-$fmg-aside-width-small :    300px;
+$fmg-aside-width-small :    220px;
 $fmg-file-icon-width-xs :    24px;
 $fmg-file-icon-width-sm :    32px;
 $fmg-file-icon-width-lg :    72px;
@@ -9,8 +9,9 @@ $file-desc-sap:           $ni-dot !default;
 /// Layout for FMG
 .nk-fmg{
     position: relative;
-    background-color: $lighter;
-    min-height: calc(100vh - (#{$header-height} + 64px));
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background-color: rgba($white,.4);
     &-aside{
         position: fixed;
         width: $fmg-aside-width;
@@ -19,10 +20,10 @@ $file-desc-sap:           $ni-dot !default;
         max-height: 100%;
         background: $white;
         flex-shrink: 0;
+        z-index: 99;
         left: 0;
         transform: translateX(-100%);
         border-right: 1px solid $border-light;
-        z-index: 99;
         top: $header-height;
         transition: transform .4s linear;
         min-height: calc(100vh - #{$header-height});
@@ -43,14 +44,13 @@ $file-desc-sap:           $ni-dot !default;
             flex-direction: column; 
         }
         &-top{
-            margin-bottom: auto;
             margin-bottom: 30px;
         }
     }
     &-menu{
         padding: 1rem;
         li{
-            margin: 2px 0;            
+            margin: 2px 0;
         }
         &-item{
             position: relative;
@@ -91,7 +91,7 @@ $file-desc-sap:           $ni-dot !default;
             .active > .nk-fmg-menu-item > &{
                 color: $accent-color;
             }
-        } 
+        }
         li ul {
             margin-top: -0.125rem;
             margin-bottom: 0.5rem;
@@ -151,6 +151,7 @@ $file-desc-sap:           $ni-dot !default;
             padding: .75rem 1.25rem;
             border-bottom: 1px solid $border-color;
             background-color: $white;
+            top: $header-height;
             z-index: 9;
             position: relative;
             top: 0;
@@ -183,8 +184,8 @@ $file-desc-sap:           $ni-dot !default;
         }
     }
     &-switch{
-        background-color: transparent;
         border-top: 1px solid $border-light;
+        background-color: transparent;
         > div{
             width: 100%;
         }
@@ -233,13 +234,14 @@ $file-desc-sap:           $ni-dot !default;
             transform: none;
             transition: none;
             width: $fmg-aside-width;
+            left: $sidebar-width-apps;
+            min-height: 100%;
+            max-height: 100%;
             position: absolute;
+            top: 0;
             left: 0;
             border-top-left-radius: $border-radius;
             border-bottom-left-radius: $border-radius;
-            top: 0;
-            min-height: 100%;
-            max-height: 100%;
             &-top{
                 flex-grow: 0;
             }
@@ -571,10 +573,15 @@ $file-desc-sap:           $ni-dot !default;
             }
             > div{
                 padding: .5rem .375rem;
+                border-bottom: 1px solid $border-color;
                 height: 4rem;
                 background-color: $white;
                 &:first-child{
+                    border-left: 1px solid $border-color;
                     padding-left: 1.25rem;
+                }
+                &:last-child{
+                    border-right: 1px solid $border-color;
                 }
                 &.nk-file-info {
                     padding-top: 0.125rem;
@@ -583,6 +590,7 @@ $file-desc-sap:           $ni-dot !default;
             }
             &:first-child{
                 > div{
+                    border-top: 1px solid $border-color;
                     &:first-child{
                         border-top-left-radius: $border-radius;
                     }
@@ -599,11 +607,6 @@ $file-desc-sap:           $ni-dot !default;
                     &:last-child{
                         border-bottom-right-radius: $border-radius;
                     }
-                }
-            } 
-            &:not(:last-child){
-                > div{
-                    border-bottom: 1px solid $border-color;
                 }
             } 
             .custom-checkbox{
@@ -682,8 +685,8 @@ $file-desc-sap:           $ni-dot !default;
             position: relative;
             margin: 8px;
             background: $white;
-            border-radius: $border-radius;
             border: 1px solid $border-color;
+            border-radius: $border-radius;
             .nk-file-members{
                 display: none;
             }

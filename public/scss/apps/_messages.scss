@@ -15,6 +15,7 @@ $msg-body-gap-x-dsk :2.5rem;
         padding: 0 $msg-item-gap-x;
         background:$lighter;
         z-index: 2;
+        border-top-left-radius: ($border-radius - 1);
         .search-wrap{
             padding: 0 1rem;
             bottom: -1px;
@@ -72,11 +73,12 @@ $msg-body-gap-x-dsk :2.5rem;
     position: relative;
     display: flex;
     overflow: hidden;
-    min-height: calc(100vh - (#{$header-height} + 64px));
-    max-height: calc(100vh - (#{$header-height} + 64px));
     background: $white;
+    border:1px solid $border-color;
+    border-radius: $border-radius;
+    min-height: calc(100vh - (#{$header-height} + 64px + 64px));
+    max-height: calc(100vh - (#{$header-height} + 64px + 64px));
     &-aside{
-        background: $lighter;
         width: 100%;
         overflow: hidden;
         max-height: 100%;
@@ -84,11 +86,9 @@ $msg-body-gap-x-dsk :2.5rem;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
-        .nk-msg-boxed &{
-            background: rgba($lighter,.7);
-            border-top-left-radius: ($border-radius - 1);
-            border-bottom-left-radius: ($border-radius - 1);
-        }
+        background: rgba($lighter,.7);
+        border-top-left-radius: ($border-radius - 1);
+        border-bottom-left-radius: ($border-radius - 1);
     }
 
     &-list{
@@ -229,15 +229,15 @@ $msg-body-gap-x-dsk :2.5rem;
             align-items: center;
             justify-content: center;
             bottom: -18px;
-            right: -18px;
-            margin-right: 40px;
-            transition: right .3s ease-in-out, margin .3s ease-in-out .2s;
             border: 1px solid $border-light;
             background-color: $white;
             border-radius: 50%;
             font-size: 1.125rem;
             z-index: 2;
             color:$base-light;
+            right: -18px;
+            margin-right: 40px;
+            transition: right .3s ease-in-out, margin .3s ease-in-out .2s;
             z-index: 110;
             &.active{
                 margin-right: 0;
@@ -301,15 +301,13 @@ $msg-body-gap-x-dsk :2.5rem;
 }
 
 
-@include media-breakpoint-down(mb){
+@include media-breakpoint-down(sm){
     .nk-msg{
-        &-boxed{
-            border: none;
-            border-radius: $border-radius;
-            min-height: calc(100vh - (#{$header-height}));
-            max-height: calc(100vh - (#{$header-height}));
-            // margin: -24px -18px; // @io-v2.0
-        }
+        border: none;
+        border-radius: $border-radius;
+        min-height: calc(100vh - (#{$header-height} + 64px));
+        max-height: calc(100vh - (#{$header-height} + 64px));
+        margin: -24px -18px;
     }
 }
 @include media-breakpoint-up(sm){
@@ -390,18 +388,6 @@ $msg-body-gap-x-dsk :2.5rem;
     .profile-shown{
         .nk-msg-profile-toggle{
             right: 262px;
-            .has-apps-sidebar & {
-                right: -18px;
-            }
-        }
-    }
-}
-@media (max-width:1279px){
-    .has-apps-sidebar{
-        .profile-shown{
-            .nk-msg-profile-toggle{
-                right: 262px;
-            }
         }
     }
 }
@@ -409,15 +395,6 @@ $msg-body-gap-x-dsk :2.5rem;
     .nk-msg-body{
         &.profile-shown{
             padding-right: 280px;
-        }
-    }
-}
-@media (min-width:1280px){
-    .has-apps-sidebar{
-        .nk-msg-body{
-            &.profile-shown{
-                padding-right: 280px;
-            }
         }
     }
 }

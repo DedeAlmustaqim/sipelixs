@@ -42,7 +42,7 @@ class Auth extends BaseController
                     session()->set('id', $user['id']);
                     session()->set('name', $user['name']);
                     session()->set('email', $user['email']);
-
+                    session()->set('akses', 3);
                     return redirect('dashboard');
                 } else {
                     $email = $user['email'];
@@ -63,7 +63,7 @@ class Auth extends BaseController
     function logout()
     {
         session()->destroy();
-        return redirect('login');
+        return redirect('/');
     }
 
     public function register()
@@ -232,11 +232,7 @@ class Auth extends BaseController
     }
 
     public function verifikasi($encodedEmail)
-    {
-
-
-
-        // Decode the URL-encoded email
+    {        // Decode the URL-encoded email
         $email = base64_decode($encodedEmail);
 
         // Retrieve user by email if necessary, for example:

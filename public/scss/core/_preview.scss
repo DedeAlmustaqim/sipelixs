@@ -41,7 +41,9 @@
     border-radius: $border-radius;
     overflow: auto;
 }
-
+.card-preview {
+    border:1px solid $border-color; 
+}
 .code-block{
     position: relative;
     border: 1px solid $border-color; 
@@ -217,14 +219,14 @@
     }
     &-width > div {
         height: 2rem;
-        background-color: $light;
+        background-color: $light-100;
         margin-bottom: 0.25rem;
     }
     &-height {
         height: 8rem;
         & > div {
             width: 8rem;
-            background-color: $light;
+            background-color: $light-100;
             margin-right: .5rem;
         }
     }
@@ -232,7 +234,7 @@
         & > div {
             height: 2rem;
             width: 4.5rem;
-            background-color: $light;
+            background-color: $light-100;
             margin-bottom: .5rem;
         }
         &-pd > div {

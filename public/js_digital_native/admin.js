@@ -13,7 +13,9 @@ $(document).ready(function () {
     };
 
     showReport()
+    showReportSkpd()
     showMonitoring()
+    showMonitoringSkpd()
 
     $.ajax({
         url: BASE_URL + 'service/get_unit',
@@ -25,7 +27,20 @@ $(document).ready(function () {
         }
     });
 
+    const quillRespond = new Quill('#editor_respond', {
+        theme: 'snow'
+    });
 
+    quillRespond.on('text-change', (delta, oldDelta, source) => {
+        if (source == 'user') {
+            // Get the current HTML content
+            const currentHtml = quillRespond.root.innerHTML;
+
+            // Update the output
+            document.getElementById('catatan_petugas').textContent = currentHtml;
+            console.log(currentHtml)
+        }
+    });
 
 
 });
@@ -53,6 +68,8 @@ function catatan(selectedUnit, selectedPetugas) {
             console.log(currentHtml)
         }
     });
+
+
 }
 
 $('#id_unit_forward').change(function () {
@@ -173,7 +190,116 @@ function showReport() {
                         + '<ul class="link-list-plain">'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></li>'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="forwardReport(this)">Teruskan</a></li>'
-                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="cancelReport(this)">Batalkan</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="rejectReport(this)">Tolak </a></li>'
+                        + '</ul>'
+                        + '</div>'
+                        + '</div>'
+                }
+            },
+
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+    });
+}
+
+function showReportSkpd() {
+    $('#reportTableSkpd').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "skpd/json_report",
+        },
+        "columns": [
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[11] + '</div>'
+                }
+            },
+
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[2] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[6] + '</div>'
+                }
+            },
+
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><a href="' + data[7] + '" target="_blank" class="btn btn-dim btn-primary">Lihat</a></div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left"><small>' + konversiFormatTanggal(data[8]) + '</small></div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                }
+            },
+            {
+
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="dropdown">'
+                        + '<a href="#" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false"><span>Aksi</span><em class="icon ni ni-chevron-down"></em></a>'
+                        + '<div class="dropdown-menu  mt-1" style="">'
+                        + '<ul class="link-list-plain">'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="acceptReport(this)">Tanggapi</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showReplyTable(this)">Riwayat</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="rejectReport(this)">Tolak </a></li>'
                         + '</ul>'
                         + '</div>'
                         + '</div>'
@@ -192,7 +318,7 @@ function showReport() {
 }
 
 function showMonitoring() {
-    
+
     $('#monitoringTableAdmin').DataTable({
         processing: true,
         serverSide: true,
@@ -255,7 +381,8 @@ function showMonitoring() {
             {
                 "orderable": false,
                 "data": function (data) {
-                    return '<div class="text-left">' + data[18] + '</div>'
+                    var petugas = data[18] || '<span class="text-danger">Tidak Ada</span>'
+                    return '<div class="text-left">' + petugas + '</div>'
                 }
             },
             {
@@ -281,13 +408,133 @@ function showMonitoring() {
 
                 "orderable": false,
                 "data": function (data,) {
+                    if (data[10] == 4) {
+                        return '<div class="text-center"><button type="button" class="btn btn-dim btn-primary" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></div>'
+                    }
                     return '<div class="dropdown">'
                         + '<a href="#" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false"><span>Aksi</span><em class="icon ni ni-chevron-down"></em></a>'
                         + '<div class="dropdown-menu  mt-1" style="">'
                         + '<ul class="link-list-plain">'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></li>'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="forwardReport(this)">Ganti Petugas</a></li>'
-                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showReplyTable(this)">Tindak Lanjut</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showReplyTable(this)">Monitoring</a></li>'
+                        + '</ul>'
+                        + '</div>'
+                        + '</div>'
+                }
+            },
+
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+    });
+}
+
+function showMonitoringSkpd() {
+
+    $('#monitoringTableSkpd').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "skpd/json_monitoring",
+        },
+        "columns": [
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[11] + '</div>'
+                }
+            },
+
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[2] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[6] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    var petugas = data[18] || '<span class="text-danger">Tidak Ada</span>'
+                    return '<div class="text-left">' + petugas + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><a href="' + data[7] + '" target="_blank" class="btn btn-dim btn-primary">Lihat</a></div>'
+
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left"><small>' + konversiFormatTanggal(data[8]) + '</small></div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                }
+            },
+            {
+
+                "orderable": false,
+                "data": function (data,) {
+                    if (data[10] == 4) {
+                        return '<div class="text-center"><button type="button" class="btn btn-dim btn-primary" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></div>'
+                    }
+                    return '<div class="dropdown">'
+                        + '<a href="#" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false"><span>Aksi</span><em class="icon ni ni-chevron-down"></em></a>'
+                        + '<div class="dropdown-menu  mt-1" style="">'
+                        + '<ul class="link-list-plain">'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showReplyTable(this)">Riwayat</a></li>'
                         + '</ul>'
                         + '</div>'
                         + '</div>'
@@ -357,7 +604,7 @@ $('#formForwardReport').on('submit', function (e) {
 
 function showReplyTable(elem) {
     var id = $(elem).data("id");
-   
+
     Swal.fire({
         title: 'Memuat Data',
         text: '',
@@ -377,7 +624,7 @@ function showReplyTable(elem) {
             $('#showReply').html('');
             $.each(data, function (index, item) {
                 if (item.lampiran_petugas) {
-                    var lampiran = `<a target="_blank" href="` + BASE_URL + `public/lampiran_petugas/` + item.lampiran_petugas + `"><span class="badge bg-secondary">Lihat Lampiran</span></a>`
+                    var lampiran = `<a target="_blank" href="` + item.lampiran_petugas + `"><span class="badge bg-secondary">Lihat Lampiran</span></a>`
                 } else {
                     var lampiran = `<span class="badge bg-danger">Tidak ada Lampiran</span>`
                 }
@@ -385,7 +632,7 @@ function showReplyTable(elem) {
                 
                 <div class="nk-support-content">
                     <div class="title">
-                        <span>`+ konversiFormatTanggal(item.created_at) + `<br>` + lampiran + `</span>
+                    <span>`+ konversiFormatTanggal(item.created_at) + `&nbsp;&nbsp;` + lampiran + `<br> Oleh ` + item.nama + `</span>
                         <span class="badge badge-dot badge-dot-xs bg-warning ms-1 `+ item.class + `">` + item.ket + `</span>
                     </div>
                     `+ item.catatan_petugas + `
@@ -506,6 +753,10 @@ function showDetailReport(elem) {
             <td>Petugas</td>
             <td>`+ petugas + `</td>
             </tr>
+            <tr>
+            <td>Status</td>
+            <td><span class="`+ data.class + `">` + data.ket + `</span></td>
+            </tr>
             
             </tbody>
             </table>`);
@@ -514,3 +765,79 @@ function showDetailReport(elem) {
 
 
 }
+
+function rejectReport(elem) {
+    var id = $(elem).data("id");
+    Swal.fire({
+        title: 'Tolak ?',
+        text: "Tolak Laporan ini ",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Tolak!'
+    }).then(function (result) {
+        if (result.value) {
+            $.ajax({
+                url: BASE_URL + 'admin/reject_report/' + id,
+                type: "GET",
+                data: {
+                    id: id,
+                },
+                success: function (data) {
+                    Swal.fire('Berhasil!', 'Laporan telah ditolak.', 'success');
+
+                },
+                error: function () {
+
+                    Swal.fire('Gagal!', 'Terjadi kesalahan .', 'error');
+                }
+            });
+
+        }
+    });
+}
+
+function acceptReport(elem) {
+    var id = $(elem).data("id");
+
+    $("#id_konflik_respond").val(id)
+    $('#modalRespondReport').modal('show')
+}
+
+$('#formRespondReport').on('submit', function (e) {
+    e.preventDefault();
+    var postData = new FormData($("#formRespondReport")[0]);
+    $.ajax({
+        type: "post",
+        url: BASE_URL + "skpd/report",
+        processData: false,
+        contentType: false,
+        data: postData,
+        dataType: "JSON",
+        success: function (data) {
+            if (data.success == false) {
+                toastr.clear();
+                if (data.id_konflik_respond) {
+                    NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.id_konflik_respond + '</p>', 'error');
+                }
+                if (data.catatan_petugas) {
+                    NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.catatan_petugas + '</p>', 'error');
+                }
+
+                if (data.status_reply) {
+                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.status_reply + '</p>', 'error');
+                }
+                if (data.lampiran_petugas) {
+                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.lampiran_petugas + '</p>', 'error');
+                }
+
+            } else if (data.success == true) {
+
+                Swal.fire('Berhasil', 'Laporan telah diteruskan', 'success');
+                showReportSkpd()
+               
+                $('#modalRespondReport').modal('hide')
+            }
+        },
+    });
+    return false;
+});

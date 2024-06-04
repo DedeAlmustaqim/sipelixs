@@ -30,7 +30,7 @@ class ReportController extends BaseController
                   status.ket,
                   status.class,
                   IF(EXISTS (SELECT 1 FROM reply_konflik WHERE reply_konflik.id_konflik = laporan_konflik.id), "1", "0") AS reply_status')
-            ->join('status', 'laporan_konflik.status = status.id', 'inner')
+            ->join('status', 'laporan_konflik.status = status.id', 'left')
             ->where('laporan_konflik.user_id', session('id'))
             ->orderBy('laporan_konflik.created_at', 'DESC');
 
@@ -168,7 +168,7 @@ class ReportController extends BaseController
             'alamat' => $alamat,
             'deskripsi' => $deskripsi,
             'lampiran' => $imgPath,
-            'status' => 0,
+            'status' => 1,
 
         ];
 
@@ -191,14 +191,27 @@ class ReportController extends BaseController
     {
         $db = db_connect();
         $data = $db->table('reply_konflik')
+        ->select('reply_konflik.id, 
+        reply_konflik.id_konflik, 
+        reply_konflik.catatan_petugas, 
+        reply_konflik.lampiran_petugas, 
+        reply_konflik.id_admin, 
+        reply_konflik.created_at, 
+        reply_konflik.status_reply, 
+        `status`.id, 
+        `status`.ket, 
+        `status`.class, 
+        tbl_admin.nama, 
+        tbl_admin.nip')
             ->join('status', 'reply_konflik.status_reply = status.id', 'left')
+            ->join('tbl_admin', 'reply_konflik.id_admin = tbl_admin.id', 'left')
             ->where('id_konflik', $id)->get()->getResult();
         if ($data) {
             return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
                 ->setJSON($data);
         } else {
             return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
-                ->setJSON(['message' => 'Not found']);
+                ->setJSON(['message' => 'Not found', 'success'=>false]);
         }
     }
 
@@ -249,4 +262,8 @@ class ReportController extends BaseController
                 ->setJSON(['message' => 'Not found']);
         }
     }
+
+
+    
+   
 }

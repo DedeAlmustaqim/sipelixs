@@ -10,7 +10,7 @@
     input::placeholder{
       color: $select2-placeholder-color;
     }
-  }
+  } 
   .select2-search--inline{
     .select2-search__field{
       padding-left: ($select2-padding-x - 0.1875rem) !important;
@@ -54,10 +54,8 @@
   .select2-selection__choice__remove {
     color: $select2-color;
     cursor: pointer;
-
     display: inline-block;
     font-weight: bold;
-
     margin-right: .5rem;
     &:hover {
       color: $select2-color;

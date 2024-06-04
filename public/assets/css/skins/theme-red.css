@@ -5,6 +5,24 @@
  * Author: Softnio
  * Author URI: http://themeforest.net/user/softnio
 **/
+.nk-sidebar.is-dark {
+  background: #0f192a;
+  border-right-color: #1c2f50;
+}
+.nk-sidebar.is-theme {
+  background: #5f2525;
+  border-right-color: #833333;
+}
+.is-dark .nk-sidebar-head {
+  border-color: #1c2f50;
+}
+.is-theme .nk-sidebar-head {
+  border-color: #833333;
+}
+.nk-sidebar.is-dark .user-balance-alt, .nk-sidebar.is-theme .user-balance-alt {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .nk-header {
   background: #f5f6fa;
   border-bottom-color: #e5e9f2;
@@ -77,8 +95,6 @@
 .badge-primary,
 .icon-circle,
 .noUi-connect,
-.nk-kycfm-label::after,
-.plan-item-card:after,
 .nk-msg-menu-item a:after,
 .ui-shady .nk-msg-item.active:after, .ui-shady .nk-msg-item.current:after,
 .ui-softy .nk-msg-item.active:after, .ui-softy .nk-msg-item.current:after {
@@ -108,6 +124,7 @@
 .nk-menu-link:hover .count,
 .nk-menu-sub .nk-menu-link:hover,
 .nk-menu-sub .active > .nk-menu-link,
+.nk-menu-sm .nk-menu-link:hover,
 .nk-menu-main .nk-menu-link:hover,
 .nk-menu-main .nk-menu-link:focus,
 .nk-menu-main .nk-menu-item.active > .nk-menu-link,
@@ -141,19 +158,15 @@
 .list-step li.list-step-current:before,
 .accordion-s2 .accordion-head .title,
 .accordion-s3 .accordion-head .title,
-.badge-outline-primary,
-.badge-dim.badge-primary,
+.bg-outline-primary,
+.badge-dim.bg-primary,
 .badge-dot.bg-primary,
-.badge-dim.badge-outline-primary,
+.badge-dim.bg-outline-primary,
 .alert-primary,
 .form-clip,
 .form-text-hint,
 .search-submit:hover,
 .nk-news-icon .icon,
-.nk-refwg-name .title,
-.nk-iv-wg1-info, .nk-wg4-note span,
-.nk-iv-scheme-item .amount-ex,
-.nk-kycfm-control:checked ~ .nk-kycfm-label .label-icon,
 .attach-item .icon,
 .attach-download:hover span,
 .nk-reply-meta-info .whom,
@@ -203,7 +216,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   background-color: #d42330 !important;
 }
 
-.bg-primary-dim {
+.bg-primary-dim, .dual-listbox .dual-listbox__item:active, .dual-listbox .dual-listbox__item.dual-listbox__item--selected {
   background-color: #fcedee !important;
 }
 
@@ -211,23 +224,22 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #fcedee !important;
 }
 
-.alert-primary, .badge-dim.badge-outline-primary {
+.alert-primary, .badge-dim.bg-outline-primary {
   background-color: #fcedee;
   border-color: #f3b6bb;
 }
 
-.alert-pro.alert-primary, .badge-primary,
-.plan-control:checked + .plan-item-card,
+.alert-pro.alert-primary, .bg-primary,
 .form-control:focus,
 .form-control.focus,
-.form-file-input:focus ~ .form-file-label,
+.custom-file-input:focus ~ .custom-file-label,
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before,
 .select2-container--default .select2-selection--single:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   border-color: #e14954;
 }
 
-.nk-order-ovwg-data.sell, .badge-outline-primary {
+.nk-order-ovwg-data.sell, .bg-outline-primary {
   border-color: #f3b6bb;
 }
 
@@ -240,7 +252,6 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 }
 
 .page-item.active .page-link,
-.plan-control:checked + .plan-item-card .plan-label,
 .custom-control-input:checked ~ .custom-control-label::before,
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
   background-color: #e14954;
@@ -253,13 +264,13 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   background-color: #ed9298;
 }
 
-.badge-dim.badge-primary {
+.badge-dim.bg-primary {
   background-color: #fcedee;
   border-color: #fcedee;
 }
 
 .bg-primary.badge-dot {
-  background: transparent;
+  background: transparent !important;
 }
 
 .nk-error-head {
@@ -273,17 +284,9 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #ffffff;
 }
 
-.icon-avatar, .nk-iv-scheme-icon.is-running {
+.icon-avatar {
   color: #e14954;
   background-color: #fbe4e5;
-}
-
-.is-dark .nk-wgw-icon {
-  background: #e76d76;
-}
-
-.is-dark .nk-iv-wg2-title .title {
-  color: #f5bfc3;
 }
 
 .is-theme .nk-quick-nav-icon:before {
@@ -366,7 +369,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 
 .form-control:focus, .form-control.focus,
 .custom-control-input:focus ~ .custom-control-label::before,
-.form-file-input:focus ~ .form-file-label,
+.custom-file-input:focus ~ .custom-file-label,
 .select2-container--default .select2-selection--single:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
   box-shadow: 0 0 0 3px rgba(225, 73, 84, 0.1);
@@ -381,8 +384,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .btn-outline-primary:not(:disabled):not(.disabled):active,
 .btn-outline-primary:not(:disabled):not(.disabled).active,
 .show > .btn-outline-primary.dropdown-toggle,
-.btn-primary.disabled, .btn-primary:disabled,
-.invest-amount-control:checked ~ .invest-amount-label {
+.btn-primary.disabled, .btn-primary:disabled {
   background-color: #e14954;
   border-color: #e14954;
 }
@@ -438,12 +440,12 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
   color: #526484;
 }
 
-.nk-menu-badge, .nk-menu-main .nk-menu-sub .nk-menu-badge {
+.nk-menu-badge {
   color: #ea8087;
   background-color: #fcedee;
 }
 
-.is-theme .nk-sidebar-footer, .nk-apps-sidebar.is-theme, .is-theme .nk-sidebar-profile-fixed {
+.is-theme .nk-sidebar-footer, .is-theme .nk-sidebar-profile-fixed {
   background: #5f2525;
   border-color: #833333;
 }

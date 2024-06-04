@@ -239,24 +239,18 @@
         }
     }
 }
-@keyframes overlay-fade-in{
-    0%{
-        opacity: 0;
-    }100%{
-        opacity: 1;
-    }
-}
+
 .nk-header{
     &-menu{
         position: fixed;
-        top: 0;
         left: 0;
-        transform: translateX(-100%);
+        top: 0;
         width: 280px;
         height: 100vh;
         max-height: 100vh;
         z-index: 999;
         background: $white;
+        transform: translateX(-100%);
         &-inner{
             overflow: auto;
             max-height: 100%;
@@ -264,12 +258,11 @@
         }
         &.mobile-menu{
             padding-top: 65px;
-            padding-bottom: 2.5rem;
             padding-left: 0;
             padding-right: 0;
             transition: transform .4s ease;
         }
-        &.nk-header-active{
+        &.nk-sidebar-active{
             transform: translateX(0);
         }
     }
@@ -296,16 +289,6 @@
             }
         }
     }
-    &-overlay{
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: $sidebar-overlay;
-        z-index: 900;
-        animation: overlay-fade-in .4s ease 1;
-    }
 }
 @include media-breakpoint-up(lg){
     .nk-header{
@@ -314,7 +297,7 @@
                 display: none;
             }
             position: static;
-            background: transparent !important;
+            background: transparent;
             height: auto;
             max-height: auto;
             border-right: none;
@@ -322,9 +305,6 @@
             padding: 0;
             overflow: visible;
             transform: translateX(0) !important;
-        }
-        &-overlay{
-            display: none;
         }
     }
 }

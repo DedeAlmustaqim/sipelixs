@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <form action="html/pages/auths/auth-success-v2.html">
+        <form>
             <div class="form-group">
                 <div class="form-label-group">
                     <label class="form-label" for="default-01">Email</label>
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <small class="">Belum mendapatkan link verifikasi ?</small>
-                <button class="btn btn-lg btn-dark btn-block">Kirim ulang link verifikasi</button>
+                <button onclick="onProgress(this)" class="btn btn-lg btn-dark btn-block">Kirim ulang link verifikasi</button>
             </div>
         </form>
         <div class="form-note-s2 text-center pt-4">
