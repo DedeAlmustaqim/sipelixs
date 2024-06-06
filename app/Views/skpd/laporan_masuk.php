@@ -53,7 +53,7 @@
             </div>
             <div class="modal-body">
                 <form id="formRespondReport" class="gy-3" method="POST">
-                    <input type="text" id="id_konflik_respond" name="id_konflik_respond">
+                    <input type="text" hidden id="id_konflik_respond" name="id_konflik_respond">
 
 
                     <div class="row g-3 align-center">
@@ -71,7 +71,7 @@
                                         <div class="quill-minimal" id="editor_respond">
 
                                         </div>
-                                        <textarea id="catatan_petugas" name="catatan_petugas"></textarea>
+                                        <textarea hidden id="catatan_petugas" name="catatan_petugas"></textarea>
                                     </div>
                                 </div>
                             </div>

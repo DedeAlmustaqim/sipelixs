@@ -257,7 +257,7 @@ class ReportController extends BaseController
          laporan_konflik.id_petugas
         
          ')
-            ->whereNotIn('laporan_konflik.`status`', [1,2])
+            ->whereNotIn('laporan_konflik.`status`', [1,3,4])
             ->where('laporan_konflik.id_petugas', session('id'))
             ->join('users', 'laporan_konflik.user_id = users.id', 'left')
             ->join('status', 'laporan_konflik.status = status.id', 'left')
