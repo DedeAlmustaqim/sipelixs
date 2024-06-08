@@ -177,7 +177,7 @@ function showReport() {
             {
                 "orderable": false,
                 "data": function (data,) {
-                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                    return '<div class="text-center"><span class="' + data[16] + '">' + data[15] + '</span></div>'
                 }
             },
             {
@@ -285,7 +285,7 @@ function showReportSkpd() {
             {
                 "orderable": false,
                 "data": function (data,) {
-                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                    return '<div class="text-center"><span class="' + data[16] + '">' + data[15] + '</span></div>'
                 }
             },
             {
@@ -401,7 +401,7 @@ function showMonitoring() {
             {
                 "orderable": false,
                 "data": function (data,) {
-                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                    return '<div class="text-center"><span class="' + data[16] + '">' + data[15] + '</span></div>'
                 }
             },
             {
@@ -496,13 +496,7 @@ function showMonitoringSkpd() {
                     return '<div class="text-left">' + data[6] + '</div>'
                 }
             },
-            {
-                "orderable": false,
-                "data": function (data) {
-                    var petugas = data[18] || '<span class="text-danger">Tidak Ada</span>'
-                    return '<div class="text-left">' + petugas + '</div>'
-                }
-            },
+         
             {
                 "orderable": false,
                 "data": function (data,) {
@@ -519,7 +513,7 @@ function showMonitoringSkpd() {
             {
                 "orderable": false,
                 "data": function (data,) {
-                    return '<div class="text-center"><span class="' + data[17] + '">' + data[16] + '</span></div>'
+                    return '<div class="text-center"><span class="' + data[15] + '">' + data[17] + '</span></div>'
                 }
             },
             {
@@ -683,11 +677,6 @@ function showDetailReport(elem) {
             </tr>
             <tr>
 
-            <tr>
-            <td>NIK</td>
-            <td>`+ data.nik + `</td>
-            </tr>
-            <tr>
             
             <tr>
             <td>No. Hp</td>

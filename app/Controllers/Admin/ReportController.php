@@ -3,7 +3,12 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Controllers\Service\WaController;
+use App\Models\AdminModel;
+use App\Models\LaporanModel;
 use App\Models\ReportModel;
+use App\Models\UnitModel;
+use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use Hermawan\DataTables\DataTable;
 
@@ -34,7 +39,6 @@ class ReportController extends BaseController
         laporan_konflik.updated_at, 
         laporan_konflik.`status`, 
         users.`name`, 
-        users.nik, 
         users.alamat, 
         kecamatan.nm_kec, 
         desa.nm_desa,
@@ -69,7 +73,6 @@ class ReportController extends BaseController
         laporan_konflik.updated_at, 
         laporan_konflik.`status`, 
         users.`name`, 
-        users.nik, 
         users.alamat, 
         kecamatan.nm_kec, 
         desa.nm_desa,
@@ -95,7 +98,7 @@ class ReportController extends BaseController
         helper(['form', 'url']);
         $db = db_connect();
 
-
+        $wa = new WaController();
 
         $request = \Config\Services::request();
         $id = $request->getVar('id_konflik_forward');
@@ -173,6 +176,33 @@ class ReportController extends BaseController
         $result = $builder->insert($data);
         $tblLaporanKonflik->where('id', $id)->update($data2);
         if ($result) {
+
+
+
+            $adminModel = new AdminModel();
+            $admin = $adminModel->where('id', $id_petugas_forward)->first();
+
+            $laporanModel = new LaporanModel();
+            $laporan = $laporanModel->where('id', $id)->first();
+
+            $userModel = new UserModel();
+            $user = $userModel->where('id', $laporan['user_id'])->first();
+
+            $unitModel = new UnitModel();
+            $unit = $unitModel->where('id', $admin['id_unit'])->first();
+
+            
+            // // Pesan untuk admin
+            $adminMessage = 'Laporan Konflik telah diteruskan kepada Anda\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Deskripsi Laporan : ' . $laporan['deskripsi'] . '\n2Login ke Akun Anda untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+
+            $wa->sendMessage($user['no_hp'], $adminMessage);
+
+            // // Pesan untuk user
+            $userMessage = 'Laporan anda telah diteruskan kepada ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+
+            $wa->sendMessage($user['no_hp'], $userMessage);
+
+            // echo $adminMessage.$userMessage;
             $respond = [
                 'success' => true,
             ];
@@ -248,7 +278,6 @@ class ReportController extends BaseController
          laporan_konflik.updated_at, 
          laporan_konflik.`status`, 
          users.`name`, 
-         users.nik, 
          users.alamat, 
          kecamatan.nm_kec, 
          desa.nm_desa,
@@ -257,7 +286,7 @@ class ReportController extends BaseController
          laporan_konflik.id_petugas
         
          ')
-            ->whereNotIn('laporan_konflik.`status`', [1,3,4])
+            ->whereNotIn('laporan_konflik.`status`', [1, 3, 4])
             ->where('laporan_konflik.id_petugas', session('id'))
             ->join('users', 'laporan_konflik.user_id = users.id', 'left')
             ->join('status', 'laporan_konflik.status = status.id', 'left')
@@ -274,7 +303,7 @@ class ReportController extends BaseController
     {
         helper(['form', 'url']);
         $db = db_connect();
-
+        $wa = new WaController();
         $model = new ReportModel();
 
         $request = \Config\Services::request();
@@ -371,6 +400,28 @@ class ReportController extends BaseController
         $result = $builder->insert($data);
 
         if ($result) {
+            $adminModel = new AdminModel();
+            $admin = $adminModel->where('id', session('id'))->first();
+
+            $laporanModel = new LaporanModel();
+            $laporan = $laporanModel->where('id', $id)->first();
+
+            $userModel = new UserModel();
+            $user = $userModel->where('id', $laporan['user_id'])->first();
+
+            $unitModel = new UnitModel();
+            $unit = $unitModel->where('id', $admin['id_unit'])->first();
+
+
+            if ($status == false) {
+                $statusProgress = "Dalam Proses";
+            } else if ($status == true) {
+                $statusProgress = "Selesai";
+            }
+            // // Pesan untuk user
+            $userMessage = 'Laporan anda telah ditanggapi oleh ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Status laporan : '.$statusProgress.'\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+
+            $wa->sendMessage($user['no_hp'], $userMessage);
             $respond = [
                 'success' => true,
             ];
@@ -406,7 +457,6 @@ class ReportController extends BaseController
         laporan_konflik.updated_at, 
         laporan_konflik.`status`, 
         users.`name`, 
-        users.nik, 
         users.alamat, 
         kecamatan.nm_kec, 
         desa.nm_desa,
@@ -415,7 +465,7 @@ class ReportController extends BaseController
         tbl_admin.nama
        
         ')
-            ->whereNotIn('laporan_konflik.`status`', [1,2])
+            ->whereNotIn('laporan_konflik.`status`', [1, 2])
             ->where('laporan_konflik.id_petugas', session('id'))
             ->join('users', 'laporan_konflik.user_id = users.id', 'left')
             ->join('tbl_admin', 'laporan_konflik.id_petugas = tbl_admin.id', 'left')

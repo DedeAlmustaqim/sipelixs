@@ -4,7 +4,7 @@
 <head>
     <base href=".<?php echo base_url() ?>">
     <meta charset="utf-8">
-    <meta name="author" content="SIKON">
+    <meta name="author" content="SIPELIKS">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistem Informasi Pelaporan Konflik Sosial Kabupaten Barito Timur">
     <!-- Fav Icon  -->
@@ -33,7 +33,7 @@
                             <a href="<?= base_url() ?>" class="logo-link">
                                 <img class="logo-light logo-img" src="<?php echo base_url() ?>public/images/bartim.png" srcset="<?php echo base_url() ?>public/images/bartim.png 2x" alt="logo">
                                 <img class="logo-dark logo-img" src="<?php echo base_url() ?>public/images/bartim.png" srcset="<?php echo base_url() ?>public/images/bartim.png 2x" alt="logo-dark">
-                            </a> <span style="font-size: larger;"><b>SIKON</b></span>
+                            </a> <span style="font-size: larger;"><b>SIPELIKS</b></span>
                         </div><!-- .nk-header-brand -->
                         <div class="nk-header-menu ms-auto" data-content="headerNav">
                             <div class="nk-header-mobile">

@@ -7,17 +7,17 @@
             <div class="nk-block-head-content">
                 <h4 class="nk-block-title">Login</h4>
                 <div class="nk-block-des">
-                    <p>Akses panel SIKON menggunakan email dan kata sandi Anda</p>
+                    <p>Akses panel SIPELIKS menggunakan No WA dan kata sandi Anda</p>
                 </div>
             </div>
         </div>
         <form action="<?= base_url() ?>login" class="form-validate is-alter" novalidate="novalidate" method="POST">
             <div class="form-group">
                 <div class="form-label-group">
-                    <label class="form-label" for="default-01">Email</label>
+                    <label class="form-label" for="default-01">No WA</label>
                 </div>
                 <div class="form-control-wrap">
-                    <input type="email" class="form-control form-control-lg" id="email" name="email" data-msg="Isi isian ini" required placeholder="Masukkan Email">
+                    <input type="text" class="form-control form-control-lg" maxlength="12" minlength="11" id="no_hp" name="no_hp" data-msg="Isi isian ini" required placeholder="Masukkan No WA">
                 </div>
             </div>
             <div class="form-group">

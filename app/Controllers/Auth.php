@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Controllers\Service\WaController;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -31,7 +32,7 @@ class Auth extends BaseController
         $userModel = new UserModel();
 
         $user = $userModel->table('users')
-            ->where('email', $this->request->getVar('email'))
+            ->where('no_hp', $this->request->getVar('no_hp'))
             ->first();
         if ($user) {
             if (password_verify($this->request->getVar('password'), $user['password'])) {
@@ -41,12 +42,11 @@ class Auth extends BaseController
                     session()->set('login', true);
                     session()->set('id', $user['id']);
                     session()->set('name', $user['name']);
-                    session()->set('email', $user['email']);
                     session()->set('akses', 3);
                     return redirect('dashboard');
                 } else {
-                    $email = $user['email'];
-                    $encodedEmail = base64_encode($email);
+                    $noHp = $user['no_hp'];
+                    $encodedEmail = base64_encode($noHp);
                     // Buat URL untuk redireksi ke halaman verifikasi dengan parameter encoded email
                     $verificationUrl = base_url('/register/verifikasi') . '/' . $encodedEmail;
 
@@ -68,6 +68,8 @@ class Auth extends BaseController
 
     public function register()
     {
+
+        $waController = new WaController();
         helper('text');
         helper('password');
         $model = new UserModel();
@@ -76,9 +78,9 @@ class Auth extends BaseController
 
         // Mendapatkan data dari form
         $name = $request->getVar('name');
-        $nik = $request->getVar('nik');
+        // $nik = $request->getVar('nik');
         $alamat = $request->getVar('alamat');
-        $email = $request->getVar('email');
+        // $email = $request->getVar('email');
         $no_hp = $request->getVar('no_hp');
         $password = $request->getVar('password');
 
@@ -93,15 +95,15 @@ class Auth extends BaseController
                     'max_length' => 'Nama tidak boleh lebih dari 50 karakter.'
                 ]
             ],
-            'nik' => [
-                'label' => 'NIK',
-                'rules' => 'required|exact_length[16]|numeric',
-                'errors' => [
-                    'required' => 'NIK wajib diisi.',
-                    'exact_length' => 'NIK harus terdiri dari 16 karakter.',
-                    'numeric' => 'NIK hanya boleh berisi angka.'
-                ]
-            ],
+            // 'nik' => [
+            //     'label' => 'NIK',
+            //     'rules' => 'required|exact_length[16]|numeric',
+            //     'errors' => [
+            //         'required' => 'NIK wajib diisi.',
+            //         'exact_length' => 'NIK harus terdiri dari 16 karakter.',
+            //         'numeric' => 'NIK hanya boleh berisi angka.'
+            //     ]
+            // ],
             'alamat' => [
                 'label' => 'Alamat',
                 'rules' => 'required|max_length[100]',
@@ -120,14 +122,14 @@ class Auth extends BaseController
                     'numeric' => 'Nomor telepon hanya boleh berisi angka.'
                 ]
             ],
-            'email' => [
-                'label' => 'Email',
-                'rules' => 'required|valid_email',
-                'errors' => [
-                    'required' => 'Email wajib diisi.',
-                    'valid_email' => 'Format email tidak valid.'
-                ]
-            ],
+            // 'email' => [
+            //     'label' => 'Email',
+            //     'rules' => 'required|valid_email',
+            //     'errors' => [
+            //         'required' => 'Email wajib diisi.',
+            //         'valid_email' => 'Format email tidak valid.'
+            //     ]
+            // ],
             'password' => [
                 'label' => 'Password',
                 'rules' => 'required|min_length[6]',
@@ -159,10 +161,10 @@ class Auth extends BaseController
             $respond = [
                 'success' => false,
                 'name' => \Config\Services::validation()->getError('name'),
-                'nik' => \Config\Services::validation()->getError('nik'),
+                // 'nik' => \Config\Services::validation()->getError('nik'),
                 'alamat' => \Config\Services::validation()->getError('alamat'),
                 'no_hp' => \Config\Services::validation()->getError('no_hp'),
-                'email' => \Config\Services::validation()->getError('email'),
+                // 'email' => \Config\Services::validation()->getError('email'),
                 'password' => \Config\Services::validation()->getError('password'),
                 'confirm_password' => \Config\Services::validation()->getError('confirm_password'),
                 'checkbox_privasi' => \Config\Services::validation()->getError('checkbox_privasi')
@@ -173,23 +175,23 @@ class Auth extends BaseController
 
         // Jika validasi berhasil, lanjutkan proses pendaftaran
         // Misalnya, menyimpan data ke database, dll.
-        $existingUser = $model->where('nik', $nik)->first();
-        $existingEmail = $model->where('email', $email)->first();
+        // $existingUser = $model->where('nik', $nik)->first();
+        // $existingEmail = $model->where('email', $email)->first();
         $existingNoHp = $model->where('no_hp', $no_hp)->first();
-        if ($existingUser) {
-            $respond = [
-                'success' => false,
-                'nik' => 'NIK sudah digunakan. Silakan masukkan NIK yang lain.'
-            ];
-            return json_encode($respond);
-        }
-        if ($existingEmail) {
-            $respond = [
-                'success' => false,
-                'email' => 'Email sudah digunakan. Silakan masukkan Email yang lain.'
-            ];
-            return json_encode($respond);
-        }
+        // if ($existingUser) {
+        //     $respond = [
+        //         'success' => false,
+        //         'nik' => 'NIK sudah digunakan. Silakan masukkan NIK yang lain.'
+        //     ];
+        //     return json_encode($respond);
+        // }
+        // if ($existingEmail) {
+        //     $respond = [
+        //         'success' => false,
+        //         'email' => 'Email sudah digunakan. Silakan masukkan Email yang lain.'
+        //     ];
+        //     return json_encode($respond);
+        // }
         if ($existingNoHp) {
             $respond = [
                 'success' => false,
@@ -197,15 +199,15 @@ class Auth extends BaseController
             ];
             return json_encode($respond);
         }
-        $randomChar = random_string('alnum', 100);
+        $randomNumber = random_int(100000, 999999);
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $user = [
             'name' => $name,
-            'nik' => $nik,
+            // 'nik' => $nik,
             'no_hp' => $no_hp,
-            'email' => $email,
+            // 'email' => $email,
             'alamat' => $alamat,
-            'active_code' => $randomChar,
+            'active_code' => $randomNumber,
             'password' => $hashedPassword,
 
         ];
@@ -216,9 +218,16 @@ class Auth extends BaseController
 
 
         if ($result) {
-            $encodedEmail = base64_encode($email);
-            // return redirect()->to(base_url('/register/verifikasi/' . $encodedEmail));
-            return json_encode(['success' => true, 'email' => $encodedEmail]);
+            $msg = 'Masukkan Kode OTP Mama Keyan Sayang ' . $randomNumber.',  Terima Kasih sudah mendaftar SIPELIKS'; // Pesan yang ingin dikirim
+            $encodedNoHp = base64_encode($no_hp);
+            $waController->sendMessage($no_hp, $msg);
+            // return redirect()->to(base_url('/register/verifikasi/' . $encodedNoHp));
+
+            // return json_encode(['success' => true, 'no_hp' => $encodedNoHp]);
+            return $this->response->setJSON([
+                'success' => true,
+                'no_hp' => $encodedNoHp
+            ]);
         } else {
             return json_encode(['success' => false, 'message' => 'Gagal menyimpan data.']);
         }
@@ -231,9 +240,9 @@ class Auth extends BaseController
 
     }
 
-    public function verifikasi($encodedEmail)
+    public function verifikasi($noHp)
     {        // Decode the URL-encoded email
-        $email = base64_decode($encodedEmail);
+        $noHp = base64_decode($noHp);
 
         // Retrieve user by email if necessary, for example:
         // $model = new UserModel();
@@ -241,10 +250,58 @@ class Auth extends BaseController
 
         $data = [
             'title' => 'Verifikasi Email',
-            'email' => $email
+            'noHp' => $noHp
             // You can pass the user data if you retrieved it
         ];
 
         return view('auth/verifikasi', $data);
+    }
+
+    public function otp()
+    {
+        $userModel = new UserModel();
+
+        // Cari user berdasarkan nomor HP
+        $user = $userModel->table('users')
+            ->where('no_hp', $this->request->getVar('no_hp_otp'))
+            ->first();
+
+        if ($user) {
+            // Periksa apakah kode OTP sesuai
+            if ($this->request->getVar('kode_otp') == $user['active_code']) {
+                // Update status user menjadi aktif
+                $data = ['active' => 1];
+                $result = $userModel->where('no_hp', $this->request->getVar('no_hp_otp'))->set($data)->update();
+
+                if ($result) {
+                    // Berhasil verifikasi
+                    $respond = [
+                        'success' => true,
+                        'message' => 'Berhasil Verifikasi',
+                    ];
+                } else {
+                    // Gagal mengupdate data
+                    $respond = [
+                        'success' => false,
+                        'message' => 'Gagal update',
+                    ];
+                }
+            } else {
+                // Kode OTP salah
+                $respond = [
+                    'success' => false,
+                    'message' => 'Kode OTP salah',
+                ];
+            }
+        } else {
+            // User tidak ditemukan
+            $respond = [
+                'success' => false,
+                'message' => 'Nomor HP tidak ditemukan',
+            ];
+        }
+
+        // Mengembalikan respon dalam format JSON
+        return $this->response->setJSON($respond);
     }
 }

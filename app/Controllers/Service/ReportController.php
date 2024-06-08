@@ -3,7 +3,9 @@
 namespace App\Controllers\Service;
 
 use App\Controllers\BaseController;
+use App\Models\AdminModel;
 use App\Models\ReportModel;
+use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 use \Hermawan\DataTables\DataTable;
 
@@ -44,6 +46,7 @@ class ReportController extends BaseController
 
     public function store()
     {
+        $wa = new WaController();
 
         helper(['form', 'url']);
         $db = db_connect();
@@ -175,6 +178,24 @@ class ReportController extends BaseController
         $result = $builder->insert($data);
 
         if ($result) {
+            $userModel = new UserModel();
+            $user = $userModel->where('id', $id)->first();
+            
+            $adminModel = new AdminModel();
+            $admin = $adminModel->where('id_akses', 1)->findAll();
+            
+            // Pesan untuk admin
+            $adminMessage = 'Pelapor telah membuat Laporan\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $nm_terlapor . '\n2Deskripsi Laporan : ' . $deskripsi . '\n2Login ke Akun Administrator untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+            
+            foreach ($admin as $a) {
+                $wa->sendMessage($a['no_hp'], $adminMessage);
+            }
+            
+            // Pesan untuk user
+            $userMessage = 'Laporan anda telah dibuat\n2Nama Terlapor : ' . $nm_terlapor . '\n2Deskripsi Laporan : ' . $deskripsi . '\n2Mohon tunggu Admin untuk meneruskan ke SKPD terkait\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+            
+            $wa->sendMessage($user['no_hp'], $userMessage);
+        
             $respond = [
                 'success' => true,
             ];
@@ -184,6 +205,7 @@ class ReportController extends BaseController
                 'message' => 'Gagal menyimpan data.',
             ];
         }
+        
         return $this->response->setJSON($respond);
     }
 
@@ -191,7 +213,7 @@ class ReportController extends BaseController
     {
         $db = db_connect();
         $data = $db->table('reply_konflik')
-        ->select('reply_konflik.id, 
+            ->select('reply_konflik.id, 
         reply_konflik.id_konflik, 
         reply_konflik.catatan_petugas, 
         reply_konflik.lampiran_petugas, 
@@ -211,7 +233,7 @@ class ReportController extends BaseController
                 ->setJSON($data);
         } else {
             return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
-                ->setJSON(['message' => 'Not found', 'success'=>false]);
+                ->setJSON(['message' => 'Not found', 'success' => false]);
         }
     }
 
@@ -234,7 +256,6 @@ class ReportController extends BaseController
         laporan_konflik.updated_by, 
         users.id as user_id, 
         users.`name`, 
-        users.nik, 
         users.no_hp, 
         users.alamat as alamat_user, 
         `status`.id, 
@@ -262,8 +283,4 @@ class ReportController extends BaseController
                 ->setJSON(['message' => 'Not found']);
         }
     }
-
-
-    
-   
 }

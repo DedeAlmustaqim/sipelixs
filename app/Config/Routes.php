@@ -10,6 +10,7 @@ $routes->get('/login', 'Auth::sigin');
 $routes->post('/login', 'Auth::login');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/register', 'Auth::index');
+$routes->post('/otp', 'Auth::otp');
 $routes->get('/register/verifikasi/(:any)', 'Auth::verifikasi/$1');
 $routes->post('/register', 'Auth::register');
 $routes->get('/admin', 'AdminAuth::index');
@@ -50,3 +51,11 @@ $routes->group('skpd',  function ($routes) {
     $routes->get('json_monitoring', 'Admin\ReportController::jsonMonitoringSkpd', ['filter' => 'isSkpd']);
 });
 
+$routes->group('notif',  function ($routes) {
+    $routes->get('single_text', 'Service\WaSingleTextController::sendMessage');
+    $routes->get('laporan_masuk', 'Admin\ReportController::laporan_masuk_skpd', ['filter' => 'isSkpd']); //laporan masuk SKPD
+    $routes->get('monitoring', 'Admin\ReportController::successReport', ['filter' => 'isSkpd']); //laporan masuk SKPD
+    $routes->get('json_report', 'Admin\ReportController::jsonReportSkpd', ['filter' => 'isSkpd']);
+    $routes->post('report', 'Admin\ReportController::respondReport', ['filter' => 'isSkpd']); //tanggapi
+    $routes->get('json_monitoring', 'Admin\ReportController::jsonMonitoringSkpd', ['filter' => 'isSkpd']);
+});

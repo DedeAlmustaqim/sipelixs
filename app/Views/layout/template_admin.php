@@ -54,7 +54,7 @@
                         <?php
                         } ?>
 
-                        <span style="font-size: 25px;" class="text-white"><b> SIKON</b></span>
+                        <span style="font-size: 25px;" class="text-white"><b> SIPELIKS</b></span>
                     </div>
                 </div><!-- .nk-sidebar-element -->
                 <div class="nk-sidebar-element nk-sidebar-body">

@@ -5,7 +5,7 @@
         <div class="nk-block-head-content">
             <h3 class="nk-block-title page-title"><?= $title ?></h3>
             <div class="nk-block-des text-soft">
-                <p>Selamat Datang <?= $userData['name'] ?></p>
+                <p>Selamat Datang <?= session('name') ?></p>
             </div>
         </div><!-- .nk-block-head-content -->
         <div class="nk-block-head-content">
@@ -150,7 +150,7 @@
             </div>
             <div class="modal-body">
                 <form id="reportForm" method="POST" class="form-validate is-alter gy-3">
-                    <input type="text" hidden value="<?= $userData['id'] ?>" name="user_id" id="user_id">
+                    <input type="text"  value="<?= session('id')?>" name="user_id" id="user_id">
                     <div class="form-group">
                         <label class="form-label" for="nm_terlapor">Nama Terlapor</label>
                         <div class="form-control-wrap">

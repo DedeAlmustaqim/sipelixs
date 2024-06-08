@@ -23,7 +23,6 @@
                                 <th scope="col" width="15%">Nama Pelapor</th>
                                 <th scope="col" width="15%">Terlapor</th>
                                 <th scope="col" width="20%">Catatan</th>
-                                <th scope="col" width="15%">Petugas</th>
                                 <th scope="col">Lampiran Pelapor</th>
                                 <th scope="col" width="15%">Dibuat pada</th>
                                 <th scope="col">Status</th>

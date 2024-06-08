@@ -64,16 +64,11 @@ $('#formRegister').on('submit', function (e) {
                 if (data.name) {
                     NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.name + '</p>', 'error');
                 }
-                if (data.nik) {
-                    NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.nik + '</p>', 'error');
-                }
-
+                
                 if (data.no_hp) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.no_hp + '</p>', 'error');
                 }
-                if (data.email) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.email + '</p>', 'error');
-                }
+               
                 if (data.alamat) {
                     NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.alamat + '</p>', 'error');
                 }
@@ -84,9 +79,16 @@ $('#formRegister').on('submit', function (e) {
                 }
             } else if (data.success == true) {
 
-                Swal.fire('Pendaftaran Berhasil', '', 'success');
-                var decodedEmail = atob(encodedEmail);
-                window.location.href = BASE_URL + '/register/verifikasi/' + decodedEmail
+                if (data.success === true) {
+                    Swal.fire('Pendaftaran Berhasil', '', 'success').then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to verification page with the encoded phone number
+                            window.location.href = BASE_URL + '/register/verifikasi/' + data.no_hp;
+                        }
+                    });
+                } else {
+                    Swal.fire('Pendaftaran Gagal', '', 'error');
+                }
             }
 
         },
@@ -133,6 +135,7 @@ $('#reportForm').on('submit', function (e) {
             } else if (data.success == true) {
 
                 Swal.fire('Laporan Anda telah dibuat', '', 'success');
+                $('#formOTP')[0].reset();
                 $('#reportTable').DataTable().ajax.reload(null, false);
                 $('#modalReport').modal('hide');
 
@@ -143,6 +146,35 @@ $('#reportForm').on('submit', function (e) {
     })
     return false;
 });
+
+$('#formOTP').on('submit', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    var postData = new FormData(this);
+    $.ajax({
+        type: "POST",
+        url: BASE_URL + "otp",
+        processData: false,
+        contentType: false,
+        data: postData,
+        dataType: "JSON",
+        success: function (data) {
+            if (data.success) {
+                Swal.fire('Berhasil Verifikasi', '', 'success').then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = BASE_URL + '/login';
+                    }
+                });
+            } else {
+                Swal.fire('Verifikasi Gagal', 'Kode OTP Salah', 'warning');
+            }
+        },
+        error: function (xhr, status, error) {
+            Swal.fire('Pendaftaran Gagal', 'Terjadi kesalahan, silakan coba lagi nanti.', 'error');
+        }
+    });
+});
+
 
 $('#filter_status').change(function () {
 

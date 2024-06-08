@@ -17,17 +17,17 @@
                     <input type="text" data-msg="Isi isian ini" class="form-control form-control-lg" name="name" id="name" placeholder="Masukkan Nama" required maxlength="50">
                 </div>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label" for="name">NIK</label>
                 <div class="form-control-wrap">
                     <input type="text" data-msg="Isi isian ini" class="form-control form-control-lg" name="nik" id="nik" placeholder="Masukkan NIK" required maxlength="16" minlength="16" inputmode="numeric" pattern="\d*">
                 </div>
-            </div>
-            <script>
+            </div> -->
+            <!-- <script>
                 document.getElementById('nik').addEventListener('input', function(e) {
                     this.value = this.value.replace(/\D/g, ''); // Remove any non-numeric characters
                 });
-            </script>
+            </script> -->
             <div class="form-group">
                 <label class="form-label" for="name">Alamat</label>
                 <div class="form-control-wrap">
@@ -35,17 +35,18 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="form-label" for="name">NO. Telp/HP/WA</label>
+                <label class="form-label" for="name">NO. WA</label>
                 <div class="form-control-wrap">
                     <input type="text" data-msg="Isi isian ini" class="form-control form-control-lg" name="no_hp" id="no_hp" placeholder="Masukkan NIK" required maxlength="12" minlength="11" inputmode="numeric" pattern="\d*">
                 </div>
+                <small>Pastikan Nomor Anda telah terdaftar Whatsapp</small>
             </div>
             <script>
                 document.getElementById('no_hp').addEventListener('input', function(e) {
                     this.value = this.value.replace(/\D/g, ''); // Remove any non-numeric characters
                 });
             </script>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label" for="email">Email</label>
                 <div class="form-control-wrap">
                     <input type="email" data-msg="Isi isian ini" data-msg-email="Isi dengan format email yang benar" class="form-control form-control-lg" id="email" name="email" placeholder="Masukkan Email" required>
@@ -60,7 +61,7 @@
                         this.setCustomValidity('');
                     }
                 });
-            </script>
+            </script> -->
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
                 <div class="form-control-wrap">
