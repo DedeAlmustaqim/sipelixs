@@ -218,7 +218,7 @@ class Auth extends BaseController
 
 
         if ($result) {
-            $msg = 'Masukkan Kode OTP Mama Keyan Sayang ' . $randomNumber.',  Terima Kasih sudah mendaftar SIPELIKS'; // Pesan yang ingin dikirim
+            $msg = 'Masukkan Kode OTP ' . $randomNumber.', \n2\n2  Terima Kasih sudah mendaftar SIPELIKS'; // Pesan yang ingin dikirim
             $encodedNoHp = base64_encode($no_hp);
             $waController->sendMessage($no_hp, $msg);
             // return redirect()->to(base_url('/register/verifikasi/' . $encodedNoHp));

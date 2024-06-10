@@ -58,7 +58,7 @@
                     <div class="col-lg-6">
                         <div class="text-block me-xl-5">
                         
-                            <h2 class="title"> <img src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo" width="40"> <span class="text-primary">SIKON</span><br>
+                            <h2 class="title"> <img src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo" width="40"> <span class="text-primary">SIPELIKS</span><br>
                              </h2>
                              <h5 class="title">Sistem Informasi Pelaporan Konflik Sosial<br> Kabupaten Barito Timur</h5>
                             <div class="review review-s3">
