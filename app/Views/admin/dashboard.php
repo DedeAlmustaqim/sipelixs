@@ -54,7 +54,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="flex-item">
                                 <div class="text-white d-flex flex-wrap">
-                                    <span class="fs-2 me-1"><?= $proses ?> Laporan</span>
+                                    <span class="fs-2 me-1"><?= $blm ?> Laporan</span>
                                 </div>
                                 <h6 class="text-white">Belum ditanggapi</h6>
                             </div>

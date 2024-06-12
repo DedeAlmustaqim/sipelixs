@@ -57,21 +57,15 @@
 
 
                     <div class="row g-3 align-center">
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <label class="form-label">Catatan</label>
-                                <!-- <span class="form-note">Optional</span> -->
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="site-name">Catatan Petugas</label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-10">
-                            <div class="form-group">
-                                <div class="card">
-                                    <div class="card-inner">
-                                        <!-- Create the editor container -->
-                                        <div class="quill-minimal" id="editor_respond">
-
-                                        </div>
-                                        <textarea hidden id="catatan_petugas" name="catatan_petugas"></textarea>
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <div class="form-control-wrap">
+                                        <textarea class="form-control" id="catatan_petugas" name="catatan_petugas"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -93,9 +87,6 @@
                                 <label class="custom-control-label" for="status_reply">Tandai Selesai</label>
                             </div>
                         </div>
-
-                    </div>
-
                     <div class="form-group float-end">
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
                         <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Batal</button>
@@ -136,7 +127,7 @@
             <div class="modal-body">
                 <div id="showReply"></div>
             </div>
-            
+
         </div>
     </div>
 </div>

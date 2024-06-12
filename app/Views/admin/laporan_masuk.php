@@ -91,24 +91,18 @@
                     <div class="row g-3 align-center">
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label class="form-label">Catatan</label>
-                                <!-- <span class="form-note">Optional</span> -->
+                                <label class="form-label" for="site-name">Catatan Petugas</label>
                             </div>
                         </div>
                         <div class="col-lg-10">
                             <div class="form-group">
-                                <div class="card">
-                                    <div class="card-inner">
-                                        <!-- Create the editor container -->
-                                        <div class="quill-minimal" id="editor">
-
-                                        </div>
-                                        <textarea hidden id="catatan_forward" name="catatan_forward"></textarea>
-                                    </div>
+                                <div class="form-control-wrap">
+                                <textarea class="form-control" id="catatan_forward" name="catatan_forward"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="form-group float-end">
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>

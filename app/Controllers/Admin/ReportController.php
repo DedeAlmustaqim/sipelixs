@@ -191,14 +191,14 @@ class ReportController extends BaseController
             $unitModel = new UnitModel();
             $unit = $unitModel->where('id', $admin['id_unit'])->first();
 
-            
-            // // Pesan untuk admin
-            $adminMessage = 'Laporan Konflik telah diteruskan kepada Anda\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Deskripsi Laporan : ' . $laporan['deskripsi'] . '\n2Login ke Akun Anda untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
 
-            $wa->sendMessage($user['no_hp'], $adminMessage);
+            // // Pesan untuk admin
+            $skpdMessage = 'Laporan Konflik telah diteruskan kepada Anda\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Deskripsi Laporan : ' . $laporan['deskripsi'] . '\n2Catatan Admin : ' . $catatan . '\n2Login ke Akun Anda untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+
+            $wa->sendMessage($admin['no_hp'], $skpdMessage);
 
             // // Pesan untuk user
-            $userMessage = 'Laporan anda telah diteruskan kepada ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+            $userMessage = 'Laporan anda telah diteruskan kepada ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Catatan Admin : ' . $catatan . '\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
 
             $wa->sendMessage($user['no_hp'], $userMessage);
 
@@ -419,7 +419,7 @@ class ReportController extends BaseController
                 $statusProgress = "Selesai";
             }
             // // Pesan untuk user
-            $userMessage = 'Laporan anda telah ditanggapi oleh ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Status laporan : '.$statusProgress.'\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+            $userMessage = 'Laporan anda telah ditanggapi oleh ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Status laporan : ' . $statusProgress . '\n2 Catatan Petugas : '.$catatan.'\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
 
             $wa->sendMessage($user['no_hp'], $userMessage);
             $respond = [

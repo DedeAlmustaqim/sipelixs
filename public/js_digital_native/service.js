@@ -135,7 +135,7 @@ $('#reportForm').on('submit', function (e) {
             } else if (data.success == true) {
 
                 Swal.fire('Laporan Anda telah dibuat', '', 'success');
-                $('#formOTP')[0].reset();
+       
                 $('#reportTable').DataTable().ajax.reload(null, false);
                 $('#modalReport').modal('hide');
 

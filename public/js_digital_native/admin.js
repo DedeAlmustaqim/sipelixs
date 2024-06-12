@@ -27,48 +27,21 @@ $(document).ready(function () {
         }
     });
 
-    const quillRespond = new Quill('#editor_respond', {
-        theme: 'snow'
-    });
-
-    quillRespond.on('text-change', (delta, oldDelta, source) => {
-        if (source == 'user') {
-            // Get the current HTML content
-            const currentHtml = quillRespond.root.innerHTML;
-
-            // Update the output
-            document.getElementById('catatan_petugas').textContent = currentHtml;
-            console.log(currentHtml)
-        }
-    });
+   
 
 
 });
 
 function catatan(selectedUnit, selectedPetugas) {
 
-    const quill = new Quill('#editor', {
-        theme: 'snow'
-    });
+  
     // HTML content
-    const html = `
-        <p>Diteruskan Kepada Petugas <strong> `+ selectedPetugas + ` </strong>Unit Kerja ` + selectedUnit + ` </p>
-        `;
+    const html = `Diteruskan Kepada Petugas  `+ selectedPetugas + ` Unit Kerja ` + selectedUnit + ``;
 
     // Set the initial content
-    quill.clipboard.dangerouslyPasteHTML(html);
+
     document.getElementById('catatan_forward').textContent = html;
-    quill.on('text-change', (delta, oldDelta, source) => {
-        if (source == 'user') {
-            // Get the current HTML content
-            const currentHtml = quill.root.innerHTML;
-
-            // Update the output
-            document.getElementById('catatan_forward').textContent = currentHtml;
-            console.log(currentHtml)
-        }
-    });
-
+  
 
 }
 

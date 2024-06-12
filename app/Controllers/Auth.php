@@ -249,7 +249,7 @@ class Auth extends BaseController
         // $user = $model->where('email', $email)->first();
 
         $data = [
-            'title' => 'Verifikasi Email',
+            'title' => 'Verifikasi Kode OTP',
             'noHp' => $noHp
             // You can pass the user data if you retrieved it
         ];

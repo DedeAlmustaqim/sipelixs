@@ -150,7 +150,7 @@
             </div>
             <div class="modal-body">
                 <form id="reportForm" method="POST" class="form-validate is-alter gy-3">
-                    <input type="text"  value="<?= session('id')?>" name="user_id" id="user_id">
+                    <input type="text" hidden  value="<?= session('id')?>" name="user_id" id="user_id">
                     <div class="form-group">
                         <label class="form-label" for="nm_terlapor">Nama Terlapor</label>
                         <div class="form-control-wrap">

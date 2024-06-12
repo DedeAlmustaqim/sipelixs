@@ -185,7 +185,7 @@ class ReportController extends BaseController
             $admin = $adminModel->where('id_akses', 1)->findAll();
             
             // Pesan untuk admin
-            $adminMessage = 'Pelapor telah membuat Laporan\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $nm_terlapor . '\n2Deskripsi Laporan : ' . $deskripsi . '\n2Login ke Akun Administrator untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+            $adminMessage = 'Pelapor telah membuat Laporan\n2Nama Pelapor : ' . $user['name'] . '\n2Nama Terlapor : ' . $nm_terlapor . '\n2Deskripsi Laporan : ' . $deskripsi . '\n2 Login ke Akun Administrator untuk menanggapi\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
             
             foreach ($admin as $a) {
                 $wa->sendMessage($a['no_hp'], $adminMessage);
