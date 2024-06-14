@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
-        'database'     => 'db_sikon',
+        'username'     => 'root_konflik',
+        'password'     => 'Pasarpanaskm14',
+        'database'     => 'dbsipelixs',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
         'pConnect'     => false,

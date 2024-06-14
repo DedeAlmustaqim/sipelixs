@@ -4,7 +4,7 @@
 <head>
 <base href=".<?php echo base_url() ?>">
     <meta charset="utf-8">
-    <meta name="author" content="SIPELIKS">
+    <meta name="author" content="SIPELIXS">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Sistem Informasi Pelaporan Konflik Sosial Kabupaten Barito Timur">
     <!-- Fav Icon  -->
@@ -30,7 +30,7 @@
                                 <img class="logo-light logo-img logo-img-lg" src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo">
                                 <img class="logo-dark logo-img logo-img-lg" src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo-dark">
                             </a>
-                            <h3>SIPELIKS</h3>
+                            <h3>SIPELIXS</h3>
                             <h6>Sistem Informasi Pelaporan Konflik Sosial</h6>
                             <h6>Kabupaten Barito Timur</h6>
                         </div>
@@ -57,7 +57,7 @@
                                 <div class="col-lg-6">
                                     <div class="nk-block-content text-center text-lg-left">
                         
-                                        <p class="text-soft"> &copy; 2024 Digital Native by <a href="https://wa.me/085248457510?text= " target="_blank">Dede Almustaqim</a></p>
+                                        <p class="text-soft"> &copy; 2024 Digital Native <a href="https://wa.me/085248457510?text= " target="_blank"></a></p>
 
                                     </div>
                                 </div>

@@ -50,21 +50,23 @@
                 <div class="header-content my-auto py-5">
                 <div class="container">
                 <div class="row align-items-center justify-content-lg-between g-gs">
-                    <div class="col-lg-5">
+                    <div class="col-lg-7">
                         <div class="img-block img-block-s1 left">
-                            <img src="<?php echo base_url() ?>/public/images/welcome.jpg" alt="img">
+                            <img src="<?php echo base_url() ?>/public/images/welcome.jpg" alt="img" width="800" height="500">
+
+
                         </div><!-- .img-block -->
                     </div><!-- .col -->
-                    <div class="col-lg-6">
-                        <div class="text-block me-xl-5">
-                        
-                            <h2 class="title"> <img src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo" width="40"> <span class="text-primary">SIPELIKS</span><br>
+                    <div class="col-lg-4">
+                        <div class="text-block me-xl-3" style="text-align: center;">
+                        <img src="<?php echo base_url() ?>/public/images/sipelixs2.png" alt="img" width="300" height="150">
+                            <h2 class="title"> <img src="<?php echo base_url() ?>public/images/bartim.png"  alt="logo" width="40"> <span class="text-primary">SIPELIXS</span><br>
                              </h2>
-                             <h5 class="title">Sistem Informasi Pelaporan Konflik Sosial<br> Kabupaten Barito Timur</h5>
+                             <h6 class="title">Sistem Informasi Pelaporan Konflik Sosial<br> Kabupaten Barito Timur</h6>
                             <div class="review review-s3">
                                 <div class="review-content">
                                     
-                                    <div class="review-text">
+                                    <div class="review-text" style="text-align: left;">
                                         <p>Laporkan Konflik Sosial secara Online </p>
                                         <h6 class="review-name text-dark">KESBANGPOL KABUPATEN BARITO TIMUR</h6>
                                     </div>

@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index(): string
     {
         $data=[
-            'title'=>'SIKON'
+            'title'=>'SIPELIXS BARTIM'
         ];
         return view('welcome_message', $data);
     }

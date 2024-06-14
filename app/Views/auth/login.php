@@ -7,7 +7,7 @@
             <div class="nk-block-head-content">
                 <h4 class="nk-block-title">Login</h4>
                 <div class="nk-block-des">
-                    <p>Akses panel SIPELIKS menggunakan No WA dan kata sandi Anda</p>
+                    <p>Akses panel SIPELIXS menggunakan No. WA dan kata sandi</p>
                 </div>
             </div>
         </div>
@@ -22,8 +22,8 @@
             </div>
             <div class="form-group">
                 <div class="form-label-group">
-                    <label class="form-label" for="password">Password</label>
-                    <a class="link link-primary link-sm" href="html/pages/auths/auth-reset-v2.html">Lupa Password?</a>
+                    <label class="form-label" for="password">Kata Sandi</label>
+                    <a class="link link-primary link-sm" href="html/pages/auths/auth-reset-v2.html">Lupa Kata Sandi?</a>
                 </div>
                 <div class="form-control-wrap">
                     <a href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
