@@ -74,7 +74,7 @@
                             <label class="form-label" for="customFileLabel">Lampiran</label>
                             <div class="form-control-wrap">
                                 <div class="form-file">
-                                    <input type="file" class="form-file-input" id="lampiran_petugas" name="lampiran_petugas" required data-msg="Isi isian ini">
+                                    <input type="file" class="form-file-input" id="lampiran_petugas" name="lampiran_petugas" >
                                     <label class="form-file-label" for="lampiran_petugas">Pilih File</label>
                                 </div>
                             </div>

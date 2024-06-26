@@ -23,6 +23,7 @@
                                 <th scope="col" width="15%">Nama Pelapor</th>
                                 <th scope="col" width="15%">Terlapor</th>
                                 <th scope="col" width="20%">Deskripsi</th>
+                                <th scope="col" width="20%">Kategori</th>
                                 <th scope="col">Lampiran Pelapor</th>
                                 <th scope="col" width="12%">Dibuat pada</th>
                                 <th scope="col">Status</th>

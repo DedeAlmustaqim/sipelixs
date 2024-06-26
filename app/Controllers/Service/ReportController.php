@@ -43,6 +43,18 @@ class ReportController extends BaseController
 
         return DataTable::of($builder)->toJson();
     }
+    public function getKategori()
+    {
+        $db = db_connect();
+        $data = $db->table('tbl_kategori')->get()->getResult();
+        if ($data) {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_OK)
+                ->setJSON($data);
+        } else {
+            return $this->response->setStatusCode(ResponseInterface::HTTP_NOT_FOUND)
+                ->setJSON(['message' => 'Not found']);
+        }
+    }
 
     public function store()
     {
@@ -55,6 +67,7 @@ class ReportController extends BaseController
 
         $request = \Config\Services::request();
         $id = $request->getVar('user_id');
+        $kategori = $request->getVar('id_kategori');
         $nm_terlapor = $request->getVar('nm_terlapor');
         $id_kec = $request->getVar('id_kec');
         $id_desa = $request->getVar('id_desa');
@@ -68,6 +81,14 @@ class ReportController extends BaseController
                 'errors' => [
                     'required' => 'User ID wajib diisi.',
                     'integer' => 'User ID harus berupa angka.',
+                ]
+            ],
+            'id_kategori' => [
+                'label' => 'kategori',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kategori wajib diisi.',
+                    
                 ]
             ],
             'nm_terlapor' => [
@@ -166,6 +187,7 @@ class ReportController extends BaseController
         $data = [
             'user_id' => $id,
             'nm_terlapor' => $nm_terlapor,
+            'id_kategori' => $kategori,
             'id_kec' => $id_kec,
             'id_desa' => $id_desa,
             'alamat' => $alamat,
@@ -267,13 +289,15 @@ class ReportController extends BaseController
         desa.nm_desa, 
         tbl_admin.nama as petugas, 
         tbl_unit.nm_unit,
-	    tbl_admin.nip')
+	    tbl_admin.nip,
+        tbl_kategori.kategori,')
             ->join('users', 'laporan_konflik.user_id = users.id', 'left')
             ->join('tbl_admin', 'laporan_konflik.id_petugas = tbl_admin.id', 'left')
             ->join('status', 'laporan_konflik.`status` = `status`.id', 'left')
             ->join('kecamatan', 'laporan_konflik.id_kec = kecamatan.id', 'left')
             ->join('desa', 'kecamatan.id = desa.id_kec AND laporan_konflik.id_desa = desa.id', 'left')
             ->join('tbl_unit', 'laporan_konflik.id_petugas = tbl_unit.id', 'left')
+            ->join('tbl_kategori', 'laporan_konflik.id_kategori = tbl_kategori.id', 'left')
             ->where('laporan_konflik.id', $id)->get()->getRow();
         if ($data) {
             return $this->response->setStatusCode(ResponseInterface::HTTP_OK)

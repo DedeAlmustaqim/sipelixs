@@ -27,21 +27,37 @@ $(document).ready(function () {
         }
     });
 
-   
 
+    document.getElementById('status_reply').addEventListener('change', function () {
+        const lampiranPetugas = document.getElementById('lampiran_petugas');
+        if (this.checked) {
+            lampiranPetugas.setAttribute('required', 'required');
+        } else {
+            lampiranPetugas.removeAttribute('required');
+        }
+    });
+
+    document.getElementById('formRespondReport').addEventListener('submit', function (event) {
+        const lampiranPetugas = document.getElementById('lampiran_petugas');
+        const statusReply = document.getElementById('status_reply');
+        if (statusReply.checked && !lampiranPetugas.value) {
+            event.preventDefault();
+            NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">Lampiran </p>', 'error');
+        }
+    });
 
 });
 
 function catatan(selectedUnit, selectedPetugas) {
 
-  
+
     // HTML content
-    const html = `Diteruskan Kepada Petugas  `+ selectedPetugas + ` Unit Kerja ` + selectedUnit + ``;
+    const html = `Diteruskan Kepada Petugas  ` + selectedPetugas + ` Unit Kerja ` + selectedUnit + ``;
 
     // Set the initial content
 
     document.getElementById('catatan_forward').textContent = html;
-  
+
 
 }
 
@@ -133,7 +149,12 @@ function showReport() {
                     return '<div class="text-left">' + data[6] + '</div>'
                 }
             },
-
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[18] + '</div>'
+                }
+            },
             {
                 "orderable": false,
                 "data": function (data,) {
@@ -141,6 +162,8 @@ function showReport() {
 
                 }
             },
+
+
             {
                 "orderable": false,
                 "data": function (data) {
@@ -469,7 +492,7 @@ function showMonitoringSkpd() {
                     return '<div class="text-left">' + data[6] + '</div>'
                 }
             },
-         
+
             {
                 "orderable": false,
                 "data": function (data,) {
@@ -694,7 +717,11 @@ function showDetailReport(elem) {
             <tr >
             <td class="bg-dark text-white" colspan="2" class="text-center"><h6>Laporan</h6></td>
             </tr>
-
+            <tr>
+            <td>Kategori</td>
+            <td>`+ data.kategori + `</td>
+            </tr>
+            <tr>
             <tr>
             <td>Deskripsi</td>
             <td>`+ data.deskripsi + `</td>
@@ -796,7 +823,7 @@ $('#formRespondReport').on('submit', function (e) {
 
                 Swal.fire('Berhasil', 'Laporan telah diteruskan', 'success');
                 showReportSkpd()
-               
+
                 $('#modalRespondReport').modal('hide')
             }
         },

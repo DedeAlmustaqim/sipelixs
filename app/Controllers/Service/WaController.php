@@ -9,7 +9,7 @@ class WaController extends BaseController
 {
     public function sendMessage($noHp, $msg)
     {
-        $token = "SQlSw9wGPfD21XmERL9t6cBO3xys2niwWjvJyJ99qA4RZp4HkCelXwERdCwjifrd"; // Isi token Anda di sini
+        $token = "38LBXy0FwWWH2QhqDSdicDaKUgDAu2EMjiLr4md2yOgx8EdagZ6BD4kt8g9GDx4q"; // Isi token Anda di sini
         $phone = $noHp; // Ganti dengan nomor telepon tujuan
         $message = urlencode($msg);
 
@@ -40,7 +40,7 @@ class WaController extends BaseController
     public function sendOtp($noHp, $otp)
     {
         $curl = curl_init();
-        $token = "SQlSw9wGPfD21XmERL9t6cBO3xys2niwWjvJyJ99qA4RZp4HkCelXwERdCwjifrd"; // Isi token Anda di sini
+        $token = "38LBXy0FwWWH2QhqDSdicDaKUgDAu2EMjiLr4md2yOgx8EdagZ6BD4kt8g9GDx4q"; // Isi token Anda di sini
         $code_otp = $otp;
         $phone = $noHp;
         $encodNoHp = base64_encode($noHp);
@@ -91,7 +91,7 @@ class WaController extends BaseController
     function sendDocument($phone, $doc)
     {
         $curl = curl_init();
-        $token = "SQlSw9wGPfD21XmERL9t6cBO3xys2niwWjvJyJ99qA4RZp4HkCelXwERdCwjifrd"; // Isi token Anda di sini
+        $token = "38LBXy0FwWWH2QhqDSdicDaKUgDAu2EMjiLr4md2yOgx8EdagZ6BD4kt8g9GDx4q"; // Isi token Anda di sini
         $data = [
             'phone' => $phone,
             'document' => $doc,

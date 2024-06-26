@@ -24,6 +24,16 @@ $(document).ready(function () {
             });
         }
     });
+
+    $.ajax({
+        url: BASE_URL + 'service/get_kategori',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (index, item) {
+                $('#id_kategori').append('<option value="' + item.id + '">' + item.kategori + '</option>');
+            });
+        }
+    });
 });
 
 
@@ -98,54 +108,48 @@ $('#formRegister').on('submit', function (e) {
 });
 
 $('#reportForm').on('submit', function (e) {
+    e.preventDefault(); // Mencegah submit default
+
+    var $submitBtn = $(this).find('button[type="submit"]');
+    var $progressIndicator = $('#progressIndicator');
+
+    $submitBtn.prop('disabled', true); // Disable tombol submit
+    $progressIndicator.show(); // Tampilkan progress indicator
+
     var postData = new FormData($("#reportForm")[0]);
     $.ajax({
         type: "post",
-        "url": BASE_URL + "service/report/user",
+        url: BASE_URL + "service/report/user",
         processData: false,
         contentType: false,
         data: postData,
         dataType: "JSON",
         success: function (data) {
-
-
             if (data.success == false) {
                 toastr.clear();
-                if (data.user_id) {
-                    NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.user_iduser_id + '</p>', 'error');
-                }
-                if (data.nm_terlapor) {
-                    NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data.nm_terlapor + '</p>', 'error');
-                }
-
-                if (data.id_kec) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.id_kec + '</p>', 'error');
-                }
-                if (data.id_desa) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.id_desa + '</p>', 'error');
-                }
-                if (data.alamat) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.alamat + '</p>', 'error');
-                }
-                if (data.deskripsi) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.deskripsi + '</p>', 'error');
-                } if (data.lampiran) {
-                    NioApp.Toast('<h5>Gagal Tambah Data</h5><p class="text-danger">' + data.lampiran + '</p>', 'error');
-                }
+                var fields = ['user_id', 'nm_terlapor', 'id_kec', 'id_desa', 'alamat', 'deskripsi', 'lampiran'];
+                fields.forEach(function (field) {
+                    if (data[field]) {
+                        NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + data[field] + '</p>', 'error');
+                    }
+                });
             } else if (data.success == true) {
-
                 Swal.fire('Laporan Anda telah dibuat', '', 'success');
-       
                 $('#reportTable').DataTable().ajax.reload(null, false);
                 $('#modalReport').modal('hide');
-
             }
-
         },
-
-    })
-    return false;
+        error: function (xhr, status, error) {
+            // Menangani kesalahan
+            NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">' + error + '</p>', 'error');
+        },
+        complete: function () {
+            $submitBtn.prop('disabled', false); // Enable kembali tombol submit
+            $progressIndicator.hide(); // Sembunyikan progress indicator
+        }
+    });
 });
+
 
 $('#formOTP').on('submit', function (e) {
     e.preventDefault(); // Prevent the default form submission

@@ -152,6 +152,17 @@
                 <form id="reportForm" method="POST" class="form-validate is-alter gy-3">
                     <input type="text" hidden  value="<?= session('id')?>" name="user_id" id="user_id">
                     <div class="form-group">
+                        <label class="form-label" for="id_kec">Kategori Laporan</label>
+                        <div class="form-control-wrap ">
+                            <div class="form-control-select">
+                                <select class="form-control" id="id_kategori" name="id_kategori" required data-msg="Isi isian ini">
+                                    <option value="">Pilih Kategori</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label" for="nm_terlapor">Nama Terlapor</label>
                         <div class="form-control-wrap">
                             <input type="text" class="form-control" id="nm_terlapor" name="nm_terlapor" required data-msg="Isi isian ini">

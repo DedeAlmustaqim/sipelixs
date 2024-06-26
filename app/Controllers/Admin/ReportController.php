@@ -44,13 +44,14 @@ class ReportController extends BaseController
         desa.nm_desa,
         status.ket,
         status.class,
-        laporan_konflik.id_petugas
+        laporan_konflik.id_petugas, tbl_kategori.kategori
        
         ')
             ->where('laporan_konflik.`status`', 1)
             ->join('users', 'laporan_konflik.user_id = users.id', 'left')
             ->join('status', 'laporan_konflik.status = status.id', 'left')
             ->join('kecamatan', 'laporan_konflik.id_kec = kecamatan.id', 'left')
+            ->join('tbl_kategori', 'laporan_konflik.id_kategori = tbl_kategori.id', 'left')
             ->join('desa', 'kecamatan.id = desa.id_kec AND laporan_konflik.id_desa = desa.id', 'left')
             ->orderBy('laporan_konflik.created_at', 'DESC');
 
@@ -300,139 +301,136 @@ class ReportController extends BaseController
     }
 
     public function respondReport()
-    {
-        helper(['form', 'url']);
-        $db = db_connect();
-        $wa = new WaController();
-        $model = new ReportModel();
+{
+    helper(['form', 'url']);
+    $db = db_connect();
+    $wa = new WaController();
+    $model = new ReportModel();
 
-        $request = \Config\Services::request();
-        $id = $request->getVar('id_konflik_respond');
-        $catatan = $request->getVar('catatan_petugas');
-        $status = $request->getVar('status_reply');
-        $lampiran = $request->getFile('lampiran_petugas');
+    $request = \Config\Services::request();
+    $id = $request->getVar('id_konflik_respond');
+    $catatan = $request->getVar('catatan_petugas');
+    $status = $request->getVar('status_reply');
+    $lampiran = $request->getFile('lampiran_petugas');
 
-        $validationRules = [
-            'id_konflik_respond' => [
-                'label' => 'User ID',
-                'rules' => 'required|integer',
-                'errors' => [
-                    'required' => 'ID wajib diisi.',
-                    'integer' => 'ID harus berupa angka.',
-                ]
-            ],
-            'catatan_petugas' => [
-                'label' => 'Catatan',
-                'rules' => 'required|max_length[1000]',
-                'errors' => [
-                    'required' => 'Catatan wajib diisi.',
-                    'max_length' => 'Catatan tidak boleh lebih dari 1000 karakter.',
-                ]
-            ],
+    // Tentukan aturan validasi berdasarkan status_reply
+    $validationRules = [
+        'id_konflik_respond' => [
+            'label' => 'User ID',
+            'rules' => 'required|integer',
+            'errors' => [
+                'required' => 'ID wajib diisi.',
+                'integer' => 'ID harus berupa angka.',
+            ]
+        ],
+        'catatan_petugas' => [
+            'label' => 'Catatan',
+            'rules' => 'required|max_length[1000]',
+            'errors' => [
+                'required' => 'Catatan wajib diisi.',
+                'max_length' => 'Catatan tidak boleh lebih dari 1000 karakter.',
+            ]
+        ]
+    ];
 
-            'lampiran_petugas' => [
-                'label' => 'Lampiran',
-                'rules' => 'uploaded[lampiran_petugas]|max_size[lampiran_petugas,10240]|mime_in[lampiran_petugas,image/jpg,image/jpeg,image/png,application/pdf]',
-                'errors' => [
-                    'uploaded' => 'Lampiran harus diunggah.',
-                    'max_size' => 'Ukuran Lampiran tidak boleh lebih dari 10MB.',
-                    'mime_in' => 'Lampiran harus berupa file dengan ekstensi jpg, jpeg, png, atau pdf.',
-                ]
+    // Tambahkan aturan validasi untuk lampiran_petugas jika status_reply = 3
+    if ($status == 3) {
+        $validationRules['lampiran_petugas'] = [
+            'label' => 'Lampiran',
+            'rules' => 'uploaded[lampiran_petugas]|max_size[lampiran_petugas,10240]|mime_in[lampiran_petugas,image/jpg,image/jpeg,image/png,application/pdf]',
+            'errors' => [
+                'uploaded' => 'Lampiran harus diunggah.',
+                'max_size' => 'Ukuran Lampiran tidak boleh lebih dari 10MB.',
+                'mime_in' => 'Lampiran harus berupa file dengan ekstensi jpg, jpeg, png, atau pdf.',
+            ]
+        ];
+    }
+
+    // Validasi input
+    if (!$this->validate($validationRules)) {
+        $respond = [
+            'success' => false,
+            'errors' => [
+                'id_konflik_respond' => \Config\Services::validation()->getError('id_konflik_respond'),
+                'catatan_petugas' => \Config\Services::validation()->getError('catatan_petugas'),
+                'status_reply' => \Config\Services::validation()->getError('status_reply'),
+                'lampiran_petugas' => \Config\Services::validation()->getError('lampiran_petugas'),
             ],
         ];
-
-        // Validasi input
-        if (!$this->validate($validationRules)) {
-            $respond = [
-                'success' => false,
-                'errors' => [
-                    'id_konflik_respond' => \Config\Services::validation()->getError('id_konflik_respond'),
-                    'catatan_petugas' => \Config\Services::validation()->getError('catatan_petugas'),
-                    'status_reply' => \Config\Services::validation()->getError('status_reply'),
-                    'lampiran_petugas' => \Config\Services::validation()->getError('lampiran_petugas'),
-                ],
-            ];
-            return $this->response->setJSON($respond);
-        }
-
-        // Proses file lampiran
-        if ($lampiran->isValid() && !$lampiran->hasMoved()) {
-            $title = date('Y-m-d_H-i-s'); // Ganti spasi dengan underscore dan hapus titik dua
-            $fileBaseName = $title;
-            $dname = explode(".", $lampiran->getClientName());
-            $ext = end($dname);
-            $newFileName = $fileBaseName . '.' . $ext;
-            $lampiran->move(ROOTPATH . 'public/lampiran/petugas/', $newFileName);
-
-            $imgPath = base_url() . 'public/lampiran/petugas/' . $newFileName;
-        } else {
-            // Handle error if file cannot be moved
-            $respond = [
-                'success' => false,
-                'message' => 'Lampiran tidak valid atau tidak dapat dipindahkan.',
-            ];
-            return $this->response->setJSON($respond);
-        }
-
-        // Simpan data ke database
-        $db = \Config\Database::connect();
-        $builder = $db->table('reply_konflik');
-
-        if ($status == false) {
-            $statusValue = 2;
-        } else if ($status == true) {
-            $statusValue = 3;
-        }
-        // Pastikan tidak ada duplikat berdasarkan title
-        $data = [
-            'id_konflik' => $id,
-            'catatan_petugas' => $catatan,
-            'id_admin' => session('id'),
-            'lampiran_petugas' => $imgPath,
-            'status_reply' => $statusValue,
-        ];
-        $data2 = [
-            'status' => $statusValue,
-
-        ];
-
-        $db->table('laporan_konflik')->where('id', $id)->update($data2);
-        $result = $builder->insert($data);
-
-        if ($result) {
-            $adminModel = new AdminModel();
-            $admin = $adminModel->where('id', session('id'))->first();
-
-            $laporanModel = new LaporanModel();
-            $laporan = $laporanModel->where('id', $id)->first();
-
-            $userModel = new UserModel();
-            $user = $userModel->where('id', $laporan['user_id'])->first();
-
-            $unitModel = new UnitModel();
-            $unit = $unitModel->where('id', $admin['id_unit'])->first();
-
-
-            if ($status == false) {
-                $statusProgress = "Dalam Proses";
-            } else if ($status == true) {
-                $statusProgress = "Selesai";
-            }
-            // // Pesan untuk user
-            $userMessage = 'Laporan anda telah ditanggapi oleh ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Status laporan : ' . $statusProgress . '\n2 Catatan Petugas : '.$catatan.'\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
-
-            $wa->sendMessage($user['no_hp'], $userMessage);
-            $respond = [
-                'success' => true,
-            ];
-        } else {
-            $respond = [
-                'success' => false,
-                'message' => 'Gagal menyimpan data.',
-            ];
-        }
         return $this->response->setJSON($respond);
     }
+
+    // Proses file lampiran jika diunggah
+    $imgPath = null;
+    if ($lampiran && $lampiran->isValid() && !$lampiran->hasMoved()) {
+        $title = date('Y-m-d_H-i-s'); // Ganti spasi dengan underscore dan hapus titik dua
+        $fileBaseName = $title;
+        $dname = explode(".", $lampiran->getClientName());
+        $ext = end($dname);
+        $newFileName = $fileBaseName . '.' . $ext;
+        $lampiran->move(ROOTPATH . 'public/lampiran/petugas/', $newFileName);
+        $imgPath = base_url() . 'public/lampiran/petugas/' . $newFileName;
+    } elseif ($status == 3) {
+        // Handle error if file cannot be moved
+        $respond = [
+            'success' => false,
+            'message' => 'Lampiran tidak valid atau tidak dapat dipindahkan.',
+        ];
+        return $this->response->setJSON($respond);
+    }
+
+    // Simpan data ke database
+    $db = \Config\Database::connect();
+    $builder = $db->table('reply_konflik');
+
+    $statusValue = ($status == 3) ? 3 : 2;
+
+    // Pastikan tidak ada duplikat berdasarkan title
+    $data = [
+        'id_konflik' => $id,
+        'catatan_petugas' => $catatan,
+        'id_admin' => session('id'),
+        'lampiran_petugas' => $imgPath,
+        'status_reply' => $statusValue,
+    ];
+    $data2 = [
+        'status' => $statusValue,
+    ];
+
+    $db->table('laporan_konflik')->where('id', $id)->update($data2);
+    $result = $builder->insert($data);
+
+    if ($result) {
+        $adminModel = new AdminModel();
+        $admin = $adminModel->where('id', session('id'))->first();
+
+        $laporanModel = new LaporanModel();
+        $laporan = $laporanModel->where('id', $id)->first();
+
+        $userModel = new UserModel();
+        $user = $userModel->where('id', $laporan['user_id'])->first();
+
+        $unitModel = new UnitModel();
+        $unit = $unitModel->where('id', $admin['id_unit'])->first();
+
+        $statusProgress = ($status == 3) ? "Selesai" : "Dalam Proses";
+        
+        // Pesan untuk user
+        $userMessage = 'Laporan anda telah ditanggapi oleh ' . $admin['nama'] . '\n2Unit Kerja : ' . $unit['nm_unit'] . '\n2Nama Terlapor : ' . $laporan['nm_terlapor'] . '\n2Status laporan : ' . $statusProgress . '\n2 Catatan Petugas : '.$catatan.'\n2Login ke Akun Anda untuk melihat riwayat tanggapan\n2\n2SIPELIKS ' . date('Y-m-d H:i:s');
+
+        $wa->sendMessage($user['no_hp'], $userMessage);
+        $respond = [
+            'success' => true,
+        ];
+    } else {
+        $respond = [
+            'success' => false,
+            'message' => 'Gagal menyimpan data.',
+        ];
+    }
+    return $this->response->setJSON($respond);
+}
+
 
     public function successReport()
     {
@@ -462,7 +460,8 @@ class ReportController extends BaseController
         desa.nm_desa,
         status.ket,
         status.class,
-        tbl_admin.nama
+        tbl_admin.nama,
+        tbl_kategori.kategori
        
         ')
             ->whereNotIn('laporan_konflik.`status`', [1, 2])
@@ -471,6 +470,7 @@ class ReportController extends BaseController
             ->join('tbl_admin', 'laporan_konflik.id_petugas = tbl_admin.id', 'left')
             ->join('status', 'laporan_konflik.status = status.id', 'left')
             ->join('kecamatan', 'laporan_konflik.id_kec = kecamatan.id', 'left')
+            ->join('tbl_kategori', 'laporan_konflik.id_kategori = tbl_kategori.id', 'left')
             ->join('desa', 'kecamatan.id = desa.id_kec AND laporan_konflik.id_desa = desa.id', 'left')
             ->orderBy('laporan_konflik.created_at', 'DESC');
         return DataTable::of($builder)->toJson();

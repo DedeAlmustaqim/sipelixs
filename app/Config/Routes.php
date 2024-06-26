@@ -21,6 +21,7 @@ $routes->group('dashboard',  function ($routes) {
 });
 
 $routes->group('service',  function ($routes) {
+    $routes->get('get_kategori', 'Service\ReportController::getKategori', ['filter' => 'isAll']);
     $routes->get('get_kecamatan', 'Service\LokasiService::getKecamatanJson/$1', ['filter' => 'isAll']);
     $routes->get('get_desa/(:alphanum)', 'Service\LokasiService::getDesaJson/$1', ['filter' => 'isAll']);
     $routes->post('report/user', 'Service\ReportController::store', ['filter' => 'isAll']);
