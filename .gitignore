@@ -124,3 +124,10 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
+
+# Ignore app/config/app.php
+app/config/app.php
+
+# Ignore app/config/database.php
+app/config/database.php
+
