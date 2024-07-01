@@ -107,7 +107,7 @@
 
                     <div class="form-group float-end">
                         <button type="submit" class="btn btn-lg btn-primary">Simpan</button>
-                        <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Batal</button>
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" >Batal</button>
                     </div>
                 </form>
             </div>

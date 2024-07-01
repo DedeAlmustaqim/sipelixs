@@ -16,6 +16,8 @@ $(document).ready(function () {
     showReportSkpd()
     showMonitoring()
     showMonitoringSkpd()
+    showPengguna()
+    showUnit()
 
     $.ajax({
         url: BASE_URL + 'service/get_unit',
@@ -28,23 +30,9 @@ $(document).ready(function () {
     });
 
 
-    document.getElementById('status_reply').addEventListener('change', function () {
-        const lampiranPetugas = document.getElementById('lampiran_petugas');
-        if (this.checked) {
-            lampiranPetugas.setAttribute('required', 'required');
-        } else {
-            lampiranPetugas.removeAttribute('required');
-        }
-    });
 
-    document.getElementById('formRespondReport').addEventListener('submit', function (event) {
-        const lampiranPetugas = document.getElementById('lampiran_petugas');
-        const statusReply = document.getElementById('status_reply');
-        if (statusReply.checked && !lampiranPetugas.value) {
-            event.preventDefault();
-            NioApp.Toast('<h5>Gagal Simpan Data</h5><p class="text-danger">Lampiran </p>', 'error');
-        }
-    });
+
+
 
 });
 
@@ -377,7 +365,7 @@ function showMonitoring() {
             {
                 "orderable": false,
                 "data": function (data) {
-                    var petugas = data[18] || '<span class="text-danger">Tidak Ada</span>'
+                    var petugas = data[17] || '<span class="text-danger">Tidak Ada</span>'
                     return '<div class="text-left">' + petugas + '</div>'
                 }
             },
@@ -414,6 +402,7 @@ function showMonitoring() {
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showDetailReport(this)">Detail</a></li>'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="forwardReport(this)">Ganti Petugas</a></li>'
                         + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="showReplyTable(this)">Monitoring</a></li>'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" target="_blank" href="' + BASE_URL + 'admin/detail_report/' + data[0] + '">Cetak</a></li>'
                         + '</ul>'
                         + '</div>'
                         + '</div>'
@@ -549,6 +538,259 @@ function forwardReport(elem) {
     });
     $("#id_konflik_forward").val(id)
     $('#modalForwardReport').modal('show')
+}
+
+function showPengguna() {
+    $('#penggunaTableAdmin').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "admin/json_pengguna",
+        },
+        "columns": [
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[1] + '</div>'
+                }
+            },
+
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[3] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[2] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    if (data[4] == 0) {
+                        var status = '<div class="text-warning">Non Aktif</div>'
+                    } else if (data[4] == 1) {
+                        var status = '<div class="text-success">Aktif</div>'
+                    }
+                    return '<div class="text-center">' + status + '</div>'
+                }
+            },
+
+            {
+
+                "orderable": false,
+                "data": function (data,) {
+                    return '<div class="dropdown">'
+                        + '<a href="#" class="btn btn-outline-secondary" data-bs-toggle="dropdown" aria-expanded="false"><span>Aksi</span><em class="icon ni ni-chevron-down"></em></a>'
+                        + '<div class="dropdown-menu  mt-1" style="">'
+                        + '<ul class="link-list-plain">'
+                        + '<li><a style="cursor: pointer;" data-id="' + data[0] + '" onclick="deletePengguna(this)">Hapus</a></li>'
+                        + '</ul>'
+                        + '</div>'
+                        + '</div>'
+                }
+            },
+
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+    });
+}
+
+function showUnit() {
+    $('#unitTableAdmin').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "admin/json_unit",
+        },
+        "columns": [
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[1] + '</div>'
+                }
+            },
+
+
+            {
+
+                "orderable": false,
+                "data": function (data,) {
+                    return `<button onClick="showPetugas(this)"  data-id=` + data[0] + ` class="btn btn-primary btn-sm">Petugas</button>
+                    <button  class="btn btn-secondary btn-sm">Edit</button>
+                    <button  class="btn btn-danger btn-sm">Hapus</button>`
+                }
+            },
+
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+    });
+}
+
+function showPetugasData(id) {
+    $('#PetugasTableAdmin').DataTable({
+        processing: true,
+        serverSide: true,
+        destroy: true,
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bAutoWidth": false,
+        "columnDefs": [{
+            "visible": false,
+        }],
+        "order": [
+            [0, 'asc']
+        ],
+        "language": {
+            "lengthMenu": "Tampilkan _MENU_ item per halaman",
+            "zeroRecords": "Tidak ada data yang ditampilkan",
+            "info": "Menampilkan Halaman _PAGE_ dari _PAGES_",
+            "infoEmpty": "Tidak ada data yang ditampilkan",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search": "Cari",
+            "paginate": {
+                "first": "Awal",
+                "last": "Akhir",
+                "next": ">",
+                "previous": "<"
+            },
+        },
+        "displayLength": 25,
+        "ajax": {
+            "url": BASE_URL + "admin/json_petugas/" + id,
+        },
+        "columns": [
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[0] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[1] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[3] + '</div>'
+                }
+            },
+            {
+                "orderable": false,
+                "data": function (data) {
+                    return '<div class="text-left">' + data[10] + '</div>'
+                }
+            },
+            {
+
+                "orderable": false,
+                "data": function (data,) {
+
+                    return `
+                    <div class="text-center">
+                    <button type="button" class="btn btn-dim btn-sm btn-primary" data-id="' + data[0] + '" onclick="showDetailReport(this)" title="Edit"><em class="icon ni ni-edit-alt"></em></button>&nbsp;
+                    <button type="button" class="btn btn-dim btn-sm btn-primary" data-id="' + data[0] + '" onclick="showDetailReport(this)" title="Hapus"><em class="icon ni ni-trash"></em></button>&nbsp;
+                    <button type="button" class="btn btn-dim btn-sm btn-primary" data-id="' + data[0] + '" onclick="showDetailReport(this)" title="Reset Password"><em class="icon ni ni-unlock"></em></button>&nbsp;
+                    </div>
+                    
+                    `
+                }
+            },
+        ],
+        rowCallback: function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = page * length + (iDisplayIndex + 1);
+            $('td:eq(0)', row).html(index);
+        },
+    });
 }
 
 $('#formForwardReport').on('submit', function (e) {
@@ -830,3 +1072,9 @@ $('#formRespondReport').on('submit', function (e) {
     });
     return false;
 });
+
+function showPetugas(elem) {
+    var id = $(elem).data("id");
+    $('#modalShowPetugas').modal('show');
+    showPetugasData(id)
+}

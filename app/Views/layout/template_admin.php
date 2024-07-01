@@ -135,14 +135,12 @@
                                         </a>
                                         <ul class="nk-menu-sub">
                                             <li class="nk-menu-item">
-                                                <a href="javascript:void(0);" onclick="onProgress(this)" class="nk-menu-link"><span class="nk-menu-text">Pengguna</span></a>
+                                                <a href="<?= base_url() ?>admin/pengguna" class="nk-menu-link"><span class="nk-menu-text">Pengguna</span></a>
                                             </li>
                                             <li class="nk-menu-item">
-                                                <a href="javascript:void(0);" onclick="onProgress(this)" class="nk-menu-link"><span class="nk-menu-text">Unit Kerja</span></a>
+                                                <a href="<?= base_url() ?>admin/unit"  class="nk-menu-link"><span class="nk-menu-text">Unit Kerja</span></a>
                                             </li>
-                                            <li class="nk-menu-item">
-                                                <a href="javascript:void(0);" onclick="onProgress(this)" class="nk-menu-link"><span class="nk-menu-text">Petugas</span></a>
-                                            </li>
+                                          
                                         </ul><!-- .nk-menu-sub -->
                                     </li><!-- .nk-menu-item -->
 

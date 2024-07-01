@@ -40,6 +40,15 @@ $routes->group('admin',  function ($routes) {
     $routes->get('json_monitoring', 'Admin\ReportController::jsonMonitoring', ['filter' => 'isAdmin']);
     $routes->post('report', 'Admin\ReportController::forwardReport', ['filter' => 'isAdmin']);
     $routes->get('reject_report/(:alphanum)', 'Admin\ReportController::rejectReport/$1', ['filter' => 'isAdmin']);
+    $routes->get('pengguna', 'Admin\SettingController::pengguna', ['filter' => 'isAdmin']);
+    $routes->get('json_pengguna', 'Admin\SettingController::jsonPengguna', ['filter' => 'isAdmin']);
+
+    $routes->get('unit', 'Admin\SettingController::unit', ['filter' => 'isAdmin']);
+    $routes->get('json_unit', 'Admin\SettingController::jsonUnit', ['filter' => 'isAdmin']);
+    $routes->get('json_petugas/(:alphanum)', 'Admin\SettingController::jsonPetugas/$1', ['filter' => 'isAdmin']);
+    $routes->get('all_report', 'Admin\ReportController::allReport', ['filter' => 'isAdmin']);
+    $routes->get('filter_report/(:alphanum)', 'Admin\ReportController::filterReport/$1', ['filter' => 'isAdmin']);
+    $routes->get('detail_report/(:alphanum)', 'Admin\ReportController::printDetail/$1', ['filter' => 'isAdmin']);
    
 });
 

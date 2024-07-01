@@ -8,16 +8,24 @@
     <div class="col-xl-12 col-xxl-12">
         <div class="card card-bordered card-full">
             <div class="card-inner border-bottom">
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6">
                         <h6 class="title">Monitoring Laporan</h6>
                     </div>
 
                 </div>
-
+                <div class="row">
+                    <div class="d-flex justify-content-end">
+                        <a href="<?= base_url() ?>admin/all_report" target="_blank" class="btn btn-outline-secondary ml-2"> <em class="icon ni ni-printer"></em> &nbsp;Semua</a>&nbsp;
+                        <a href="<?= base_url() ?>admin/filter_report/2" target="_blank" class="btn btn-outline-secondary"><em class="icon ni ni-printer"></em> &nbsp;Dalam Proses</a>&nbsp;
+                        <a href="<?= base_url() ?>admin/filter_report/3" target="_blank" class="btn btn-outline-secondary"><em class="icon ni ni-printer"></em> &nbsp;Selesai</a>&nbsp;
+                        <a href="<?= base_url() ?>admin/filter_report/4" target="_blank" class="btn btn-outline-secondary"><em class="icon ni ni-printer"></em>&nbsp;Ditolak</a>
+                    </div>
+                    
+                </div>
                 <div class="table-responsive mt-4">
                     <table class="table wrap table-bordered table-striped " id="monitoringTableAdmin">
-                    <thead class="table-light text-center">
+                        <thead class="table-light text-center">
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col" width="15%">Nama Pelapor</th>
@@ -135,24 +143,24 @@
             <div class="modal-body">
                 <div id="showReply"></div>
             </div>
-            
+
         </div>
     </div>
 </div>
 <div class="modal fade" tabindex="-1" id="modalDetailReport">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            
+
             <div class="modal-header">
                 <h5 class="modal-title">Detail Laporan Konflik</h5>
             </div>
             <div class="modal-body">
-               <div id="showDetailReport"></div>
-               <div class="form-group float-end">
-                <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Tutup</button>
+                <div id="showDetailReport"></div>
+                <div class="form-group float-end">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-warning" data>Tutup</button>
+                </div>
             </div>
-            </div>
-            
+
         </div>
     </div>
 </div>
